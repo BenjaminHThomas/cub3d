@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 19:32:31 by okoca             #+#    #+#              #
-#    Updated: 2024/07/27 13:56:29 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/27 14:31:17 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,8 @@ OTHER_PATH	= src/other/
 
 SRCS		= $(addprefix $(SRC), $(SRCS_M)) \
 		  $(addprefix $(OTHER_PATH), $(SRCS_OTHER)) \
+
+# BIN = ./bin
 
 OBJS = ${SRCS:.c=.o}
 

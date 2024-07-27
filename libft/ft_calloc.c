@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:03:36 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/02 14:50:21 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/27 14:31:49 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	*ft_realloc(void *ptr, size_t size)
 
 	if (ptr == NULL)
 		return (NULL);
-	new = calloc(sizeof(unsigned char), size);
+	new = ft_calloc(sizeof(unsigned char), size);
 	if (new == NULL)
 		return (NULL);
 	if (ft_strlen((char *)ptr) > size)

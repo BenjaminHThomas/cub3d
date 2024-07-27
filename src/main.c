@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/27 16:57:43 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/27 17:11:38 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	cb_mini_draw(t_ctx *ctx)
 		vec.x = 0;
 		while (vec.x++ < 1024)
 		{
-			if (vec.x > 100 && vec.x < 300)
+			if (vec.x > 100 && vec.x < 300 && vec.y > 100 && vec.y < 300)
 				color = 0x4444aa;
 			else
 				color = 0x19987f;

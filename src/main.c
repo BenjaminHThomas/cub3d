@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/27 16:26:53 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/27 16:30:36 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	cb_mini_draw(t_ctx *ctx)
 	int		line_size;
 	int		endian;
 	char	*buffer;
+	int		x;
+	int		y;
 
 	int	color = 0x19987f;
 	image = mlx_new_image(ctx->mlx, 1024, 512);
@@ -46,23 +48,30 @@ void	cb_mini_draw(t_ctx *ctx)
 	printf("bits_p: %d\n", bits_per_pix);
 	printf("line_size: %d\n", line_size);
 	printf("endian: %d\n", endian);
-	for (int y = 0; y < 512; y++)
-	for (int x = 0; x < 1024; x++)
+	x = 0;
+	y = 0;
+	while (y < 512)
 	{
-		int	pixel = (y * line_size) + (x * 4);
-		if (endian == 1)
+		y++;
+		x = 0;
+		while (x < 1024)
 		{
-			buffer[pixel + 0] = (color >> 24);
-			buffer[pixel + 1] = (color >> 16) & 0xFF;
-			buffer[pixel + 2] = (color >> 8) & 0xFF;
-			buffer[pixel + 3] = (color) & 0xFF;
-		}
-		else if (endian == 0)
-		{
-			buffer[pixel + 0] = (color & 0xFF);
-			buffer[pixel + 1] = (color >> 8) & 0xFF;
-			buffer[pixel + 2] = (color >> 16) & 0xFF;
-			buffer[pixel + 3] = (color >> 24);
+			x++;
+			int	pixel = (y * line_size) + (x * 4);
+			if (endian == 1)
+			{
+				buffer[pixel + 0] = (color >> 24);
+				buffer[pixel + 1] = (color >> 16) & 0xFF;
+				buffer[pixel + 2] = (color >> 8) & 0xFF;
+				buffer[pixel + 3] = (color) & 0xFF;
+			}
+			else if (endian == 0)
+			{
+				buffer[pixel + 0] = (color & 0xFF);
+				buffer[pixel + 1] = (color >> 8) & 0xFF;
+				buffer[pixel + 2] = (color >> 16) & 0xFF;
+				buffer[pixel + 3] = (color >> 24);
+			}
 		}
 	}
 	(void)buffer;

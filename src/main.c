@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/27 16:30:36 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/27 16:55:41 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,51 +32,46 @@ int	cb_free_all(void *param)
 	exit(0);
 }
 
+void	cb_put_pixel(t_img *img, t_vec vec, t_color color)
+{
+	int	pixel = (vec.y * img->line_size) + (vec.x * 4);
+	if (img->endian == 1)
+	{
+		img->buffer[pixel + 0] = (color >> 24);
+		img->buffer[pixel + 1] = (color >> 16) & 0xFF;
+		img->buffer[pixel + 2] = (color >> 8) & 0xFF;
+		img->buffer[pixel + 3] = (color) & 0xFF;
+	}
+	else if (img->endian == 0)
+	{
+		img->buffer[pixel + 0] = (color & 0xFF);
+		img->buffer[pixel + 1] = (color >> 8) & 0xFF;
+		img->buffer[pixel + 2] = (color >> 16) & 0xFF;
+		img->buffer[pixel + 3] = (color >> 24);
+	}
+}
+
 void	cb_mini_draw(t_ctx *ctx)
 {
-	void	*image;
-	int		bits_per_pix;
-	int		line_size;
-	int		endian;
-	char	*buffer;
-	int		x;
-	int		y;
+	int		color;
+	t_vec	vec;
+	t_img	img;
 
-	int	color = 0x19987f;
-	image = mlx_new_image(ctx->mlx, 1024, 512);
-	buffer = mlx_get_data_addr(image, &bits_per_pix, &line_size, &endian);
-	printf("bits_p: %d\n", bits_per_pix);
-	printf("line_size: %d\n", line_size);
-	printf("endian: %d\n", endian);
-	x = 0;
-	y = 0;
-	while (y < 512)
+	vec.x = 0;
+	vec.y = 0;
+	color = 0x19987f;
+	img.img = mlx_new_image(ctx->mlx, 1024, 512);
+	img.buffer = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_size, &img.endian);
+	while (vec.y++ < 512)
 	{
-		y++;
-		x = 0;
-		while (x < 1024)
+		vec.x = 0;
+		while (vec.x++ < 1024)
 		{
-			x++;
-			int	pixel = (y * line_size) + (x * 4);
-			if (endian == 1)
-			{
-				buffer[pixel + 0] = (color >> 24);
-				buffer[pixel + 1] = (color >> 16) & 0xFF;
-				buffer[pixel + 2] = (color >> 8) & 0xFF;
-				buffer[pixel + 3] = (color) & 0xFF;
-			}
-			else if (endian == 0)
-			{
-				buffer[pixel + 0] = (color & 0xFF);
-				buffer[pixel + 1] = (color >> 8) & 0xFF;
-				buffer[pixel + 2] = (color >> 16) & 0xFF;
-				buffer[pixel + 3] = (color >> 24);
-			}
+			cb_put_pixel(&img, vec, color);
 		}
 	}
-	(void)buffer;
-	mlx_put_image_to_window(ctx->mlx, ctx->window, image, 0, 0);
-	mlx_destroy_image(ctx->mlx, image);
+	mlx_put_image_to_window(ctx->mlx, ctx->window, img.img, 0, 0);
+	mlx_destroy_image(ctx->mlx, img.img);
 }
 
 int	main(int ac, char **av)

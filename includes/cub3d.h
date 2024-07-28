@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 16:47:14 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 21:55:48 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@
 # include "mlx.h"
 # include "libft.h"
 
-# define SCREEN_WIDTH 1024
-# define SCREEN_HEIGHT 512
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
 
-# define PRECISION 0.2f
+# define PRECISION 0.3f
+
+# define FOV 4.0f
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846

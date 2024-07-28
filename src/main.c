@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 17:09:19 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 21:55:32 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 int	cb_free_all(void *param)
 {
 	t_ctx	*ctx;
-	int		i;
 
-	i = 0;
 	ctx = (t_ctx *)param;
 	if (ctx->map && ctx->map->raw)
 	{
@@ -147,14 +145,12 @@ void	cb_mini_draw(t_ctx *ctx)
 			else if (vec.y > n_ceilling && vec.y <= n_floor) // wall is here
 			{
 				f_sample_y = ((float)vec.y - (float)n_ceilling) / ((float)n_floor - (float)n_ceilling);
-				// cb_put_pixel(ctx->img);
-				// int *arr = (int*)ctx->textures.img.buffer;
-				// int	pixel = ((vec.y * f_sample_y) * ctx->img->line_size) + (vec.x * f_sample_x);
 
-				// ctx->img->buffer[pixel] = color;
-				// cb_int_put_pixel(ctx->img, vec, arr[pixel]);
+				int *arr = (int*)ctx->textures.img.buffer;
+				int	tex_x = (int)(f_sample_x * ctx->textures.w) % ctx->textures.w;
+				int	tex_y = (int)(f_sample_y * ctx->textures.h) % ctx->textures.h;
 
-				color = 0xaf00ef;
+				int color = arr[(tex_y * (ctx->textures.img.line_size / 4) + tex_x)];
 				cb_put_pixel(ctx->img, vec, color);
 			}
 			else // floor
@@ -175,7 +171,7 @@ int	main(int ac, char **av)
 	i = 0;
 	(void)ac;
 	(void)av;
-	ctx.fov = M_PI / 4.0f;
+	ctx.fov = M_PI / FOV;
 	printf("PI: %f\n", ctx.fov);
 	ctx.map = init_map();
 	while (i < ctx.map->height)

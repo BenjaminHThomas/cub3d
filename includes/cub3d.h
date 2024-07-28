@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 22:01:02 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 22:21:19 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
 
-# define PRECISION 0.3f
+# define PRECISION 0.15f
 
 # define FOV 4.0f
 

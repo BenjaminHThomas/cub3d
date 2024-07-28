@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 22:03:34 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 22:31:32 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,13 @@ void	cb_mini_draw(t_ctx *ctx)
 			int	hit_wall = 0;
 			float f_ray_angle = (player.angle - ctx->fov / 2.0f)
 				+ ((float)vec.x / (float)SCREEN_WIDTH) * ctx->fov;
-			float f_distance_to_wall = 0.0f;
-			float f_eye_x = sinf(f_ray_angle);
-			float f_eye_y = cosf(f_ray_angle);
-			float f_sample_x = 0.0f;
-			float f_sample_y = 0.0f;
+			float	f_distance_to_wall = 0.0f;
+			float	f_eye_x = sinf(f_ray_angle);
+			float	f_eye_y = cosf(f_ray_angle);
+			float	f_sample_x = 0.0f;
+			float	f_sample_y = 0.0f;
+			float	wall_x = 0.0f;
+			int		orientation;
 
 			while (!hit_wall && f_distance_to_wall < f_depth)
 			{
@@ -122,6 +124,18 @@ void	cb_mini_draw(t_ctx *ctx)
 
 						float f_test_angle = atan2f((f_test_point_y - f_block_mid_y), (f_test_point_x - f_block_mid_x));
 
+						if (n_test_x == (int)player.x + f_eye_x || n_test_x == (int)player.x - f_eye_x)
+						{
+							orientation = 1;
+							wall_x = player.y + f_eye_y * f_distance_to_wall;
+						}
+						else
+						{
+							orientation = 0;
+							wall_x = player.x + f_eye_x * f_distance_to_wall;
+						}
+						wall_x -= floorf(wall_x);
+
 						if (f_test_angle >= M_PI * 0.25f && f_test_angle < M_PI * 0.25f)
 							f_sample_x = f_test_point_y - (float)n_test_y;
 						if (f_test_angle >= M_PI * 0.25f && f_test_angle < M_PI * 0.75f)
@@ -130,6 +144,16 @@ void	cb_mini_draw(t_ctx *ctx)
 							f_sample_x = f_test_point_x - (float)n_test_x;
 						if (f_test_angle >= M_PI * 0.75f || f_test_angle < M_PI * 0.75f)
 							f_sample_x = f_test_point_y - (float)n_test_y;
+
+						// if (cosf(f_ray_angle) > 0.0001 || cosf(f_ray_angle) < -0.001)
+						// {
+						// 	wall_x = player.y + f_distance_to_wall * sinf(f_ray_angle);
+						// }
+						// else
+						// {
+						// 	wall_x = player.x + f_distance_to_wall + cosf(f_ray_angle);
+						// }
+						// wall_x -= floorf(wall_x);
 					}
 				}
 			}
@@ -147,7 +171,15 @@ void	cb_mini_draw(t_ctx *ctx)
 				f_sample_y = ((float)vec.y - (float)n_ceilling) / ((float)n_floor - (float)n_ceilling);
 
 				int *arr = (int*)ctx->textures.img.buffer;
-				int	tex_x = (int)(f_sample_x * ctx->textures.w) % ctx->textures.w;
+				// int	tex_x = (int)(f_sample_x * ctx->textures.w) % ctx->textures.w;
+				(void)f_sample_x;
+
+				if (orientation == 1 && f_eye_x > 0)
+					wall_x = 1.0f - wall_x;
+				if (orientation == 0 && f_eye_x < 0)
+					wall_x = 1.0f - wall_x;
+
+				int	tex_x = (int)(wall_x * ctx->textures.w) % ctx->textures.w;
 				int	tex_y = (int)(f_sample_y * ctx->textures.h) % ctx->textures.h;
 				float shading = 1.0f - (f_distance_to_wall / f_depth);
 

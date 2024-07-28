@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 14:46:54 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 14:59:42 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,13 @@ t_map	*init_map();
 
 int		cb_handle_key(int keycode, void *data);
 
-int		cb_free_all(void *param);
+int		cb_free_all(void *param)
+		__attribute__((cold));
 
-void	cb_mini_draw(t_ctx *ctx);
+void	cb_mini_draw(t_ctx *ctx)
+		__attribute__((hot));
+
+void	cb_put_pixel(t_img *img, t_vec vec, t_color color)
+		__attribute__((hot));
 
 #endif

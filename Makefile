@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 19:32:31 by okoca             #+#    #+#              #
-#    Updated: 2024/07/28 11:36:22 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/28 14:57:06 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ MLX= mlx
 
 LIBFT = libft
 
-CFLAGS = -Wall -Werror -Wextra -I${INCLUDES_DIR} -I${MLX} -I${LIBFT} -g
+CFLAGS = -Wall -Werror -Wextra -MMD -I${INCLUDES_DIR} -I${MLX} -I${LIBFT} -g
 
 LDFLAGS = -L${MLX} -L${LIBFT} -lmlx_Linux -lXext -lX11 -lm -lbsd -lft
 
@@ -70,6 +70,8 @@ SRCS		= $(addprefix $(SRC), $(SRCS_M)) \
 
 OBJS = ${SRCS:.c=.o}
 
+DEP = ${OBJS:%.o=%.d}
+
 %.o: %.c
 	@${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
@@ -80,6 +82,7 @@ ${NAME}: ${OBJS} ${MLX_TARGET} ${LIBFT_TARGET}
 	@echo "${FGreen}   Done [${TICK}]"
 	@echo "${RESET}"
 
+-include $(DEP)
 
 all: ${NAME}
 
@@ -104,6 +107,7 @@ clean:
 	@make clean -C ${MLX}
 	@make clean -C ${LIBFT}
 	@rm -f ${OBJS}
+	@rm -f ${DEP}
 	@echo "${RESET}"
 
 fclean: clean

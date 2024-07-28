@@ -3,9 +3,11 @@
 */*.swp
 */*.o
 */*.so
+*/*.d
 */*.a
 */*.a
 *.a
+*.d
 .cache
 *.gch
 *.swp

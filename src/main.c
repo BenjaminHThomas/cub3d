@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 11:57:17 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 14:53:06 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ int	cb_free_all(void *param)
 	}
 	if (ctx->mlx)
 	{
+		if (ctx->img)
+		{
+			mlx_destroy_image(ctx->mlx, ctx->img->img);
+			free(ctx->img);
+		}
 		mlx_loop_end(ctx->mlx);
 		if (ctx->window)
 		{
@@ -63,7 +68,6 @@ void	cb_mini_draw(t_ctx *ctx)
 {
 	int		color;
 	t_vec	vec;
-	t_img	img;
 	t_vec2	player;
 
 	vec.x = 0;
@@ -71,8 +75,6 @@ void	cb_mini_draw(t_ctx *ctx)
 	vec.angle = 0;
 	color = 0x19987f;
 	player = ctx->map->player;
-	img.img = mlx_new_image(ctx->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	img.buffer = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_size, &img.endian);
 	float f_depth = 12.0f;
 	while (vec.y++ < SCREEN_HEIGHT)
 	{
@@ -88,7 +90,7 @@ void	cb_mini_draw(t_ctx *ctx)
 
 			while (!hit_wall && f_distance_to_wall < f_depth)
 			{
-				f_distance_to_wall += 0.1f;
+				f_distance_to_wall += 0.2f;
 
 				int	n_test_x = (int)(player.x + f_eye_x * f_distance_to_wall);
 				int	n_test_y = (int)(player.y + f_eye_y * f_distance_to_wall);
@@ -110,22 +112,24 @@ void	cb_mini_draw(t_ctx *ctx)
 			if (vec.y < n_ceilling)
 			{
 				color = 0x1affff;
-				cb_put_pixel(&img, vec, color);
+				cb_put_pixel(ctx->img, vec, color);
 			}
 			else if (vec.y > n_ceilling && vec.y <= n_floor)
 			{
-				color = 0x9010ff;
-				cb_put_pixel(&img, vec, color);
+				if (f_distance_to_wall < 4)
+					color = 0xaf10ff;
+				else
+					color = 0x7010ff;
+				cb_put_pixel(ctx->img, vec, color);
 			}
 			else
 			{
 				color = 0x100fff;
-				cb_put_pixel(&img, vec, color);
+				cb_put_pixel(ctx->img, vec, color);
 			}
 		}
 	}
-	mlx_put_image_to_window(ctx->mlx, ctx->window, img.img, 0, 0);
-	mlx_destroy_image(ctx->mlx, img.img);
+	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img->img, 0, 0);
 }
 
 int	main(int ac, char **av)
@@ -145,6 +149,9 @@ int	main(int ac, char **av)
 		i++;
 	}
 	ctx.mlx = mlx_init();
+	ctx.img = malloc(sizeof(t_img));
+	ctx.img->img = mlx_new_image(ctx.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	ctx.img->buffer = mlx_get_data_addr(ctx.img->img, &ctx.img->bits_per_pixel, &ctx.img->line_size, &ctx.img->endian);
 	ctx.window = mlx_new_window(ctx.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
 	mlx_hook(ctx.window, DestroyNotify, StructureNotifyMask, cb_free_all, &ctx);
 	mlx_hook(ctx.window, KeyPress, KeyPressMask, cb_handle_key, &ctx);

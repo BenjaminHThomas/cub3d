@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 11:56:17 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 14:46:54 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_ctx
 	void	*window;
 	t_map	*map;
 	float	fov;
+	t_img	*img;
 }	t_ctx;
 
 t_map	*init_map();

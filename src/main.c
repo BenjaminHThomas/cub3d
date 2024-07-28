@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 16:24:38 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 17:09:19 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ int	cb_free_all(void *param)
 		ctx->mlx = NULL;
 	}
 	exit(0);
+}
+
+void	cb_int_put_pixel(t_img *img, t_vec vec, t_color color)
+{
+	int	pixel = (vec.y * img->line_size) + vec.x;
+
+	img->buffer[pixel] = color;
 }
 
 void	cb_put_pixel(t_img *img, t_vec vec, t_color color)
@@ -89,6 +96,8 @@ void	cb_mini_draw(t_ctx *ctx)
 			float f_distance_to_wall = 0.0f;
 			float f_eye_x = sinf(f_ray_angle);
 			float f_eye_y = cosf(f_ray_angle);
+			float f_sample_x = 0.0f;
+			float f_sample_y = 0.0f;
 
 			while (!hit_wall && f_distance_to_wall < f_depth)
 			{
@@ -104,29 +113,51 @@ void	cb_mini_draw(t_ctx *ctx)
 				else
 				{
 					if (ctx->map->raw[n_test_y * ctx->map->width + n_test_x] == '1')
+					{
 						hit_wall = 1;
+
+						float f_block_mid_x = (float)n_test_x + 0.5f;
+						float f_block_mid_y = (float)n_test_y + 0.5f;
+
+						float f_test_point_x = player.x + f_eye_x * f_distance_to_wall;
+						float f_test_point_y = player.y + f_eye_y * f_distance_to_wall;
+
+						float f_test_angle = atan2f((f_test_point_y - f_block_mid_y), (f_test_point_x - f_block_mid_x));
+
+						if (f_test_angle >= M_PI * 0.25f && f_test_angle < M_PI * 0.25f)
+							f_sample_x = f_test_point_y - (float)n_test_y;
+						if (f_test_angle >= M_PI * 0.25f && f_test_angle < M_PI * 0.75f)
+							f_sample_x = f_test_point_x - (float)n_test_x;
+						if (f_test_angle < M_PI * 0.25f && f_test_angle >= M_PI * 0.75f)
+							f_sample_x = f_test_point_x - (float)n_test_x;
+						if (f_test_angle >= M_PI * 0.75f || f_test_angle < M_PI * 0.75f)
+							f_sample_x = f_test_point_y - (float)n_test_y;
+					}
 				}
 			}
 
 			int n_ceilling = (float)(SCREEN_HEIGHT / 2.0f) - SCREEN_HEIGHT / ((float)f_distance_to_wall);
 			int n_floor = SCREEN_HEIGHT - n_ceilling;
 
-			if (vec.y < n_ceilling)
+			if (vec.y < n_ceilling) // ceilling
 			{
 				color = 0x1affff;
 				cb_put_pixel(ctx->img, vec, color);
 			}
-			else if (vec.y > n_ceilling && vec.y <= n_floor)
+			else if (vec.y > n_ceilling && vec.y <= n_floor) // wall is here
 			{
-				if (f_distance_to_wall < 4)
-					color = 0xaf00ef;
-				else if (f_distance_to_wall < 7)
-					color = 0xa000ff;
-				else
-					color = 0x7010ff;
+				f_sample_y = ((float)vec.y - (float)n_ceilling) / ((float)n_floor - (float)n_ceilling);
+				// cb_put_pixel(ctx->img);
+				// int *arr = (int*)ctx->textures.img.buffer;
+				// int	pixel = ((vec.y * f_sample_y) * ctx->img->line_size) + (vec.x * f_sample_x);
+
+				// ctx->img->buffer[pixel] = color;
+				// cb_int_put_pixel(ctx->img, vec, arr[pixel]);
+
+				color = 0xaf00ef;
 				cb_put_pixel(ctx->img, vec, color);
 			}
-			else
+			else // floor
 			{
 				color = 0x100fff;
 				cb_put_pixel(ctx->img, vec, color);

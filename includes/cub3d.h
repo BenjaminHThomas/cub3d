@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 16:23:24 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 16:47:14 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_texture
 	void	*data;
 	int		w;
 	int		h;
+	t_img	img;
 }	t_texture;
 
 typedef struct s_ctx

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 15:51:38 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 16:24:38 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	cb_free_all(void *param)
 	}
 	if (ctx->mlx)
 	{
+		if (ctx->textures.data)
+			mlx_destroy_image(ctx->mlx, ctx->textures.data);
 		if (ctx->img)
 		{
 			mlx_destroy_image(ctx->mlx, ctx->img->img);
@@ -151,6 +153,13 @@ int	main(int ac, char **av)
 		i++;
 	}
 	ctx.mlx = mlx_init();
+	if (init_textures(&ctx) != 0)
+	{
+		printf("entered this\n");
+		free(ctx.map->raw);
+		free(ctx.map);
+		free(ctx.mlx);
+	}
 	ctx.img = malloc(sizeof(t_img));
 	ctx.img->img = mlx_new_image(ctx.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	ctx.img->buffer = mlx_get_data_addr(ctx.img->img, &ctx.img->bits_per_pixel, &ctx.img->line_size, &ctx.img->endian);

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 15:52:36 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 16:23:24 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,21 @@ typedef struct s_map
 	int		width;
 }	t_map;
 
+typedef struct s_texture
+{
+	void	*data;
+	int		w;
+	int		h;
+}	t_texture;
+
 typedef struct s_ctx
 {
-	void	*mlx;
-	void	*window;
-	t_map	*map;
-	float	fov;
-	t_img	*img;
+	void		*mlx;
+	void		*window;
+	t_map		*map;
+	float		fov;
+	t_img		*img;
+	t_texture	textures;
 }	t_ctx;
 
 t_map	*init_map();
@@ -88,5 +96,8 @@ void	cb_mini_draw(t_ctx *ctx)
 
 void	cb_put_pixel(t_img *img, t_vec vec, t_color color)
 		__attribute__((hot));
+
+int	init_textures(t_ctx *ctx)
+		__attribute__((cold));
 
 #endif

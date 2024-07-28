@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 14:53:06 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 15:30:52 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,9 @@ void	cb_mini_draw(t_ctx *ctx)
 			else if (vec.y > n_ceilling && vec.y <= n_floor)
 			{
 				if (f_distance_to_wall < 4)
-					color = 0xaf10ff;
+					color = 0xaf00ef;
+				else if (f_distance_to_wall < 7)
+					color = 0xa000ff;
 				else
 					color = 0x7010ff;
 				cb_put_pixel(ctx->img, vec, color);

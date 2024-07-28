@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/27 17:11:38 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 09:05:48 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,20 @@
 int	cb_free_all(void *param)
 {
 	t_ctx	*ctx;
+	int		i;
 
+	i = 0;
 	ctx = (t_ctx *)param;
+	if (ctx->map && ctx->map->raw)
+	{
+		while (ctx->map->raw[i])
+		{
+			free(ctx->map->raw[i]);
+			i++;
+		}
+		free(ctx->map->raw);
+		free(ctx->map);
+	}
 	if (ctx->mlx)
 	{
 		mlx_loop_end(ctx->mlx);
@@ -81,9 +93,18 @@ void	cb_mini_draw(t_ctx *ctx)
 int	main(int ac, char **av)
 {
 	t_ctx	ctx;
+	int		i;
 
+
+	i = 0;
 	(void)ac;
 	(void)av;
+	ctx.map = init_map();
+	while (ctx.map->raw[i])
+	{
+		printf("-> %s\n", ctx.map->raw[i]);
+		i++;
+	}
 	ctx.mlx = mlx_init();
 	ctx.window = mlx_new_window(ctx.mlx, 1024, 512, "cub3d");
 	mlx_hook(ctx.window, DestroyNotify, StructureNotifyMask, cb_free_all, &ctx);

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/27 16:54:14 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 08:46:45 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,14 @@
 # include "mlx.h"
 # include "libft.h"
 
-typedef struct s_ctx
-{
-	void	*mlx;
-	void	*window;
-}	t_ctx;
+
+typedef int	t_color;
 
 typedef struct s_vec
 {
 	int	x;
 	int	y;
 }	t_vec;
-
-typedef int	t_color;
 
 typedef struct s_img
 {
@@ -45,5 +40,21 @@ typedef struct s_img
 	char	*buffer;
 	void	*img;
 }	t_img;
+
+
+typedef struct s_map
+{
+	char	**raw;
+	t_vec	player;
+}	t_map;
+
+typedef struct s_ctx
+{
+	void	*mlx;
+	void	*window;
+	t_map	*map;
+}	t_ctx;
+
+t_map	*init_map();
 
 #endif

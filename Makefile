@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 19:32:31 by okoca             #+#    #+#              #
-#    Updated: 2024/07/27 14:31:17 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/28 08:45:33 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ LIBFT_TARGET = ${LIBFT}/libft.a
 
 MLX_TARGET = ${MLX}/libmlx.a
 
-SRCS_M = main.c \
+SRCS_M = main.c map.c
 
 SRCS_OTHER =
 

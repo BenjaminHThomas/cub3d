@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 09:05:48 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 09:38:59 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,11 @@ int	main(int ac, char **av)
 	t_ctx	ctx;
 	int		i;
 
-
 	i = 0;
 	(void)ac;
 	(void)av;
+	ctx.fov = M_PI / 4.0f;
+	printf("PI: %f\n", ctx.fov);
 	ctx.map = init_map();
 	while (ctx.map->raw[i])
 	{

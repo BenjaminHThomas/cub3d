@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 10:55:04 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 10:58:22 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ void	cb_mini_draw(t_ctx *ctx)
 	img.img = mlx_new_image(ctx->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	img.buffer = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_size, &img.endian);
 	float f_depth = 12.0f;
-	while (vec.y++ < 512)
+	while (vec.y++ < SCREEN_HEIGHT)
 	{
 		vec.x = 0;
-		while (vec.x++ < 1024)
+		while (vec.x++ < SCREEN_WIDTH)
 		{
 			color = 0x19987f;
 			int	hit_wall = 0;;
@@ -104,9 +104,7 @@ void	cb_mini_draw(t_ctx *ctx)
 				else
 				{
 					if (ctx->map->raw[n_test_y * ctx->map->width + n_test_x] == '1')
-					{
 						hit_wall = 1;
-					}
 				}
 			}
 
@@ -151,7 +149,7 @@ int	main(int ac, char **av)
 		i++;
 	}
 	ctx.mlx = mlx_init();
-	ctx.window = mlx_new_window(ctx.mlx, 1024, 512, "cub3d");
+	ctx.window = mlx_new_window(ctx.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
 	mlx_hook(ctx.window, DestroyNotify, StructureNotifyMask, cb_free_all, &ctx);
 	cb_mini_draw(&ctx);
 	mlx_loop(ctx.mlx);

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 10:41:41 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 10:55:04 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	cb_mini_draw(t_ctx *ctx)
 	vec.angle = 0;
 	color = 0x19987f;
 	player = ctx->map->player;
+	player.angle = 1;
 	img.img = mlx_new_image(ctx->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	img.buffer = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_size, &img.endian);
 	float f_depth = 12.0f;
@@ -102,10 +103,31 @@ void	cb_mini_draw(t_ctx *ctx)
 				}
 				else
 				{
-
+					if (ctx->map->raw[n_test_y * ctx->map->width + n_test_x] == '1')
+					{
+						hit_wall = 1;
+					}
 				}
 			}
-			cb_put_pixel(&img, vec, color);
+
+			int n_ceilling = (float)(SCREEN_HEIGHT / 2.0f) - SCREEN_HEIGHT / ((float)f_distance_to_wall);
+			int n_floor = SCREEN_HEIGHT - n_ceilling;
+
+			if (vec.y < n_ceilling)
+			{
+				color = 0x1affff;
+				cb_put_pixel(&img, vec, color);
+			}
+			else if (vec.y > n_ceilling && vec.y <= n_floor)
+			{
+				color = 0x9010ff;
+				cb_put_pixel(&img, vec, color);
+			}
+			else
+			{
+				color = 0x100fff;
+				cb_put_pixel(&img, vec, color);
+			}
 		}
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, img.img, 0, 0);

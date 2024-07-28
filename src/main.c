@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 21:55:32 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 22:03:34 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,22 @@ void	cb_int_put_pixel(t_img *img, t_vec vec, t_color color)
 	img->buffer[pixel] = color;
 }
 
-void	cb_put_pixel(t_img *img, t_vec vec, t_color color)
+void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading)
 {
 	int	pixel = (vec.y * img->line_size) + (vec.x * 4);
 
 	if (img->endian == 1)
 	{
 		img->buffer[pixel + 0] = (color >> 24);
-		img->buffer[pixel + 1] = (color >> 16) & 0xFF;
-		img->buffer[pixel + 2] = (color >> 8) & 0xFF;
-		img->buffer[pixel + 3] = (color) & 0xFF;
+		img->buffer[pixel + 1] = ((color >> 16) & 0xFF) * shading;
+		img->buffer[pixel + 2] = ((color >> 8) & 0xFF) * shading;
+		img->buffer[pixel + 3] = ((color) & 0xFF) * shading;
 	}
 	else if (img->endian == 0)
 	{
-		img->buffer[pixel + 0] = (color & 0xFF);
-		img->buffer[pixel + 1] = (color >> 8) & 0xFF;
-		img->buffer[pixel + 2] = (color >> 16) & 0xFF;
+		img->buffer[pixel + 0] = (color & 0xFF) * shading;
+		img->buffer[pixel + 1] = ((color >> 8) & 0xFF) * shading;
+		img->buffer[pixel + 2] = ((color >> 16) & 0xFF) * shading;
 		img->buffer[pixel + 3] = (color >> 24);
 	}
 }
@@ -140,7 +140,7 @@ void	cb_mini_draw(t_ctx *ctx)
 			if (vec.y < n_ceilling) // ceilling
 			{
 				color = 0x1affff;
-				cb_put_pixel(ctx->img, vec, color);
+				cb_put_pixel(ctx->img, vec, color, 1.0f);
 			}
 			else if (vec.y > n_ceilling && vec.y <= n_floor) // wall is here
 			{
@@ -149,14 +149,15 @@ void	cb_mini_draw(t_ctx *ctx)
 				int *arr = (int*)ctx->textures.img.buffer;
 				int	tex_x = (int)(f_sample_x * ctx->textures.w) % ctx->textures.w;
 				int	tex_y = (int)(f_sample_y * ctx->textures.h) % ctx->textures.h;
+				float shading = 1.0f - (f_distance_to_wall / f_depth);
 
 				int color = arr[(tex_y * (ctx->textures.img.line_size / 4) + tex_x)];
-				cb_put_pixel(ctx->img, vec, color);
+				cb_put_pixel(ctx->img, vec, color, shading);
 			}
 			else // floor
 			{
 				color = 0x100fff;
-				cb_put_pixel(ctx->img, vec, color);
+				cb_put_pixel(ctx->img, vec, color, 1.0f);
 			}
 		}
 	}

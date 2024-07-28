@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 21:55:48 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 22:01:02 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int		cb_free_all(void *param)
 void	cb_mini_draw(t_ctx *ctx)
 		__attribute__((hot));
 
-void	cb_put_pixel(t_img *img, t_vec vec, t_color color)
+void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading)
 		__attribute__((hot));
 
 int	init_textures(t_ctx *ctx)

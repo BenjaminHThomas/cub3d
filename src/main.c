@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 11:37:44 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 11:57:17 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,10 @@ void	cb_mini_draw(t_ctx *ctx)
 		vec.x = 0;
 		while (vec.x++ < SCREEN_WIDTH)
 		{
-			color = 0x19987f;
 			int	hit_wall = 0;
 			float f_ray_angle = (player.angle - ctx->fov / 2.0f)
 				+ ((float)vec.x / (float)SCREEN_WIDTH) * ctx->fov;
-
 			float f_distance_to_wall = 0.0f;
-
 			float f_eye_x = sinf(f_ray_angle);
 			float f_eye_y = cosf(f_ray_angle);
 
@@ -139,7 +136,7 @@ int	main(int ac, char **av)
 	i = 0;
 	(void)ac;
 	(void)av;
-	ctx.fov = M_PI / 3.0f;
+	ctx.fov = M_PI / 4.0f;
 	printf("PI: %f\n", ctx.fov);
 	ctx.map = init_map();
 	while (i < ctx.map->height)

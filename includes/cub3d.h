@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 14:59:42 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 15:52:36 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 # define SCREEN_WIDTH 1024
 # define SCREEN_HEIGHT 512
+
+# define PRECISION 0.2f
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846

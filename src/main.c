@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 15:30:52 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/28 15:51:38 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	cb_mini_draw(t_ctx *ctx)
 
 			while (!hit_wall && f_distance_to_wall < f_depth)
 			{
-				f_distance_to_wall += 0.2f;
+				f_distance_to_wall += PRECISION;
 
 				int	n_test_x = (int)(player.x + f_eye_x * f_distance_to_wall);
 				int	n_test_y = (int)(player.y + f_eye_y * f_distance_to_wall);

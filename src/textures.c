@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 16:16:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 21:56:32 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/29 22:07:43 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ t_texture	create_texture(t_ctx *ctx, char *path, int *err)
 int	init_textures(t_ctx *ctx)
 {
 	t_texture	*texture;
-	int			i;
+	// int			i;
 	int			err;
 
-	i = 0;
+	// i = 0;
 	err = 0;
 	texture = malloc(sizeof(t_texture) * 4);
-	texture[NORTH] = create_texture(ctx, "textures/ground.xpm", &err);
-	texture[EAST] = create_texture(ctx, "textures/ground.xpm", &err);
-	texture[SOUTH] = create_texture(ctx, "textures/ground.xpm", &err);
-	texture[WEST] = create_texture(ctx, "textures/ground.xpm", &err);
+	texture[NORTH] = create_texture(ctx, "textures/boss.xpm", &err);
+	texture[EAST] = create_texture(ctx, "textures/gang.xpm", &err);
+	texture[SOUTH] = create_texture(ctx, "textures/psyop.xpm", &err);
+	texture[WEST] = create_texture(ctx, "textures/alpha.xpm", &err);
 	// GOOD CODE BUT FOR TESTING PURPOSES IM GOING TO LEAVE IT OUT
 	// while (i < 4)
 	// {

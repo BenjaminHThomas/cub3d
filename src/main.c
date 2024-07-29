@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 21:54:20 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/29 22:20:21 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,28 +224,30 @@ void	cb_mini_draw(t_ctx *ctx)
 		}
 		// printf("---------\nray_dir_x: %f\nray_dir_y: %f\n-------\n", ray_dir_x, ray_dir_y);
 
-		int	texture_x = (int)(wall_x * (float)ctx->textures[orientation].w);
-		if (side == 0 && ray_dir_x > 0)
-			texture_x = ctx->textures[orientation].w - texture_x - 1;
-		if (side == 1 && ray_dir_y < 0)
-			texture_x = ctx->textures[orientation].w - texture_x - 1;
+		int tex_width = ctx->textures[orientation].w;
+		int tex_height = ctx->textures[orientation].h;
 
-		float	step = 1.0f * ctx->textures[orientation].h / line_height;
+		int	tex_x = (int)(wall_x * (float)tex_width);
+		if ((side == 0 && ray_dir_x > 0) || (side == 1 && ray_dir_y < 0))
+			tex_x = tex_width - tex_x - 1;
+
+		// float	step = 1.0f * ctx->textures[orientation].h / line_height;
+		float	step = (float)tex_height / line_height;
 
 		float	tex_pos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
 
 		int		*arr = (int*)ctx->textures[orientation].img.buffer;
+		int		tex_line_size = ctx->textures[orientation].img.line_size / 4;
 
 
 		while (vec.y++ < SCREEN_HEIGHT)
 		{
 			if (vec.y >= draw_start && vec.y <= draw_end)
 			{
-				int	texture_y = (int)tex_pos & (ctx->textures[orientation].h - 1);
-
+				int	tex_y = (int)tex_pos & (tex_height - 1);
 				tex_pos += step;
 
-				color = arr[(texture_y * (ctx->textures[orientation].img.line_size / 4) + texture_x)];
+				color = arr[(tex_y * tex_line_size + tex_x)];
 				cb_put_pixel(ctx->img, vec, color, 1.0f);
 			}
 			else if (vec.y < draw_start)

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 21:27:27 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/29 22:49:46 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ typedef struct s_vec
 
 typedef struct s_player
 {
-	float	x;
-	float	y;
-	float	dx;
-	float	dy;
-	float	angle;
-	float	plane_x;
-	float	plane_y;
+	double	x;
+	double	y;
+	double	dx;
+	double	dy;
+	double	angle;
+	double	plane_x;
+	double	plane_y;
 }	t_player;
 
 typedef struct s_img

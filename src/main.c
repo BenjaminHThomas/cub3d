@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 22:36:31 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/29 22:52:58 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,28 +111,22 @@ void	cb_mini_draw(t_ctx *ctx)
 	vec.x = 0;
 	vec.y = 0;
 	vec.angle = 0;
-	color = 0x19987f;
 	player = ctx->map->player;
-	float f_depth = 12.0f;
-	(void)f_depth;
-	(void)player;
-	// cb_clear_image(ctx);
-	while (vec.x++ < SCREEN_WIDTH)
+	while (vec.x < SCREEN_WIDTH)
 	{
-		float	camera_x = 2 * vec.x / SCREEN_WIDTH - 1;
-		float	ray_dir_x = player.dx + player.plane_x * camera_x;
-		float	ray_dir_y = player.dy + player.plane_y * camera_x;
-		float	shading = 1.0f;
+		double	camera_x = 2 * vec.x / SCREEN_WIDTH - 1;
+		double	ray_dir_x = player.dx + player.plane_x * camera_x;
+		double	ray_dir_y = player.dy + player.plane_y * camera_x;
 
 		int		map_x = (int)player.x;
 		int		map_y = (int)player.y;
 
-		float	side_dist_x;
-		float	side_dist_y;
+		double	side_dist_x;
+		double	side_dist_y;
 
 		double	delta_dist_x = (ray_dir_x == 0) ? 1e30 : fabs(1 / ray_dir_x);
 		double	delta_dist_y = (ray_dir_y == 0) ? 1e30 : fabs(1 / ray_dir_y);
-		float	distance_to_wall;
+		double	distance_to_wall;
 
 		int		step_x;
 		int		step_y;
@@ -177,10 +171,7 @@ void	cb_mini_draw(t_ctx *ctx)
 				side = 1;
 			}
 			if (ctx->map->raw[map_y * ctx->map->width + map_x] == '1')
-			{
 				hit = 1;
-				// printf("----------\nmap_x: %d\nmap_y: %d\n---------\n", map_x, map_y);
-			}
 		}
 
 		if (side == 0)
@@ -197,11 +188,7 @@ void	cb_mini_draw(t_ctx *ctx)
 		if (draw_end >= SCREEN_HEIGHT)
 			draw_end = SCREEN_HEIGHT - 1;
 
-		vec.y = 0;
-		if (side == 1)
-			shading /= 2;
-
-		float	wall_x;
+		double	wall_x;
 		if (side == 0)
 			wall_x = player.y + distance_to_wall * ray_dir_y;
 		else
@@ -222,30 +209,26 @@ void	cb_mini_draw(t_ctx *ctx)
 			else
 				orientation = NORTH;
 		}
-		// printf("---------\nray_dir_x: %f\nray_dir_y: %f\n-------\n", ray_dir_x, ray_dir_y);
-
 		int tex_width = ctx->textures[orientation].w;
 		int tex_height = ctx->textures[orientation].h;
 
-		int	tex_x = (int)(wall_x * (float)tex_width);
+		int	tex_x = (int)(wall_x * (double)tex_width);
 		if ((side == 0 && ray_dir_x > 0) || (side == 1 && ray_dir_y < 0))
 			tex_x = tex_width - tex_x - 1;
 
-		// float	step = 1.0f * ctx->textures[orientation].h / line_height;
-		float	step = (float)tex_height / line_height;
-
-		float	tex_pos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
+		double	step = (double)tex_height / line_height;
+		double	tex_pos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
 
 		int		*arr = (int*)ctx->textures[orientation].img.buffer;
 		int		tex_line_size = ctx->textures[orientation].img.line_size / 4;
 
 
-		while (vec.y++ < SCREEN_HEIGHT)
+		vec.y = 0;
+		while (vec.y < SCREEN_HEIGHT)
 		{
 			if (vec.y >= draw_start && vec.y <= draw_end)
 			{
 				int	tex_y = (int)tex_pos % tex_height;
-
 				tex_pos += step;
 
 				color = arr[(tex_y * tex_line_size + tex_x)];
@@ -261,7 +244,9 @@ void	cb_mini_draw(t_ctx *ctx)
 				color = 0x0fa0b9;
 				cb_put_pixel(ctx->img, vec, color, 1.0f);
 			}
+			vec.y++;
 		}
+		vec.x++;
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img->img, 0, 0);
 }

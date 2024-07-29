@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 20:11:39 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/29 21:23:06 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	cb_mini_draw(t_ctx *ctx)
 
 		int		hit = 0;
 		int		side;
+		int		orientation;
 
 		if (ray_dir_x < 0)
 		{
@@ -208,16 +209,41 @@ void	cb_mini_draw(t_ctx *ctx)
 
 		int		*arr = (int*)ctx->textures.img.buffer;
 
+		if (side == 0)
+		{
+			if (ray_dir_x > 0)
+				orientation = EAST;
+			else
+				orientation = WEST;
+		}
+		else
+		{
+			if (ray_dir_y > 0)
+				orientation = SOUTH;
+			else
+				orientation = NORTH;
+		}
+		// printf("---------\nray_dir_x: %f\nray_dir_y: %f\n-------\n", ray_dir_x, ray_dir_y);
+
+
 		while (vec.y++ < SCREEN_HEIGHT)
 		{
 			if (vec.y >= draw_start && vec.y <= draw_end)
 			{
-				// color = 0x100fff;
 				int	texture_y = (int)tex_pos & (ctx->textures.h - 1);
 
 				tex_pos += step;
 
 				color = arr[(texture_y * (ctx->textures.img.line_size / 4) + texture_x)];
+
+				if (orientation == EAST)
+					color = 0x00129a;
+				else if (orientation == WEST)
+					color = 0xa0120a;
+				else if (orientation == SOUTH)
+					color = 0xf0f20a;
+				else if (orientation == NORTH)
+					color = 0x00f20a;
 
 				cb_put_pixel(ctx->img, vec, color, 1.0f);
 			}
@@ -235,15 +261,6 @@ void	cb_mini_draw(t_ctx *ctx)
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img->img, 0, 0);
 }
-// (void)perp_wall_dist;
-// vec.y = 0;
-// while (vec.y++ < SCREEN_HEIGHT)
-// {
-// 	color = 0x100fff;
-// 	cb_put_pixel(ctx->img, vec, color, 1.0f);
-// }
-
-
 
 int	main(int ac, char **av)
 {
@@ -267,7 +284,9 @@ int	main(int ac, char **av)
 		printf("entered this\n");
 		free(ctx.map->raw);
 		free(ctx.map);
+		mlx_destroy_display(ctx.mlx);
 		free(ctx.mlx);
+		return (1);
 	}
 	ctx.img = malloc(sizeof(t_img));
 	ctx.img->img = mlx_new_image(ctx.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);

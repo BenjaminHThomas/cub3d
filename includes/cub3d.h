@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 15:49:50 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/29 17:11:42 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include "mlx.h"
 # include "libft.h"
 
-# define SCREEN_WIDTH 1024
-# define SCREEN_HEIGHT 512
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
 
 # define PRECISION 0.10f
 
@@ -44,14 +44,16 @@ typedef struct s_vec
 	float	angle;
 }	t_vec;
 
-typedef struct s_vec2
+typedef struct s_player
 {
 	float	x;
 	float	y;
 	float	dx;
 	float	dy;
 	float	angle;
-}	t_vec2;
+	float	plane_x;
+	float	plane_y;
+}	t_player;
 
 typedef struct s_img
 {
@@ -66,7 +68,7 @@ typedef struct s_img
 typedef struct s_map
 {
 	char	*raw;
-	t_vec2	player;
+	t_player	player;
 	int		height;
 	int		width;
 }	t_map;

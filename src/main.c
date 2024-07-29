@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 21:23:06 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/29 21:54:20 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int	cb_free_all(void *param)
 {
 	t_ctx	*ctx;
+	int		i;
 
+	i = 0;
 	ctx = (t_ctx *)param;
 	if (ctx->map && ctx->map->raw)
 	{
@@ -24,8 +26,15 @@ int	cb_free_all(void *param)
 	}
 	if (ctx->mlx)
 	{
-		if (ctx->textures.data)
-			mlx_destroy_image(ctx->mlx, ctx->textures.data);
+		if (ctx->textures)
+		{
+			while (i < 4)
+			{
+				mlx_destroy_image(ctx->mlx, ctx->textures[i].data);
+				i++;
+			}
+			free(ctx->textures);
+		}
 		if (ctx->img)
 		{
 			mlx_destroy_image(ctx->mlx, ctx->img->img);
@@ -81,13 +90,15 @@ void	cb_clear_image(t_ctx *ctx)
 	t_vec	vec;
 
 	vec.x = 0;
-	while (vec.x++ < SCREEN_WIDTH)
+	while (vec.x < SCREEN_WIDTH)
 	{
 		vec.y = 0;
-		while (vec.y++ < SCREEN_HEIGHT)
+		while (vec.y < SCREEN_HEIGHT)
 		{
 			cb_put_pixel(ctx->img, vec, 0x000, 0.0f);
+			vec.y++;
 		}
+		vec.x++;
 	}
 }
 
@@ -128,7 +139,7 @@ void	cb_mini_draw(t_ctx *ctx)
 
 		int		hit = 0;
 		int		side;
-		int		orientation;
+		int		orientation = 0;
 
 		if (ray_dir_x < 0)
 		{
@@ -197,18 +208,6 @@ void	cb_mini_draw(t_ctx *ctx)
 			wall_x = player.x + perp_wall_dist * ray_dir_x;
 		wall_x -= floor(wall_x);
 
-		int	texture_x = (int)(wall_x * (float)ctx->textures.w);
-		if (side == 0 && ray_dir_x > 0)
-			texture_x = ctx->textures.w - texture_x - 1;
-		if (side == 1 && ray_dir_y < 0)
-			texture_x = ctx->textures.w - texture_x - 1;
-
-		float	step = 1.0f * ctx->textures.h / line_height;
-
-		float	tex_pos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
-
-		int		*arr = (int*)ctx->textures.img.buffer;
-
 		if (side == 0)
 		{
 			if (ray_dir_x > 0)
@@ -225,26 +224,28 @@ void	cb_mini_draw(t_ctx *ctx)
 		}
 		// printf("---------\nray_dir_x: %f\nray_dir_y: %f\n-------\n", ray_dir_x, ray_dir_y);
 
+		int	texture_x = (int)(wall_x * (float)ctx->textures[orientation].w);
+		if (side == 0 && ray_dir_x > 0)
+			texture_x = ctx->textures[orientation].w - texture_x - 1;
+		if (side == 1 && ray_dir_y < 0)
+			texture_x = ctx->textures[orientation].w - texture_x - 1;
+
+		float	step = 1.0f * ctx->textures[orientation].h / line_height;
+
+		float	tex_pos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
+
+		int		*arr = (int*)ctx->textures[orientation].img.buffer;
+
 
 		while (vec.y++ < SCREEN_HEIGHT)
 		{
 			if (vec.y >= draw_start && vec.y <= draw_end)
 			{
-				int	texture_y = (int)tex_pos & (ctx->textures.h - 1);
+				int	texture_y = (int)tex_pos & (ctx->textures[orientation].h - 1);
 
 				tex_pos += step;
 
-				color = arr[(texture_y * (ctx->textures.img.line_size / 4) + texture_x)];
-
-				if (orientation == EAST)
-					color = 0x00129a;
-				else if (orientation == WEST)
-					color = 0xa0120a;
-				else if (orientation == SOUTH)
-					color = 0xf0f20a;
-				else if (orientation == NORTH)
-					color = 0x00f20a;
-
+				color = arr[(texture_y * (ctx->textures[orientation].img.line_size / 4) + texture_x)];
 				cb_put_pixel(ctx->img, vec, color, 1.0f);
 			}
 			else if (vec.y < draw_start)
@@ -261,6 +262,16 @@ void	cb_mini_draw(t_ctx *ctx)
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img->img, 0, 0);
 }
+// if (orientation == EAST)
+// 	color = 0x00129a;
+// else if (orientation == WEST)
+// 	color = 0xa0120a;
+// else if (orientation == SOUTH)
+// 	color = 0xf0f20a;
+// else if (orientation == NORTH)
+// 	color = 0x00f20a;
+
+
 
 int	main(int ac, char **av)
 {

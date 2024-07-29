@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 17:27:57 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/29 19:16:41 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ int	cb_handle_key(int keycode, void *data)
 	}
 	if (keycode == XK_d || keycode == XK_D)
 	{
-		ctx->map->player.x += cosf(ctx->map->player.angle) * 0.1f;
-		ctx->map->player.y -= sinf(ctx->map->player.angle) * 0.1f;
+		player->x += player->dy * 0.1f;
+		player->y -= player->dx * 0.1f;
 		cb_mini_draw(ctx);
 	}
 	if (keycode == XK_a || keycode == XK_A)
 	{
-		ctx->map->player.x -= cosf(ctx->map->player.angle) * 0.1f;
-		ctx->map->player.y += sinf(ctx->map->player.angle) * 0.1f;
+		player->x -= player->dy * 0.1f;
+		player->y += player->dx * 0.1f;
 		cb_mini_draw(ctx);
 	}
 	return (0);

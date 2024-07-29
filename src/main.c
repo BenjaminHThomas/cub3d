@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 17:27:16 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/29 19:48:07 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,27 @@ void	cb_int_put_pixel(t_img *img, t_vec vec, t_color color)
 
 void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading)
 {
-	int	pixel = (vec.y * img->line_size) + (vec.x * 4);
+	int	pixel = (vec.y * (img->line_size / 4)) + (vec.x);
+	int	*buffer = (int*)(img->buffer);
 
-	if (img->endian == 1)
-	{
-		img->buffer[pixel + 0] = (color >> 24);
-		img->buffer[pixel + 1] = ((color >> 16) & 0xFF) * shading;
-		img->buffer[pixel + 2] = ((color >> 8) & 0xFF) * shading;
-		img->buffer[pixel + 3] = ((color) & 0xFF) * shading;
-	}
-	else if (img->endian == 0)
-	{
-		img->buffer[pixel + 0] = (color & 0xFF) * shading;
-		img->buffer[pixel + 1] = ((color >> 8) & 0xFF) * shading;
-		img->buffer[pixel + 2] = ((color >> 16) & 0xFF) * shading;
-		img->buffer[pixel + 3] = (color >> 24);
-	}
+	color *= shading;
+	if (buffer[pixel] != color)
+		buffer[pixel] = color;
+
+	// if (img->endian == 1)
+	// {
+	// 	img->buffer[pixel + 0] = (color >> 24);
+	// 	img->buffer[pixel + 1] = ((color >> 16) & 0xFF) * shading;
+	// 	img->buffer[pixel + 2] = ((color >> 8) & 0xFF) * shading;
+	// 	img->buffer[pixel + 3] = ((color) & 0xFF) * shading;
+	// }
+	// else if (img->endian == 0)
+	// {
+	// 	img->buffer[pixel + 0] = (color & 0xFF) * shading;
+	// 	img->buffer[pixel + 1] = ((color >> 8) & 0xFF) * shading;
+	// 	img->buffer[pixel + 2] = ((color >> 16) & 0xFF) * shading;
+	// 	img->buffer[pixel + 3] = (color >> 24);
+	// }
 }
 
 void	cb_clear_image(t_ctx *ctx)
@@ -100,12 +105,13 @@ void	cb_mini_draw(t_ctx *ctx)
 	float f_depth = 12.0f;
 	(void)f_depth;
 	(void)player;
-	cb_clear_image(ctx);
+	// cb_clear_image(ctx);
 	while (vec.x++ < SCREEN_WIDTH)
 	{
 		float	camera_x = 2 * vec.x / SCREEN_WIDTH - 1;
 		float	ray_dir_x = player.dx + player.plane_x * camera_x;
 		float	ray_dir_y = player.dy + player.plane_y * camera_x;
+		float	shading = 1.0f;
 
 		int		map_x = (int)player.x;
 		int		map_y = (int)player.y;
@@ -179,13 +185,26 @@ void	cb_mini_draw(t_ctx *ctx)
 		if (draw_end >= SCREEN_HEIGHT)
 			draw_end = SCREEN_HEIGHT - 1;
 
-		color = 0x100fff;
+		vec.y = 0;
 		if (side == 1)
-			color = color / 2;
-		vec.y = draw_start;
-		while (hit && vec.y++ < draw_end)
+			shading /= 2;
+		while (vec.y++ < SCREEN_HEIGHT)
 		{
-			cb_put_pixel(ctx->img, vec, color, 1.0f);
+			if (vec.y >= draw_start && vec.y <= draw_end)
+			{
+				color = 0x100fff;
+				cb_put_pixel(ctx->img, vec, color, shading);
+			}
+			else if (vec.y < draw_start)
+			{
+				color = 0x70129a;
+				cb_put_pixel(ctx->img, vec, color, 1.0f);
+			}
+			else if (vec.y > draw_end)
+			{
+				color = 0x0fa0b9;
+				cb_put_pixel(ctx->img, vec, color, 1.0f);
+			}
 		}
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img->img, 0, 0);

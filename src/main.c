@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 19:48:07 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/29 20:11:39 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,12 +188,38 @@ void	cb_mini_draw(t_ctx *ctx)
 		vec.y = 0;
 		if (side == 1)
 			shading /= 2;
+
+		float	wall_x;
+		if (side == 0)
+			wall_x = player.y + perp_wall_dist * ray_dir_y;
+		else
+			wall_x = player.x + perp_wall_dist * ray_dir_x;
+		wall_x -= floor(wall_x);
+
+		int	texture_x = (int)(wall_x * (float)ctx->textures.w);
+		if (side == 0 && ray_dir_x > 0)
+			texture_x = ctx->textures.w - texture_x - 1;
+		if (side == 1 && ray_dir_y < 0)
+			texture_x = ctx->textures.w - texture_x - 1;
+
+		float	step = 1.0f * ctx->textures.h / line_height;
+
+		float	tex_pos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
+
+		int		*arr = (int*)ctx->textures.img.buffer;
+
 		while (vec.y++ < SCREEN_HEIGHT)
 		{
 			if (vec.y >= draw_start && vec.y <= draw_end)
 			{
-				color = 0x100fff;
-				cb_put_pixel(ctx->img, vec, color, shading);
+				// color = 0x100fff;
+				int	texture_y = (int)tex_pos & (ctx->textures.h - 1);
+
+				tex_pos += step;
+
+				color = arr[(texture_y * (ctx->textures.img.line_size / 4) + texture_x)];
+
+				cb_put_pixel(ctx->img, vec, color, 1.0f);
 			}
 			else if (vec.y < draw_start)
 			{

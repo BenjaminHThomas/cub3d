@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 17:18:36 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/29 17:27:16 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,21 @@ void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading)
 	}
 }
 
+void	cb_clear_image(t_ctx *ctx)
+{
+	t_vec	vec;
+
+	vec.x = 0;
+	while (vec.x++ < SCREEN_WIDTH)
+	{
+		vec.y = 0;
+		while (vec.y++ < SCREEN_HEIGHT)
+		{
+			cb_put_pixel(ctx->img, vec, 0x000, 0.0f);
+		}
+	}
+}
+
 void	cb_mini_draw(t_ctx *ctx)
 {
 	int		color;
@@ -85,6 +100,7 @@ void	cb_mini_draw(t_ctx *ctx)
 	float f_depth = 12.0f;
 	(void)f_depth;
 	(void)player;
+	cb_clear_image(ctx);
 	while (vec.x++ < SCREEN_WIDTH)
 	{
 		float	camera_x = 2 * vec.x / SCREEN_WIDTH - 1;
@@ -171,8 +187,6 @@ void	cb_mini_draw(t_ctx *ctx)
 		{
 			cb_put_pixel(ctx->img, vec, color, 1.0f);
 		}
-
-
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img->img, 0, 0);
 }

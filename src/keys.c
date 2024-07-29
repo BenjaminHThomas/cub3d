@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 17:16:29 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/29 17:27:57 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	cb_handle_key(int keycode, void *data)
 		float	old_plane_x = player->plane_x;
 		player->plane_x = player->plane_x * cosf(-0.1f) - player->plane_y * sinf(-0.1f);
 		player->plane_y = old_plane_x * sinf(-0.1f) + player->plane_y * cosf(-0.1f);
-
 		cb_mini_draw(ctx);
 	}
 	if (keycode == XK_Left)
@@ -42,6 +41,7 @@ int	cb_handle_key(int keycode, void *data)
 		float	old_plane_x = player->plane_x;
 		player->plane_x = player->plane_x * cosf(0.1f) - player->plane_y * sinf(0.1f);
 		player->plane_y = old_plane_x * sinf(0.1f) + player->plane_y * cosf(0.1f);
+		cb_mini_draw(ctx);
 	}
 	if (keycode == XK_w || keycode == XK_W)
 	{

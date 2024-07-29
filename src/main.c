@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 22:20:21 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/29 22:36:31 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	cb_mini_draw(t_ctx *ctx)
 
 		double	delta_dist_x = (ray_dir_x == 0) ? 1e30 : fabs(1 / ray_dir_x);
 		double	delta_dist_y = (ray_dir_y == 0) ? 1e30 : fabs(1 / ray_dir_y);
-		float	perp_wall_dist;
+		float	distance_to_wall;
 
 		int		step_x;
 		int		step_y;
@@ -184,11 +184,11 @@ void	cb_mini_draw(t_ctx *ctx)
 		}
 
 		if (side == 0)
-			perp_wall_dist = (side_dist_x - delta_dist_x);
+			distance_to_wall = (side_dist_x - delta_dist_x);
 		else
-			perp_wall_dist = (side_dist_y - delta_dist_y);
+			distance_to_wall = (side_dist_y - delta_dist_y);
 
-		int line_height = (int)(SCREEN_HEIGHT / perp_wall_dist);
+		int line_height = (int)(SCREEN_HEIGHT / distance_to_wall);
 
 		int draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
 		if (draw_start < 0)
@@ -203,9 +203,9 @@ void	cb_mini_draw(t_ctx *ctx)
 
 		float	wall_x;
 		if (side == 0)
-			wall_x = player.y + perp_wall_dist * ray_dir_y;
+			wall_x = player.y + distance_to_wall * ray_dir_y;
 		else
-			wall_x = player.x + perp_wall_dist * ray_dir_x;
+			wall_x = player.x + distance_to_wall * ray_dir_x;
 		wall_x -= floor(wall_x);
 
 		if (side == 0)
@@ -244,7 +244,8 @@ void	cb_mini_draw(t_ctx *ctx)
 		{
 			if (vec.y >= draw_start && vec.y <= draw_end)
 			{
-				int	tex_y = (int)tex_pos & (tex_height - 1);
+				int	tex_y = (int)tex_pos % tex_height;
+
 				tex_pos += step;
 
 				color = arr[(tex_y * tex_line_size + tex_x)];

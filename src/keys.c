@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 19:16:41 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/29 20:56:21 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,34 @@ int	cb_handle_key(int keycode, void *data)
 	}
 	if (keycode == XK_w || keycode == XK_W)
 	{
-		player->x += player->dx * 0.1f;
-		player->y += player->dy * 0.1f;
+		if (ctx->map->raw[(ctx->map->width * (int)player->y) + (int)(player->x + player->dx * 0.1f)] != '1')
+			player->x += player->dx * 0.1f;
+		if (ctx->map->raw[(ctx->map->width * (int)(player->y + player->dy * 0.1f)) + (int)(player->x)] != '1')
+			player->y += player->dy * 0.1f;
 		cb_mini_draw(ctx);
 	}
 	if (keycode == XK_s || keycode == XK_S)
 	{
-		player->x -= player->dx * 0.1f;
-		player->y -= player->dy * 0.1f;
+		if (ctx->map->raw[(ctx->map->width * (int)player->y) + (int)(player->x - player->dx * 0.1f)] != '1')
+			player->x -= player->dx * 0.1f;
+		if (ctx->map->raw[(ctx->map->width * (int)(player->y - player->dy * 0.1f)) + (int)(player->x)] != '1')
+			player->y -= player->dy * 0.1f;
 		cb_mini_draw(ctx);
 	}
 	if (keycode == XK_d || keycode == XK_D)
 	{
-		player->x += player->dy * 0.1f;
-		player->y -= player->dx * 0.1f;
+		if (ctx->map->raw[(ctx->map->width * (int)player->y) + (int)(player->x + player->dy * 0.1f)] != '1')
+			player->x += player->dy * 0.1f;
+		if (ctx->map->raw[(ctx->map->width * (int)(player->y - player->dx * 0.1f)) + (int)(player->x)] != '1')
+			player->y -= player->dx * 0.1f;
 		cb_mini_draw(ctx);
 	}
 	if (keycode == XK_a || keycode == XK_A)
 	{
-		player->x -= player->dy * 0.1f;
-		player->y += player->dx * 0.1f;
+		if (ctx->map->raw[(ctx->map->width * (int)player->y) + (int)(player->x - player->dy * 0.1f)] != '1')
+			player->x -= player->dy * 0.1f;
+		if (ctx->map->raw[(ctx->map->width * (int)(player->y + player->dx * 0.1f)) + (int)(player->x)] != '1')
+			player->y += player->dx * 0.1f;
 		cb_mini_draw(ctx);
 	}
 	return (0);

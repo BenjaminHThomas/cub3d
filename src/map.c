@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:44:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/28 11:27:07 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/29 15:52:52 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_map	*init_map()
 	map = malloc(sizeof(t_map));
 	map->player.x = 3.0f;
 	map->player.y = 3.0f;
+	map->player.dx = -1.0f;
+	map->player.dy = 0.0f;
 	map->player.angle = 0.0f;
 
 	map->height = 10;

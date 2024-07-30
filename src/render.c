@@ -6,13 +6,33 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/30 16:08:54 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/30 22:37:54 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading)
+inline int	cb_darken_color(int color, float shade)
+{
+	int	new;
+	int	red;
+	int	green;
+	int	blue;
+
+	red = ((color >> 16) & 0xFF) * shade;
+	green = ((color >> 8) & 0xFF) * shade;
+	blue = (color & 0xFF) * shade;
+	if (red > 255)
+		red = 255;
+	if (green > 255)
+		green = 255;
+	if (blue > 255)
+		blue = 255;
+	new = (red << 16) | (green << 8) | blue;
+	return (new);
+}
+
+inline void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading)
 {
 	int	pixel = (vec.y * (img->line_size / 4)) + (vec.x);
 	int	*buffer = (int*)(img->buffer);
@@ -42,6 +62,8 @@ void	cb_raytracer_set_values(t_ctx *ctx)
 	t_raytracer	raytracer;
 	t_player	player;
 
+	raytracer.vec.x = 0;
+	raytracer.vec.y = 0;
 	player = ctx->map->player;
 	raytracer.camera_x = 2 * raytracer.vec.x / SCREEN_WIDTH - 1;
 	raytracer.ray_dir_x = player.dx + player.plane_x * raytracer.camera_x;
@@ -198,7 +220,7 @@ void	cb_mini_draw(t_ctx *ctx)
 
 				color = arr[(tex_y * tex_line_size + tex_x)];
 				if (side == 1)
-					shading = 1.5f;
+					shading = 1.1f;
 				else
 					shading = 1.0f;
 				color = cb_darken_color(color, shading);

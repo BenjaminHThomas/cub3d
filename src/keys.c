@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 20:56:21 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/30 08:05:38 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,23 @@ int	cb_handle_key(int keycode, void *data)
 	if (keycode == XK_Right)
 	{
 		float	old_dir_x = player->dx;
-		player->dx = player->dx * cosf(-0.1f) - player->dy * sinf(-0.1f);
-		player->dy = old_dir_x * sinf(-0.1f) + player->dy * cosf(-0.1f);
+		player->dx = player->dx * cos(-0.1f) - player->dy * sin(-0.1f);
+		player->dy = old_dir_x * sin(-0.1f) + player->dy * cos(-0.1f);
 
 		float	old_plane_x = player->plane_x;
-		player->plane_x = player->plane_x * cosf(-0.1f) - player->plane_y * sinf(-0.1f);
-		player->plane_y = old_plane_x * sinf(-0.1f) + player->plane_y * cosf(-0.1f);
+		player->plane_x = player->plane_x * cos(-0.1f) - player->plane_y * sin(-0.1f);
+		player->plane_y = old_plane_x * sin(-0.1f) + player->plane_y * cos(-0.1f);
 		cb_mini_draw(ctx);
 	}
 	if (keycode == XK_Left)
 	{
 		float	old_dir_x = player->dx;
-		player->dx = player->dx * cosf(0.1f) - player->dy * sinf(0.1f);
-		player->dy = old_dir_x * sinf(0.1f) + player->dy * cosf(0.1f);
+		player->dx = player->dx * cos(0.1f) - player->dy * sin(0.1f);
+		player->dy = old_dir_x * sin(0.1f) + player->dy * cos(0.1f);
 
 		float	old_plane_x = player->plane_x;
-		player->plane_x = player->plane_x * cosf(0.1f) - player->plane_y * sinf(0.1f);
-		player->plane_y = old_plane_x * sinf(0.1f) + player->plane_y * cosf(0.1f);
+		player->plane_x = player->plane_x * cos(0.1f) - player->plane_y * sin(0.1f);
+		player->plane_y = old_plane_x * sin(0.1f) + player->plane_y * cos(0.1f);
 		cb_mini_draw(ctx);
 	}
 	if (keycode == XK_w || keycode == XK_W)

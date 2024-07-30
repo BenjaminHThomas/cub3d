@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 22:52:58 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/30 08:02:47 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,21 @@ void	cb_int_put_pixel(t_img *img, t_vec vec, t_color color)
 
 	img->buffer[pixel] = color;
 }
+
+int	cb_darken_color(int color, float shade)
+{
+	int	new;
+	int	red;
+	int	green;
+	int	blue;
+
+	red = ((color >> 16) & 0xFF) * shade;
+	green = ((color >> 8) & 0xFF) * shade;
+	blue = (color & 0xFF) * shade;
+	new = (red << 16) | (green << 8) | blue;
+	return (new);
+}
+
 
 void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading)
 {
@@ -155,7 +170,6 @@ void	cb_mini_draw(t_ctx *ctx)
 			step_y = 1;
 			side_dist_y = (map_y + 1.0 - player.y) * delta_dist_y;
 		}
-
 		while (hit == 0)
 		{
 			if (side_dist_x < side_dist_y)
@@ -221,25 +235,30 @@ void	cb_mini_draw(t_ctx *ctx)
 
 		int		*arr = (int*)ctx->textures[orientation].img.buffer;
 		int		tex_line_size = ctx->textures[orientation].img.line_size / 4;
+		float	shading = 0.0f;
 
 
 		vec.y = 0;
 		while (vec.y < SCREEN_HEIGHT)
 		{
-			if (vec.y >= draw_start && vec.y <= draw_end)
+			if (vec.y >= draw_start && vec.y <= draw_end) // wall
 			{
 				int	tex_y = (int)tex_pos % tex_height;
 				tex_pos += step;
 
 				color = arr[(tex_y * tex_line_size + tex_x)];
-				cb_put_pixel(ctx->img, vec, color, 1.0f);
+				if (side == 1)
+					shading = 0.9f;
+				else
+					shading = 1.1f;
+				cb_put_pixel(ctx->img, vec, color, shading);
 			}
-			else if (vec.y < draw_start)
+			else if (vec.y < draw_start) // ceilling
 			{
 				color = 0x70129a;
 				cb_put_pixel(ctx->img, vec, color, 1.0f);
 			}
-			else if (vec.y > draw_end)
+			else if (vec.y > draw_end) // floor
 			{
 				color = 0x0fa0b9;
 				cb_put_pixel(ctx->img, vec, color, 1.0f);

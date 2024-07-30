@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 16:16:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 22:07:43 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/30 09:04:39 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	init_textures(t_ctx *ctx)
 	err = 0;
 	texture = malloc(sizeof(t_texture) * 4);
 	texture[NORTH] = create_texture(ctx, "textures/boss.xpm", &err);
-	texture[EAST] = create_texture(ctx, "textures/gang.xpm", &err);
-	texture[SOUTH] = create_texture(ctx, "textures/psyop.xpm", &err);
+	texture[EAST] = create_texture(ctx, "textures/psyop.xpm", &err);
+	texture[SOUTH] = create_texture(ctx, "textures/aple.xpm", &err);
 	texture[WEST] = create_texture(ctx, "textures/alpha.xpm", &err);
 	// GOOD CODE BUT FOR TESTING PURPOSES IM GOING TO LEAVE IT OUT
 	// while (i < 4)

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/30 08:02:47 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/30 09:35:26 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,10 +248,11 @@ void	cb_mini_draw(t_ctx *ctx)
 
 				color = arr[(tex_y * tex_line_size + tex_x)];
 				if (side == 1)
-					shading = 0.9f;
+					shading = 1.0f;
 				else
-					shading = 1.1f;
-				cb_put_pixel(ctx->img, vec, color, shading);
+					shading = 0.8f;
+				color = cb_darken_color(color, shading);
+				cb_put_pixel(ctx->img, vec, color, 1.0f);
 			}
 			else if (vec.y < draw_start) // ceilling
 			{
@@ -269,16 +270,6 @@ void	cb_mini_draw(t_ctx *ctx)
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img->img, 0, 0);
 }
-// if (orientation == EAST)
-// 	color = 0x00129a;
-// else if (orientation == WEST)
-// 	color = 0xa0120a;
-// else if (orientation == SOUTH)
-// 	color = 0xf0f20a;
-// else if (orientation == NORTH)
-// 	color = 0x00f20a;
-
-
 
 int	main(int ac, char **av)
 {

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:44:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 17:12:22 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/30 09:03:49 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,17 @@ t_map	*init_map()
 	map->height = 10;
 	map->width = 12;
 	map->raw = ft_calloc(sizeof(char), (map->height * map->width + 1));
-	while (i < map->height)
-	{
-		if (i == 0 || i == 9)
-			ft_strcat(map->raw, "111111111111");
-		else if (i == 3 || i == 4)
-			ft_strcat(map->raw, "100000110001");
-		else
-			ft_strcat(map->raw, "100000000001");
-		i++;
-	}
-	map->raw[i] = '\0';
+	ft_strcat(map->raw, "111111111111100000000001100000000001100000110001100000110001100000000001100000000001100000000001100000000001111111111111");
+	// while (i < map->height)
+	// {
+	// 	if (i == 0 || i == 9)
+	// 		ft_strcat(map->raw, "111111111111");
+	// 	else if (i == 3 || i == 4)
+	// 		ft_strcat(map->raw, "100000110001");
+	// 	else
+	// 		ft_strcat(map->raw, "100000000001");
+	// 	i++;
+	// }
+	// map->raw[i] = '\0';
 	return (map);
 }

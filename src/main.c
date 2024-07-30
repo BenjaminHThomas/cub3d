@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/30 09:35:26 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/30 10:23:23 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,6 @@ int	cb_free_all(void *param)
 		ctx->mlx = NULL;
 	}
 	exit(0);
-}
-
-void	cb_int_put_pixel(t_img *img, t_vec vec, t_color color)
-{
-	int	pixel = (vec.y * img->line_size) + vec.x;
-
-	img->buffer[pixel] = color;
 }
 
 int	cb_darken_color(int color, float shade)

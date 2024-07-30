@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/29 22:49:46 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/30 09:43:43 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@
 
 # include "mlx.h"
 # include "libft.h"
+
+# ifdef __GNUC__
+#  define HOT __attribute__((hot))
+#  define COLD __attribute__((cold))
+# else
+# define HOT
+# define COLD
+#endif
 
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
@@ -100,16 +108,14 @@ t_map	*init_map();
 
 int		cb_handle_key(int keycode, void *data);
 
-int		cb_free_all(void *param)
-		__attribute__((cold));
+int		cb_free_all(void *param) COLD;
 
-void	cb_mini_draw(t_ctx *ctx)
-		__attribute__((hot));
+void	cb_mini_draw(t_ctx *ctx) HOT;
 
-void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading)
-		__attribute__((hot));
+void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading) HOT;
 
-int	init_textures(t_ctx *ctx)
-		__attribute__((cold));
+int	init_textures(t_ctx *ctx) COLD;
+
+int	parsing(char *path) COLD;
 
 #endif

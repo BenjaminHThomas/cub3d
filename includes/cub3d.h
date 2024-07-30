@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/30 11:17:53 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/30 16:02:34 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,40 @@ typedef struct s_texture
 	t_img	img;
 }	t_texture;
 
+typedef struct s_raytracer
+{
+	t_vec	vec;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		orientation;
+	double	distance_to_wall;
+}	t_raytracer;
+
+typedef	struct s_renderer
+{
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	double	wall_x;
+	int		tex_width;
+	int		tex_height;
+	int		tex_x;
+	int		tex_y;
+	double	step;
+	double	text_pos;
+}	t_renderer;
+
 typedef struct s_ctx
 {
 	void		*mlx;
@@ -102,6 +136,8 @@ typedef struct s_ctx
 	float		fov;
 	t_img		*img;
 	t_texture	*textures;
+	t_renderer	renderer;
+	t_raytracer	raytracer;
 }	t_ctx;
 
 t_map	*init_map();
@@ -113,6 +149,8 @@ int		cb_free_all(void *param) COLD;
 void	cb_mini_draw(t_ctx *ctx) HOT;
 
 void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading) HOT;
+
+int		cb_darken_color(int color, float shade) HOT;
 
 int		init_textures(t_ctx *ctx) COLD;
 

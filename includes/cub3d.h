@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/30 09:43:43 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/30 11:17:53 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ void	cb_mini_draw(t_ctx *ctx) HOT;
 
 void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading) HOT;
 
-int	init_textures(t_ctx *ctx) COLD;
+int		init_textures(t_ctx *ctx) COLD;
 
-int	parsing(char *path) COLD;
+int		parsing(char *path, t_ctx *ctx) COLD;
 
 #endif

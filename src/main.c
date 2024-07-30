@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/30 10:33:51 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/30 13:51:43 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,7 +247,7 @@ void	cb_mini_draw(t_ctx *ctx)
 
 				color = arr[(tex_y * tex_line_size + tex_x)];
 				if (side == 1)
-					shading = 2.5f;
+					shading = 1.5f;
 				else
 					shading = 1.0f;
 				color = cb_darken_color(color, shading);
@@ -280,6 +280,10 @@ int	main(int ac, char **av)
 	(void)av;
 	ctx.fov = M_PI / FOV;
 	printf("PI: %f\n", ctx.fov);
+	if (check_args(av, av) != 0)
+		return (1);
+	if (parsing(av[1], &ctx) != 0)
+		return (1);
 	ctx.map = init_map();
 	while (i < ctx.map->height)
 	{

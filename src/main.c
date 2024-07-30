@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/30 10:23:23 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/30 10:33:51 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,12 @@ int	cb_darken_color(int color, float shade)
 	red = ((color >> 16) & 0xFF) * shade;
 	green = ((color >> 8) & 0xFF) * shade;
 	blue = (color & 0xFF) * shade;
+	if (red > 255)
+		red = 255;
+	if (green > 255)
+		green = 255;
+	if (blue > 255)
+		blue = 255;
 	new = (red << 16) | (green << 8) | blue;
 	return (new);
 }
@@ -241,9 +247,9 @@ void	cb_mini_draw(t_ctx *ctx)
 
 				color = arr[(tex_y * tex_line_size + tex_x)];
 				if (side == 1)
-					shading = 1.0f;
+					shading = 2.5f;
 				else
-					shading = 0.8f;
+					shading = 1.0f;
 				color = cb_darken_color(color, shading);
 				cb_put_pixel(ctx->img, vec, color, 1.0f);
 			}

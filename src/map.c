@@ -27,9 +27,9 @@
 t_map	*init_map()
 {
 	t_map	*map;
-	int		i;
+	//int		i;
 
-	i = 0;
+	//i = 0;
 	map = malloc(sizeof(t_map));
 	map->player.x = 3.0f;
 	map->player.y = 3.0f;

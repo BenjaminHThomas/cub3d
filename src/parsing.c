@@ -23,10 +23,10 @@ int	check_args(int ac, char **av)
 
 int	check_path(char *path)
 {
-	int		i;
+//	int		i;
 	char	*dot;
 
-	i = 0;
+//	i = 0;
 	dot = ft_strchr(path, '.');
 	if (!dot)
 		return (2);
@@ -38,11 +38,11 @@ int	check_path(char *path)
 int	parsing(char *path, t_ctx *ctx)
 {
 	int		i;
-	char	*line;
+//	char	*line;
 	int		fd;
 
 	i = 0;
-	line = NULL;
+//	line = NULL;
 	(void)ctx;
 	if (check_path(path) != 0)
 	{

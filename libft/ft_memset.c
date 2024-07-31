@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:03:36 by okoca             #+#    #+#             */
-/*   Updated: 2024/05/19 16:34:11 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 11:30:43 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // 	return (NULL);
 // i was told to remove these protections.
 
-void	*ft_memset(void *addr, int c, size_t n)
+inline void	*ft_memset(void *addr, int c, size_t n)
 {
 	size_t			i;
 	unsigned char	*location;

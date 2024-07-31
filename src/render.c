@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 11:19:02 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 11:29:15 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,6 @@ int	cb_mini_draw(void *data)
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img->img, 0, 0);
 
-	char	*fps_c;
 	ctx->new_time = get_time();
 	ctx->delta_time = ctx->new_time - ctx->old_time;
 	ctx->frame_count++;
@@ -232,8 +231,8 @@ int	cb_mini_draw(void *data)
 		ctx->fps = ctx->frame_count * 1000 / ctx->delta_time;
 		ctx->frame_count = 0;
 		ctx->old_time = get_time();
+		ft_itoa_s(ctx->time_str, (int)ctx->fps);
 	}
-	fps_c = ft_itoa_s(ctx->time_str, (int)ctx->fps);
-	mlx_string_put(ctx->mlx, ctx->window, 20, 30, 0xfff, fps_c);
+	mlx_string_put(ctx->mlx, ctx->window, 20, 30, 0xfff, ctx->time_str);
 	return (0);
 }

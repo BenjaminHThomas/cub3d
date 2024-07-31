@@ -6,11 +6,23 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:44:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 14:39:40 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 14:48:11 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	print_map(char *map, int height, int width)
+{
+	int	i;
+
+	i = 0;
+	while (i < height)
+	{
+		printf("%.12s\n", &(map[i * width]));
+		i++;
+	}
+}
 
 /*
 * 111111111111
@@ -40,5 +52,6 @@ t_map	*init_map()
 	map->width = 12;
 	map->raw = ft_calloc(sizeof(char), (map->height * map->width + 1));
 	ft_strcat(map->raw, "111111111111100000000001100000000001100000111001100000110001100000001001100000000001100000000001101000000001111111111111");
+	print_map(map->raw, map->height, map->width);
 	return (map);
 }

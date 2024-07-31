@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 13:40:27 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 14:45:39 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,6 @@ int	main(int ac, char **av)
 	ctx = cb_init_ctx();
 	if (cb_init_mtx(&ctx) != 0)
 		return (1);
-	while (i < ctx.map->height)
-	{
-		printf("%.12s\n", &(ctx.map->raw[i * ctx.map->width]));
-		i++;
-	}
 	mlx_hook(ctx.window, DestroyNotify, StructureNotifyMask, cb_free_all, &ctx);
 	mlx_hook(ctx.window, KeyPress, KeyPressMask, cb_handle_key, &ctx);
 	mlx_loop_hook(ctx.mlx, cb_mini_draw, &ctx);

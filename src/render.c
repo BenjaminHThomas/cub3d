@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/30 22:37:54 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 10:03:20 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,37 +207,60 @@ void	cb_mini_draw(t_ctx *ctx)
 
 		int		*arr = (int*)ctx->textures[orientation].img.buffer;
 		int		tex_line_size = ctx->textures[orientation].img.line_size / 4;
-		float	shading = 0.0f;
+		float	shading = 1.0f;
 
 
 		vec.y = 0;
-		while (vec.y < SCREEN_HEIGHT)
+		while (vec.y < SCREEN_HEIGHT && vec.y < draw_start)
 		{
-			if (vec.y >= draw_start && vec.y <= draw_end) // wall
-			{
-				int	tex_y = (int)tex_pos % tex_height;
-				tex_pos += step;
+				cb_put_pixel(ctx->img, vec, CEILLING_COLOR, 1.0f);
+				vec.y++;
+		}
+		while (vec.y < SCREEN_HEIGHT && vec.y >= draw_start && vec.y <= draw_end)
+		{
+			int	tex_y = (int)tex_pos % tex_height;
+			tex_pos += step;
 
-				color = arr[(tex_y * tex_line_size + tex_x)];
-				if (side == 1)
-					shading = 1.1f;
-				else
-					shading = 1.0f;
-				color = cb_darken_color(color, shading);
-				cb_put_pixel(ctx->img, vec, color, 1.0f);
-			}
-			else if (vec.y < draw_start) // ceilling
-			{
-				color = 0x70129a;
-				cb_put_pixel(ctx->img, vec, color, 1.0f);
-			}
-			else if (vec.y > draw_end) // floor
-			{
-				color = 0x0fa0b9;
-				cb_put_pixel(ctx->img, vec, color, 1.0f);
-			}
+			color = arr[(tex_y * tex_line_size + tex_x)];
+			// if (side == 1)
+			// 	shading = 1.1f;
+			// else
+			// 	shading = 1.0f;
+			color = cb_darken_color(color, shading);
+			cb_put_pixel(ctx->img, vec, color, 1.0f);
 			vec.y++;
 		}
+		while (vec.y < SCREEN_HEIGHT && vec.y > draw_end)
+		{
+				cb_put_pixel(ctx->img, vec, FLOOR_COLOR, 1.0f);
+				vec.y++;
+		}
+		// while (vec.y < SCREEN_HEIGHT)
+		// {
+		// 	if (vec.y >= draw_start && vec.y <= draw_end) // wall
+		// 	{
+		// 		int	tex_y = (int)tex_pos % tex_height;
+		// 		tex_pos += step;
+
+		// 		color = arr[(tex_y * tex_line_size + tex_x)];
+		// 		if (side == 1)
+		// 			shading = 1.1f;
+		// 		else
+		// 			shading = 1.0f;
+		// 		color = cb_darken_color(color, shading);
+		// 		cb_put_pixel(ctx->img, vec, color, 1.0f);
+		// 	}
+		// 	else if (vec.y < draw_start) // ceilling
+		// 	{
+		// 		color = 0x70129a;
+		// 		cb_put_pixel(ctx->img, vec, color, 1.0f);
+		// 	}
+		// 	else if (vec.y > draw_end) // floor
+		// 	{
+		// 		cb_put_pixel(ctx->img, vec, color, 1.0f);
+		// 	}
+		// 	vec.y++;
+		// }
 		vec.x++;
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img->img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:44:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/30 09:03:49 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 09:26:12 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_map	*init_map()
 	map->player.dy = 0.0f;
 	map->player.angle = 0.0f;
 	map->player.plane_x = 0;
-	map->player.plane_y = 0.66;
+	map->player.plane_y = 0.60;
 
 	map->height = 10;
 	map->width = 12;

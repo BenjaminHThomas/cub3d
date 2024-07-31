@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/30 16:02:34 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 09:59:32 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@
 # define WEST 2
 # define EAST 3
 
+# define CEILLING_COLOR 0x70129a
+# define FLOOR_COLOR 0x0fa0b9
+
 typedef int	t_color;
 
 typedef struct s_vec
@@ -76,7 +79,6 @@ typedef struct s_img
 	char	*buffer;
 	void	*img;
 }	t_img;
-
 
 typedef struct s_map
 {

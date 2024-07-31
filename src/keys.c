@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 16:20:25 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 16:23:27 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	cb_handle_key(int keycode, void *data)
 	ctx = (t_ctx *)data;
 	player = &ctx->map.player;
 	if (keycode == XK_Escape)
-		cb_free_all(ctx);
+		cb_exit(ctx);
 	if (keycode == XK_Right)
 	{
 		float	old_dir_x = player->dx;

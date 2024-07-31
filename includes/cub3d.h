@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 16:16:08 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 16:24:06 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,5 +177,6 @@ void		cb_free_map(t_ctx *ctx) __attribute__((cold));
 
 void		cb_free_tex(t_ctx *ctx) __attribute__((cold));
 
+int			cb_exit(void *param) __attribute__((cold));
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 14:26:39 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 14:38:49 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include "mlx.h"
 # include "libft.h"
 
-# define SCREEN_WIDTH 1860
-# define SCREEN_HEIGHT 920
+# define SCREEN_WIDTH 1680
+# define SCREEN_HEIGHT 720
 
 # define PROG_NAME "cub3d"
 

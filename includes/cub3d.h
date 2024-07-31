@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 14:38:49 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 14:44:57 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <sys/time.h>
+# include <stddef.h>
+# include <stdint.h>
 # include <math.h>
 # include <stdlib.h>
 # include <X11/keysym.h>
@@ -30,15 +32,11 @@
 
 # define PROG_NAME "cub3d"
 
-# define PRECISION 0.10f
-
-# define FOV 4.0f
-
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
 
-typedef	enum e_direction
+typedef enum e_direction
 {
 	NORTH,
 	SOUTH,
@@ -114,7 +112,7 @@ typedef struct s_raytracer
 	double	distance_to_wall;
 }	t_raytracer;
 
-typedef	struct s_renderer
+typedef struct s_renderer
 {
 	int		line_height;
 	int		draw_start;
@@ -150,27 +148,27 @@ typedef struct s_ctx
 	t_fps		fps;
 }	t_ctx;
 
-t_map	*init_map();
+t_map		*init_map(void);
 
-t_ctx	cb_init_ctx() __attribute__((cold));
+t_ctx		cb_init_ctx(void) __attribute__((cold));
 
-int		cb_init_mtx(t_ctx *ctx) __attribute__((cold));
+int			cb_init_mtx(t_ctx *ctx) __attribute__((cold));
 
-int		cb_handle_key(int keycode, void *data);
+int			cb_handle_key(int keycode, void *data);
 
-int		cb_free_all(void *param) __attribute__((cold));
+int			cb_free_all(void *param) __attribute__((cold));
 
-int		cb_mini_draw(void *data) __attribute__((hot));
+int			cb_mini_draw(void *data) __attribute__((hot));
 
-void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading)
-		__attribute__((hot));
+void		cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading)
+			__attribute__((hot));
 
-int		cb_darken_color(int color, float shade) __attribute__((hot));
+int			cb_darken_color(int color, float shade) __attribute__((hot));
 
-int		init_textures(t_ctx *ctx) __attribute__((cold));
+int			init_textures(t_ctx *ctx) __attribute__((cold));
 
-int		parsing(char *path, t_ctx *ctx) __attribute__((cold));
+int			parsing(char *path, t_ctx *ctx) __attribute__((cold));
 
-unsigned long	get_time();
+uint64_t	get_time(void);
 
 #endif

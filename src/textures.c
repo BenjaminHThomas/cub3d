@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 16:16:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 13:57:58 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 14:41:21 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_texture	create_texture(t_ctx *ctx, char *path, int *err)
 {
 	t_texture	new;
+
 	new.data = mlx_xpm_file_to_image(ctx->mlx, path,
 			&new.w, &new.h);
 	if (!new.data)

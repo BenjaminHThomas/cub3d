@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 10:06:48 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 11:05:11 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,35 @@ int	cb_mini_draw(void *data)
 	t_player	player;
 	t_ctx	*ctx;
 
+//  double lastTime = glfwGetTime();
+//  int nbFrames = 0;
+
+//  do{
+
+//      // Measure speed
+//      double currentTime = glfwGetTime();
+//      nbFrames++;
+//      if ( currentTime - lastTime >= 1.0 ){ // If last prinf() was more than 1 sec ago
+//          // printf and reset timer
+//          printf("%f ms/frame\n", 1000.0/double(nbFrames));
+//          nbFrames = 0;
+//          lastTime += 1.0;
+//      }
+
+// float currentTime = glfwGetTime();
+//     float deltaTime = currentTime - lastTime;
+//     lastTime = currentTime;
+//     std::cout << "FPS: " << (1 / deltaTime) << "/" << deltaTime << std::endl;
+
+
+
+
+
 	ctx = (t_ctx *)data;
+
+
+
+
 	vec.x = 0;
 	vec.y = 0;
 	vec.angle = 0;
@@ -262,6 +290,19 @@ int	cb_mini_draw(void *data)
 		vec.x++;
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img->img, 0, 0);
+
+	char	*fps_c;
+	ctx->new_time = get_time();
+	ctx->delta_time = ctx->new_time - ctx->old_time;
+	ctx->frame_count++;
+	if (ctx->delta_time >= 1000)
+	{
+		ctx->fps = ctx->frame_count * 1000 / ctx->delta_time;
+		ctx->frame_count = 0;
+		ctx->old_time = get_time();
+	}
+	fps_c = ft_itoa_s(ctx->time_str, (int)ctx->fps);
+	mlx_string_put(ctx->mlx, ctx->window, 20, 30, 0xfff, fps_c);
 	return (0);
 }
 

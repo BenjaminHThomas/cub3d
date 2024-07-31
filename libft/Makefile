@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by okoca             #+#    #+#              #
-#    Updated: 2024/06/30 19:14:05 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/31 11:05:25 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC = ft_atoi.c \
 	ft_strtrim.c \
 	ft_split.c \
 	ft_itoa.c \
+	ft_itoa_s.c \
 	ft_strmapi.c \
 	ft_striteri.c \
 	ft_putchar_fd.c \

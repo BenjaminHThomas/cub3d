@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 10:05:55 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 11:02:25 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <sys/time.h>
 # include <math.h>
 # include <stdlib.h>
 # include <X11/keysym.h>
@@ -140,6 +141,12 @@ typedef struct s_ctx
 	t_texture	*textures;
 	t_renderer	renderer;
 	t_raytracer	raytracer;
+	unsigned long		old_time;
+	unsigned long		new_time;
+	unsigned long		frame_count;
+	unsigned long		delta_time;
+	unsigned long		fps;
+	char				time_str[21];
 }	t_ctx;
 
 t_map	*init_map();
@@ -158,5 +165,7 @@ int		cb_darken_color(int color, float shade) HOT;
 int		init_textures(t_ctx *ctx) COLD;
 
 int		parsing(char *path, t_ctx *ctx) COLD;
+
+unsigned long	get_time();
 
 #endif

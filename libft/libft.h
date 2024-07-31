@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:03:36 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/27 14:09:02 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 11:04:22 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 int		ft_isupper(int c);
 
 int		ft_islower(int c);
+
+char	*ft_itoa_s(char *dest, int n);
 
 /*
 * Joins two strings into a new string, optionally freeing the original strings.

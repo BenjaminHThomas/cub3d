@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/30 22:37:38 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 10:04:42 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ int	main(int ac, char **av)
 	ctx.window = mlx_new_window(ctx.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
 	mlx_hook(ctx.window, DestroyNotify, StructureNotifyMask, cb_free_all, &ctx);
 	mlx_hook(ctx.window, KeyPress, KeyPressMask, cb_handle_key, &ctx);
-	cb_mini_draw(&ctx);
+	// cb_mini_draw(&ctx);
+	mlx_loop_hook(ctx.mlx, cb_mini_draw, &ctx);
 	mlx_loop(ctx.mlx);
 	cb_free_all(&ctx);
 }

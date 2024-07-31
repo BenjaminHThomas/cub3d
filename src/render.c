@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 10:03:20 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 10:06:48 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,14 @@ void	cb_raytracer_set_values(t_ctx *ctx)
 	ctx->raytracer = raytracer;
 }
 
-void	cb_mini_draw(t_ctx *ctx)
+int	cb_mini_draw(void *data)
 {
 	int		color;
 	t_vec	vec;
 	t_player	player;
+	t_ctx	*ctx;
 
+	ctx = (t_ctx *)data;
 	vec.x = 0;
 	vec.y = 0;
 	vec.angle = 0;
@@ -222,10 +224,6 @@ void	cb_mini_draw(t_ctx *ctx)
 			tex_pos += step;
 
 			color = arr[(tex_y * tex_line_size + tex_x)];
-			// if (side == 1)
-			// 	shading = 1.1f;
-			// else
-			// 	shading = 1.0f;
 			color = cb_darken_color(color, shading);
 			cb_put_pixel(ctx->img, vec, color, 1.0f);
 			vec.y++;
@@ -264,6 +262,7 @@ void	cb_mini_draw(t_ctx *ctx)
 		vec.x++;
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img->img, 0, 0);
+	return (0);
 }
 
 

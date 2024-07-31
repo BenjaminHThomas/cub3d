@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 09:59:32 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 10:05:55 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,8 @@ int		cb_handle_key(int keycode, void *data);
 
 int		cb_free_all(void *param) COLD;
 
-void	cb_mini_draw(t_ctx *ctx) HOT;
+// void	cb_mini_draw(t_ctx *ctx) HOT;
+int		cb_mini_draw(void *data) HOT;
 
 void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading) HOT;
 

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/30 08:05:38 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 10:06:24 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	cb_handle_key(int keycode, void *data)
 		float	old_plane_x = player->plane_x;
 		player->plane_x = player->plane_x * cos(-0.1f) - player->plane_y * sin(-0.1f);
 		player->plane_y = old_plane_x * sin(-0.1f) + player->plane_y * cos(-0.1f);
-		cb_mini_draw(ctx);
+		// cb_mini_draw(ctx);
 	}
 	if (keycode == XK_Left)
 	{
@@ -41,7 +41,7 @@ int	cb_handle_key(int keycode, void *data)
 		float	old_plane_x = player->plane_x;
 		player->plane_x = player->plane_x * cos(0.1f) - player->plane_y * sin(0.1f);
 		player->plane_y = old_plane_x * sin(0.1f) + player->plane_y * cos(0.1f);
-		cb_mini_draw(ctx);
+		// cb_mini_draw(ctx);
 	}
 	if (keycode == XK_w || keycode == XK_W)
 	{
@@ -49,7 +49,7 @@ int	cb_handle_key(int keycode, void *data)
 			player->x += player->dx * 0.1f;
 		if (ctx->map->raw[(ctx->map->width * (int)(player->y + player->dy * 0.1f)) + (int)(player->x)] != '1')
 			player->y += player->dy * 0.1f;
-		cb_mini_draw(ctx);
+		// cb_mini_draw(ctx);
 	}
 	if (keycode == XK_s || keycode == XK_S)
 	{
@@ -57,7 +57,7 @@ int	cb_handle_key(int keycode, void *data)
 			player->x -= player->dx * 0.1f;
 		if (ctx->map->raw[(ctx->map->width * (int)(player->y - player->dy * 0.1f)) + (int)(player->x)] != '1')
 			player->y -= player->dy * 0.1f;
-		cb_mini_draw(ctx);
+		// cb_mini_draw(ctx);
 	}
 	if (keycode == XK_d || keycode == XK_D)
 	{
@@ -65,7 +65,7 @@ int	cb_handle_key(int keycode, void *data)
 			player->x += player->dy * 0.1f;
 		if (ctx->map->raw[(ctx->map->width * (int)(player->y - player->dx * 0.1f)) + (int)(player->x)] != '1')
 			player->y -= player->dx * 0.1f;
-		cb_mini_draw(ctx);
+		// cb_mini_draw(ctx);
 	}
 	if (keycode == XK_a || keycode == XK_A)
 	{
@@ -73,7 +73,7 @@ int	cb_handle_key(int keycode, void *data)
 			player->x -= player->dy * 0.1f;
 		if (ctx->map->raw[(ctx->map->width * (int)(player->y + player->dx * 0.1f)) + (int)(player->x)] != '1')
 			player->y += player->dx * 0.1f;
-		cb_mini_draw(ctx);
+		// cb_mini_draw(ctx);
 	}
 	return (0);
 }

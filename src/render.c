@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 17:28:06 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 21:32:39 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,43 +33,40 @@ inline int	cb_darken_color(int color, float shade)
 	return (new);
 }
 
-inline void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading)
+inline void	cb_put_pixel(t_img *img, t_vecint vec, t_color color, float shading)
 {
-	int	pixel = (vec.y * (img->line_size / 4)) + (vec.x);
-	int	*buffer = (int*)(img->buffer);
+	int	pixel;
+	int	*buffer;
 
+	pixel = (vec.y * (img->line_size / 4)) + (vec.x);
+	buffer = (int *)img->buffer;
 	color *= shading;
 	if (buffer[pixel] != color)
 		buffer[pixel] = color;
 }
 
-void	cb_raytracer_set_values(t_ctx *ctx)
+inline void	cb_raytracer_set_values(t_ctx *ctx)
 {
 	t_raytracer	raytracer;
 	t_player	player;
 
+	player = ctx->map.player;
 	raytracer.vec.x = 0;
 	raytracer.vec.y = 0;
-	player = ctx->map.player;
 	raytracer.camera_x = 2 * raytracer.vec.x / SCREEN_WIDTH - 1;
-	raytracer.ray_dir_x = player.dx + player.plane_x * raytracer.camera_x;
-	raytracer.ray_dir_y = player.dy + player.plane_y * raytracer.camera_x;
-	raytracer.map_x = (int)player.x;
-	raytracer.map_y = (int)player.y;
-	if (raytracer.ray_dir_x == 0)
-		raytracer.delta_dist_x = 1e30;
+	raytracer.ray_dir.x = player.dx + player.plane_x * raytracer.camera_x;
+	raytracer.ray_dir.y = player.dy + player.plane_y * raytracer.camera_x;
+	raytracer.map_check.x = (int)player.x;
+	raytracer.map_check.y = (int)player.y;
+	if (raytracer.ray_dir.x == 0)
+		raytracer.delta_dist.x = 1e30;
 	else
-		raytracer.delta_dist_x = fabs(1 / raytracer.ray_dir_x);
-	if (raytracer.ray_dir_y == 0)
-		raytracer.delta_dist_y = 1e30;
+		raytracer.delta_dist.x = fabs(1 / raytracer.ray_dir.x);
+	if (raytracer.ray_dir.y == 0)
+		raytracer.delta_dist.y = 1e30;
 	else
-		raytracer.delta_dist_y = fabs(1 / raytracer.ray_dir_y);
-	raytracer.side_dist_x = 0;
-	raytracer.side_dist_y = 0;
+		raytracer.delta_dist.y = fabs(1 / raytracer.ray_dir.y);
 	raytracer.distance_to_wall = 0;
-	raytracer.step_x = 0;
-	raytracer.step_y = 0;
-	raytracer.side = 0;
 	raytracer.hit = 0;
 	raytracer.orientation = 0;
 	ctx->raytracer = raytracer;
@@ -77,19 +74,17 @@ void	cb_raytracer_set_values(t_ctx *ctx)
 
 int	cb_mini_draw(void *data)
 {
-	int		color;
-	t_vec	vec;
+	int			color;
+	t_vecint	vec;
 	t_player	player;
-	t_ctx	*ctx;
+	t_ctx		*ctx;
 
 	ctx = (t_ctx *)data;
 	vec.x = 0;
 	vec.y = 0;
-	vec.angle = 0;
 	player = ctx->map.player;
 	while (vec.x < SCREEN_WIDTH)
 	{
-		ctx->raytracer.vec = vec;
 		double	camera_x = 2 * vec.x / SCREEN_WIDTH - 1;
 		double	ray_dir_x = player.dx + player.plane_x * camera_x;
 		double	ray_dir_y = player.dy + player.plane_y * camera_x;

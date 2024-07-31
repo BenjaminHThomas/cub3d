@@ -34,9 +34,7 @@ int	cb_exit(void *param)
 int	main(int ac, char **av)
 {
 	t_ctx	ctx;
-	int		i;
 
-	i = 0;
 	(void)ac;
 	(void)av;
 	// if (check_args(av, av) != 0)

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 17:28:43 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 21:32:55 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,15 @@ typedef int	t_color;
 
 typedef struct s_vec
 {
-	float	x;
-	float	y;
-	float	angle;
+	double	x;
+	double	y;
 }	t_vec;
+
+typedef struct s_vecint
+{
+	int	x;
+	int	y;
+}	t_vecint;
 
 typedef struct s_player
 {
@@ -96,22 +101,17 @@ typedef struct s_texture
 
 typedef struct s_raytracer
 {
-	t_vec	vec;
-	double	camera_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	int		map_x;
-	int		map_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	int		step_x;
-	int		step_y;
-	int		hit;
-	int		side;
-	int		orientation;
-	double	distance_to_wall;
+	t_vec		vec;
+	double		camera_x;
+	t_vec		ray_dir;
+	t_vecint	map_check;
+	t_vec		side_dist;
+	t_vec		delta_dist;
+	t_vecint	step;
+	int			hit;
+	int			side;
+	int			orientation;
+	double		distance_to_wall;
 }	t_raytracer;
 
 typedef struct s_renderer
@@ -164,7 +164,7 @@ int			cb_free_all(t_ctx *ctx) __attribute__((cold));
 
 int			cb_mini_draw(void *data) __attribute__((hot));
 
-void		cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading)
+void		cb_put_pixel(t_img *img, t_vecint vec, t_color color, float shading)
 			__attribute__((hot));
 
 int			cb_darken_color(int color, float shade) __attribute__((hot));

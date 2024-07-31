@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 11:45:39 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 13:55:44 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@
 # define COLD
 #endif
 
-# define SCREEN_WIDTH 1024
-# define SCREEN_HEIGHT 512
+# define SCREEN_WIDTH 1860
+# define SCREEN_HEIGHT 920
+
+# define PROG_NAME "cub3d"
 
 # define PRECISION 0.10f
 
@@ -44,10 +46,13 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define NORTH 0
-# define SOUTH 1
-# define WEST 2
-# define EAST 3
+typedef	enum e_direction
+{
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST
+}	t_direction;
 
 # define CEILLING_COLOR 0x70129a
 # define FLOOR_COLOR 0x0fa0b9
@@ -146,8 +151,8 @@ typedef struct s_ctx
 	void		*mlx;
 	void		*window;
 	t_map		*map;
-	t_img		*img;
 	t_texture	*textures;
+	t_img		img;
 	t_renderer	renderer;
 	t_raytracer	raytracer;
 	t_fps		fps;
@@ -156,6 +161,8 @@ typedef struct s_ctx
 t_map	*init_map();
 
 t_ctx	cb_init_ctx() COLD;
+
+int		cb_init_mtx(t_ctx *ctx) COLD;
 
 int		cb_handle_key(int keycode, void *data);
 

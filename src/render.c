@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 11:47:22 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 11:56:12 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ int	cb_mini_draw(void *data)
 		vec.y = 0;
 		while (vec.y < SCREEN_HEIGHT && vec.y < draw_start)
 		{
-				cb_put_pixel(ctx->img, vec, CEILLING_COLOR, 1.0f);
+				cb_put_pixel(&ctx->img, vec, CEILLING_COLOR, 1.0f);
 				vec.y++;
 		}
 		while (vec.y < SCREEN_HEIGHT && vec.y >= draw_start && vec.y <= draw_end)
@@ -211,17 +211,17 @@ int	cb_mini_draw(void *data)
 
 			color = arr[(tex_y * tex_line_size + tex_x)];
 			color = cb_darken_color(color, shading);
-			cb_put_pixel(ctx->img, vec, color, 1.0f);
+			cb_put_pixel(&ctx->img, vec, color, 1.0f);
 			vec.y++;
 		}
 		while (vec.y < SCREEN_HEIGHT && vec.y > draw_end)
 		{
-				cb_put_pixel(ctx->img, vec, FLOOR_COLOR, 1.0f);
+				cb_put_pixel(&ctx->img, vec, FLOOR_COLOR, 1.0f);
 				vec.y++;
 		}
 		vec.x++;
 	}
-	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img->img, 0, 0);
+	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img.img, 0, 0);
 
 	ctx->fps.new_time = get_time();
 	ctx->fps.delta_time = ctx->fps.new_time - ctx->fps.old_time;

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:44:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 09:26:12 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 13:54:01 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@
 t_map	*init_map()
 {
 	t_map	*map;
-	//int		i;
 
-	//i = 0;
 	map = malloc(sizeof(t_map));
 	map->player.x = 3.0f;
 	map->player.y = 3.0f;
@@ -38,21 +36,9 @@ t_map	*init_map()
 	map->player.angle = 0.0f;
 	map->player.plane_x = 0;
 	map->player.plane_y = 0.60;
-
 	map->height = 10;
 	map->width = 12;
 	map->raw = ft_calloc(sizeof(char), (map->height * map->width + 1));
 	ft_strcat(map->raw, "111111111111100000000001100000000001100000110001100000110001100000000001100000000001100000000001100000000001111111111111");
-	// while (i < map->height)
-	// {
-	// 	if (i == 0 || i == 9)
-	// 		ft_strcat(map->raw, "111111111111");
-	// 	else if (i == 3 || i == 4)
-	// 		ft_strcat(map->raw, "100000110001");
-	// 	else
-	// 		ft_strcat(map->raw, "100000000001");
-	// 	i++;
-	// }
-	// map->raw[i] = '\0';
 	return (map);
 }

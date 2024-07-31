@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 16:16:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/30 13:38:42 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 13:57:58 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,14 @@ t_texture	create_texture(t_ctx *ctx, char *path, int *err)
 int	init_textures(t_ctx *ctx)
 {
 	t_texture	*texture;
-	// int			i;
 	int			err;
 
-	// i = 0;
 	err = 0;
 	texture = malloc(sizeof(t_texture) * 4);
 	texture[NORTH] = create_texture(ctx, "textures/boss.xpm", &err);
-	texture[EAST] = create_texture(ctx, "textures/psyop.xpm", &err);
-	texture[SOUTH] = create_texture(ctx, "textures/aple.xpm", &err);
-	texture[WEST] = create_texture(ctx, "textures/alpha.xpm", &err);
-	// GOOD CODE BUT FOR TESTING PURPOSES IM GOING TO LEAVE IT OUT
-	// while (i < 4)
-	// {
-	// 	texture[i] = create_texture(ctx, "textures/ground.xpm", &err);
-	// 	if (err == 1)
-	// 	{
-	// 		while (i--)
-	// 			mlx_destroy_image(ctx->mlx, texture[i].data);
-	// 		free(texture);
-	// 		return (1);
-	// 	}
-	// 	i++;
-	// }
+	texture[SOUTH] = create_texture(ctx, "textures/psyop.xpm", &err);
+	texture[WEST] = create_texture(ctx, "textures/aple.xpm", &err);
+	texture[EAST] = create_texture(ctx, "textures/alpha.xpm", &err);
 	ctx->textures = texture;
 	return (0);
 }

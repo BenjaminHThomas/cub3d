@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 14:50:18 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 16:16:08 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,15 +140,15 @@ typedef struct s_ctx
 {
 	void		*mlx;
 	void		*window;
-	t_map		*map;
 	t_texture	*textures;
+	t_map		map;
 	t_img		img;
 	t_renderer	renderer;
 	t_raytracer	raytracer;
 	t_fps		fps;
 }	t_ctx;
 
-t_map		*init_map(void);
+t_map		init_map(void);
 
 int			cb_loop(t_ctx *ctx) __attribute__((cold));
 
@@ -158,7 +158,7 @@ int			cb_init_mtx(t_ctx *ctx) __attribute__((cold));
 
 int			cb_handle_key(int keycode, void *data);
 
-int			cb_free_all(void *param) __attribute__((cold));
+int			cb_free_all(t_ctx *ctx) __attribute__((cold));
 
 int			cb_mini_draw(void *data) __attribute__((hot));
 
@@ -172,5 +172,10 @@ int			init_textures(t_ctx *ctx) __attribute__((cold));
 int			parsing(char *path, t_ctx *ctx) __attribute__((cold));
 
 uint64_t	get_time(void);
+
+void		cb_free_map(t_ctx *ctx) __attribute__((cold));
+
+void		cb_free_tex(t_ctx *ctx) __attribute__((cold));
+
 
 #endif

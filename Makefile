@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 19:32:31 by okoca             #+#    #+#              #
-#    Updated: 2024/07/31 14:52:43 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/31 14:59:31 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,12 +59,17 @@ SRCS_M = main.c keys.c parsing.c render.c
 
 SRCS_INIT = ctx.c map.c textures.c
 
+SRCS_HELP = free.c
+
 SRC 		= src/
 
 INIT_PATH	= src/init/
 
+HELP_PATH	= src/helper/
+
 SRCS		= $(addprefix $(SRC), $(SRCS_M)) \
 		  $(addprefix $(INIT_PATH), $(SRCS_INIT)) \
+		  $(addprefix $(HELP_PATH), $(SRCS_HELP)) \
 
 # BIN = ./bin
 

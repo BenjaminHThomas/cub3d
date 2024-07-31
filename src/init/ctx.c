@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:32:40 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 14:51:37 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 16:18:36 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	cb_init_mtx(t_ctx *ctx)
 		return (1);
 	}
 	ctx->map = init_map();
-	if (!ctx->map)
+	if (!ctx->map.raw)
 		return (cb_free_all(ctx), 1);
 	return (0);
 }

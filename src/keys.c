@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 11:27:56 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 16:11:18 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,3 +71,5 @@ int	cb_handle_key(int keycode, void *data)
 	}
 	return (0);
 }
+
+// more fluid keybinds

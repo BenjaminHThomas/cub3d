@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 14:50:39 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 15:04:19 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,45 +22,14 @@ inline unsigned long	get_time()
 	return (ms);
 }
 
-int	cb_free_all(void *param)
+int	cb_exit(void *param)
 {
 	t_ctx	*ctx;
-	int		i;
 
-	i = 0;
 	ctx = (t_ctx *)param;
-	if (ctx->map && ctx->map->raw)
-	{
-		free(ctx->map->raw);
-		free(ctx->map);
-	}
-	if (ctx->mlx)
-	{
-		if (ctx->textures)
-		{
-			while (i < 4)
-			{
-				mlx_destroy_image(ctx->mlx, ctx->textures[i].data);
-				i++;
-			}
-			free(ctx->textures);
-		}
-		if (ctx->img.img)
-			mlx_destroy_image(ctx->mlx, ctx->img.img);
-		mlx_loop_end(ctx->mlx);
-		if (ctx->window)
-		{
-			mlx_destroy_window(ctx->mlx, ctx->window);
-			ctx->window = NULL;
-		}
-		mlx_destroy_display(ctx->mlx);
-		free(ctx->mlx);
-		ctx->mlx = NULL;
-	}
+	cb_free_all(ctx);
 	exit(0);
 }
-
-
 
 int	main(int ac, char **av)
 {
@@ -83,7 +52,7 @@ int	main(int ac, char **av)
 
 int	cb_loop(t_ctx *ctx)
 {
-	mlx_hook(ctx->window, DestroyNotify, StructureNotifyMask, cb_free_all, ctx);
+	mlx_hook(ctx->window, DestroyNotify, StructureNotifyMask, cb_exit, ctx);
 	mlx_hook(ctx->window, KeyPress, KeyPressMask, cb_handle_key, ctx);
 	mlx_loop_hook(ctx->mlx, cb_mini_draw, ctx);
 	mlx_loop(ctx->mlx);

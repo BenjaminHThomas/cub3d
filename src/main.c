@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 14:45:39 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 14:50:39 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	cb_free_all(void *param)
 }
 
 
+
 int	main(int ac, char **av)
 {
 	t_ctx	ctx;
@@ -76,10 +77,15 @@ int	main(int ac, char **av)
 	ctx = cb_init_ctx();
 	if (cb_init_mtx(&ctx) != 0)
 		return (1);
-	mlx_hook(ctx.window, DestroyNotify, StructureNotifyMask, cb_free_all, &ctx);
-	mlx_hook(ctx.window, KeyPress, KeyPressMask, cb_handle_key, &ctx);
-	mlx_loop_hook(ctx.mlx, cb_mini_draw, &ctx);
-	mlx_loop(ctx.mlx);
+	cb_loop(&ctx);
 	cb_free_all(&ctx);
 }
 
+int	cb_loop(t_ctx *ctx)
+{
+	mlx_hook(ctx->window, DestroyNotify, StructureNotifyMask, cb_free_all, ctx);
+	mlx_hook(ctx->window, KeyPress, KeyPressMask, cb_handle_key, ctx);
+	mlx_loop_hook(ctx->mlx, cb_mini_draw, ctx);
+	mlx_loop(ctx->mlx);
+	return (0);
+}

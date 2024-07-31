@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 19:32:31 by okoca             #+#    #+#              #
-#    Updated: 2024/07/31 14:35:11 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/31 14:52:43 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,16 +55,16 @@ LIBFT_TARGET = ${LIBFT}/libft.a
 
 MLX_TARGET = ${MLX}/libmlx.a
 
-SRCS_M = main.c map.c keys.c textures.c parsing.c render.c ctx.c
+SRCS_M = main.c keys.c parsing.c render.c
 
-SRCS_OTHER =
+SRCS_INIT = ctx.c map.c textures.c
 
 SRC 		= src/
 
-OTHER_PATH	= src/other/
+INIT_PATH	= src/init/
 
 SRCS		= $(addprefix $(SRC), $(SRCS_M)) \
-		  $(addprefix $(OTHER_PATH), $(SRCS_OTHER)) \
+		  $(addprefix $(INIT_PATH), $(SRCS_INIT)) \
 
 # BIN = ./bin
 

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 14:44:57 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 14:50:18 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,8 @@ typedef struct s_ctx
 }	t_ctx;
 
 t_map		*init_map(void);
+
+int			cb_loop(t_ctx *ctx) __attribute__((cold));
 
 t_ctx		cb_init_ctx(void) __attribute__((cold));
 

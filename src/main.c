@@ -6,13 +6,13 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 10:58:58 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 11:26:47 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-unsigned long	get_time()
+inline unsigned long	get_time()
 {
 	struct timeval	time;
 	unsigned long ms;

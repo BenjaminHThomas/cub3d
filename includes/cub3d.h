@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 13:55:44 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 14:26:39 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@
 
 # include "mlx.h"
 # include "libft.h"
-
-# ifdef __GNUC__
-#  define HOT __attribute__((hot))
-#  define COLD __attribute__((cold))
-# else
-# define HOT
-# define COLD
-#endif
 
 # define SCREEN_WIDTH 1860
 # define SCREEN_HEIGHT 920
@@ -160,24 +152,24 @@ typedef struct s_ctx
 
 t_map	*init_map();
 
-t_ctx	cb_init_ctx() COLD;
+t_ctx	cb_init_ctx() __attribute__((cold));
 
-int		cb_init_mtx(t_ctx *ctx) COLD;
+int		cb_init_mtx(t_ctx *ctx) __attribute__((cold));
 
 int		cb_handle_key(int keycode, void *data);
 
-int		cb_free_all(void *param) COLD;
+int		cb_free_all(void *param) __attribute__((cold));
 
-// void	cb_mini_draw(t_ctx *ctx) HOT;
-int		cb_mini_draw(void *data) HOT;
+int		cb_mini_draw(void *data) __attribute__((hot));
 
-void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading) HOT;
+void	cb_put_pixel(t_img *img, t_vec vec, t_color color, float shading)
+		__attribute__((hot));
 
-int		cb_darken_color(int color, float shade) HOT;
+int		cb_darken_color(int color, float shade) __attribute__((hot));
 
-int		init_textures(t_ctx *ctx) COLD;
+int		init_textures(t_ctx *ctx) __attribute__((cold));
 
-int		parsing(char *path, t_ctx *ctx) COLD;
+int		parsing(char *path, t_ctx *ctx) __attribute__((cold));
 
 unsigned long	get_time();
 

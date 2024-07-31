@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 11:30:31 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 11:46:22 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,11 @@ int	main(int ac, char **av)
 	i = 0;
 	(void)ac;
 	(void)av;
-	ctx.fov = M_PI / FOV;
-	printf("PI: %f\n", ctx.fov);
 	// if (check_args(av, av) != 0)
 	// 	return (1);
 	// if (parsing(av[1], &ctx) != 0)
 	// 	return (1);
+	ctx = cb_init_ctx();
 	ctx.map = init_map();
 	while (i < ctx.map->height)
 	{
@@ -94,10 +93,6 @@ int	main(int ac, char **av)
 		free(ctx.mlx);
 		return (1);
 	}
-	ctx.old_time = get_time();
-	ctx.frame_count = 0;
-	ctx.fps = 0;
-	ft_bzero(ctx.time_str, 1);
 	ctx.img = malloc(sizeof(t_img));
 	ctx.img->img = mlx_new_image(ctx.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	ctx.img->buffer = mlx_get_data_addr(ctx.img->img, &ctx.img->bits_per_pixel, &ctx.img->line_size, &ctx.img->endian);

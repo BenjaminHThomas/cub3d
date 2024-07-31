@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 11:29:15 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 11:47:22 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,16 +223,16 @@ int	cb_mini_draw(void *data)
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img->img, 0, 0);
 
-	ctx->new_time = get_time();
-	ctx->delta_time = ctx->new_time - ctx->old_time;
-	ctx->frame_count++;
-	if (ctx->delta_time >= 1000)
+	ctx->fps.new_time = get_time();
+	ctx->fps.delta_time = ctx->fps.new_time - ctx->fps.old_time;
+	ctx->fps.frame_count++;
+	if (ctx->fps.delta_time >= 1000)
 	{
-		ctx->fps = ctx->frame_count * 1000 / ctx->delta_time;
-		ctx->frame_count = 0;
-		ctx->old_time = get_time();
-		ft_itoa_s(ctx->time_str, (int)ctx->fps);
+		ctx->fps.fps = ctx->fps.frame_count * 1000 / ctx->fps.delta_time;
+		ctx->fps.frame_count = 0;
+		ctx->fps.old_time = get_time();
+		ft_itoa_s(ctx->fps.time_str, (int)ctx->fps.fps);
 	}
-	mlx_string_put(ctx->mlx, ctx->window, 20, 30, 0xfff, ctx->time_str);
+	mlx_string_put(ctx->mlx, ctx->window, 20, 30, 0xfff, ctx->fps.time_str);
 	return (0);
 }

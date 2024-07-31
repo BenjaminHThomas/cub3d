@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 11:22:03 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 11:45:39 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,25 +131,31 @@ typedef	struct s_renderer
 	double	text_pos;
 }	t_renderer;
 
-typedef struct s_ctx
+typedef struct s_fps
 {
-	void		*mlx;
-	void		*window;
-	t_map		*map;
-	float		fov;
-	t_img		*img;
-	t_texture	*textures;
-	t_renderer	renderer;
-	t_raytracer	raytracer;
 	unsigned long		old_time;
 	unsigned long		new_time;
 	unsigned long		frame_count;
 	unsigned long		delta_time;
 	unsigned long		fps;
 	char				time_str[21];
+}	t_fps;
+
+typedef struct s_ctx
+{
+	void		*mlx;
+	void		*window;
+	t_map		*map;
+	t_img		*img;
+	t_texture	*textures;
+	t_renderer	renderer;
+	t_raytracer	raytracer;
+	t_fps		fps;
 }	t_ctx;
 
 t_map	*init_map();
+
+t_ctx	cb_init_ctx() COLD;
 
 int		cb_handle_key(int keycode, void *data);
 

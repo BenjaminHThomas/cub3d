@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 11:56:12 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 16:20:47 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	cb_raytracer_set_values(t_ctx *ctx)
 
 	raytracer.vec.x = 0;
 	raytracer.vec.y = 0;
-	player = ctx->map->player;
+	player = ctx->map.player;
 	raytracer.camera_x = 2 * raytracer.vec.x / SCREEN_WIDTH - 1;
 	raytracer.ray_dir_x = player.dx + player.plane_x * raytracer.camera_x;
 	raytracer.ray_dir_y = player.dy + player.plane_y * raytracer.camera_x;
@@ -86,7 +86,7 @@ int	cb_mini_draw(void *data)
 	vec.x = 0;
 	vec.y = 0;
 	vec.angle = 0;
-	player = ctx->map->player;
+	player = ctx->map.player;
 	while (vec.x < SCREEN_WIDTH)
 	{
 		ctx->raytracer.vec = vec;
@@ -145,7 +145,7 @@ int	cb_mini_draw(void *data)
 				map_y += step_y;
 				side = 1;
 			}
-			if (ctx->map->raw[map_y * ctx->map->width + map_x] == '1')
+			if (ctx->map.raw[map_y * ctx->map.width + map_x] == '1')
 				hit = 1;
 		}
 

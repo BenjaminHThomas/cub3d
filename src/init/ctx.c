@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:32:40 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 16:18:36 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 16:20:36 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_ctx	cb_init_ctx(void)
 
 	ctx.window = NULL;
 	ctx.mlx = NULL;
-	ctx.map = NULL;
+	ctx.map.raw = NULL;
 	ctx.textures = NULL;
 	ft_bzero(ctx.fps.time_str, 2);
 	ctx.fps.delta_time = 0;

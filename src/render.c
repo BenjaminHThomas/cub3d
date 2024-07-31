@@ -6,11 +6,18 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 11:08:13 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 11:19:02 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+inline int	cb_clamp(int color)
+{
+	if (color > 255)
+		return (255);
+	return (color);
+}
 
 inline int	cb_darken_color(int color, float shade)
 {
@@ -19,15 +26,9 @@ inline int	cb_darken_color(int color, float shade)
 	int	green;
 	int	blue;
 
-	red = ((color >> 16) & 0xFF) * shade;
-	green = ((color >> 8) & 0xFF) * shade;
-	blue = (color & 0xFF) * shade;
-	if (red > 255)
-		red = 255;
-	if (green > 255)
-		green = 255;
-	if (blue > 255)
-		blue = 255;
+	red = cb_clamp(((color >> 16) & 0xFF) * shade);
+	green = cb_clamp(((color >> 8) & 0xFF) * shade);
+	blue = cb_clamp((color & 0xFF) * shade);
 	new = (red << 16) | (green << 8) | blue;
 	return (new);
 }

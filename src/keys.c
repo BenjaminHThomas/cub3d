@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 17:35:53 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 17:37:42 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ inline void	cb_rotate(int keycode, t_player *p)
 
 int	cb_handle_key(int keycode, void *data)
 {
-	t_ctx	*ctx;
+	t_ctx		*ctx;
 	t_player	*player;
 
 	ctx = (t_ctx *)data;

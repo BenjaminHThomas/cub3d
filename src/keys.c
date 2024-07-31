@@ -6,20 +6,76 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 16:27:53 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 17:35:53 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-inline void	cb_move_up(int keycode, t_map map, t_player *p)
+inline void	cb_move_updown(int keycode, t_map map, t_player *p)
 {
 	if (keycode == XK_W || keycode == XK_w)
 	{
-		if (map.raw[(map.width * (int)p->y) + (int)(p->x + p->dx * 0.1f)] != '1')
-			p->x += p->dx * 0.1f;
-		if (map.raw[(map.width * (int)(p->y + p->dy * 0.1f)) + (int)(p->x)] != '1')
-			p->y += p->dy * 0.1f;
+		if (map.raw[(map.width * (int)p->y)
+				+ (int)(p->x + p->dx * FORCE)] != '1')
+			p->x += p->dx * FORCE;
+		if (map.raw[(map.width * (int)(p->y + p->dy * FORCE))
+			+ (int)(p->x)] != '1')
+			p->y += p->dy * FORCE;
+	}
+	if (keycode == XK_s || keycode == XK_S)
+	{
+		if (map.raw[(map.width * (int)p->y)
+				+ (int)(p->x - p->dx * 0.1f)] != '1')
+			p->x -= p->dx * 0.1f;
+		if (map.raw[(map.width
+					* (int)(p->y - p->dy * 0.1f)) + (int)(p->x)] != '1')
+			p->y -= p->dy * 0.1f;
+	}
+}
+
+inline void	cb_move_side(int keycode, t_map map, t_player *p)
+{
+	if (keycode == XK_d || keycode == XK_D)
+	{
+		if (map.raw[(map.width * (int)p->y)
+				+ (int)(p->x + p->dy * 0.1f)] != '1')
+			p->x += p->dy * 0.1f;
+		if (map.raw[(map.width
+					* (int)(p->y - p->dx * 0.1f)) + (int)(p->x)] != '1')
+			p->y -= p->dx * 0.1f;
+	}
+	if (keycode == XK_a || keycode == XK_A)
+	{
+		if (map.raw[(map.width * (int)p->y)
+				+ (int)(p->x - p->dy * 0.1f)] != '1')
+			p->x -= p->dy * 0.1f;
+		if (map.raw[(map.width
+					* (int)(p->y + p->dx * 0.1f)) + (int)(p->x)] != '1')
+			p->y += p->dx * 0.1f;
+	}
+}
+
+inline void	cb_rotate(int keycode, t_player *p)
+{
+	float	old_dir_x;
+	float	old_plane_x;
+
+	old_dir_x = p->dx;
+	old_plane_x = p->plane_x;
+	if (keycode == XK_Right)
+	{
+		p->dx = p->dx * cos(-FORCE) - p->dy * sin(-FORCE);
+		p->dy = old_dir_x * sin(-FORCE) + p->dy * cos(-FORCE);
+		p->plane_x = p->plane_x * cos(-FORCE) - p->plane_y * sin(-FORCE);
+		p->plane_y = old_plane_x * sin(-FORCE) + p->plane_y * cos(-FORCE);
+	}
+	if (keycode == XK_Left)
+	{
+		p->dx = p->dx * cos(FORCE) - p->dy * sin(FORCE);
+		p->dy = old_dir_x * sin(FORCE) + p->dy * cos(FORCE);
+		p->plane_x = p->plane_x * cos(FORCE) - p->plane_y * sin(FORCE);
+		p->plane_y = old_plane_x * sin(FORCE) + p->plane_y * cos(FORCE);
 	}
 }
 
@@ -32,48 +88,10 @@ int	cb_handle_key(int keycode, void *data)
 	player = &ctx->map.player;
 	if (keycode == XK_Escape)
 		cb_exit(ctx);
-	if (keycode == XK_Right)
-	{
-		float	old_dir_x = player->dx;
-		player->dx = player->dx * cos(-0.1f) - player->dy * sin(-0.1f);
-		player->dy = old_dir_x * sin(-0.1f) + player->dy * cos(-0.1f);
 
-		float	old_plane_x = player->plane_x;
-		player->plane_x = player->plane_x * cos(-0.1f) - player->plane_y * sin(-0.1f);
-		player->plane_y = old_plane_x * sin(-0.1f) + player->plane_y * cos(-0.1f);
-	}
-	if (keycode == XK_Left)
-	{
-		float	old_dir_x = player->dx;
-		player->dx = player->dx * cos(0.1f) - player->dy * sin(0.1f);
-		player->dy = old_dir_x * sin(0.1f) + player->dy * cos(0.1f);
-
-		float	old_plane_x = player->plane_x;
-		player->plane_x = player->plane_x * cos(0.1f) - player->plane_y * sin(0.1f);
-		player->plane_y = old_plane_x * sin(0.1f) + player->plane_y * cos(0.1f);
-	}
-	cb_move_up(keycode, ctx->map, player);
-	if (keycode == XK_s || keycode == XK_S)
-	{
-		if (ctx->map.raw[(ctx->map.width * (int)player->y) + (int)(player->x - player->dx * 0.1f)] != '1')
-			player->x -= player->dx * 0.1f;
-		if (ctx->map.raw[(ctx->map.width * (int)(player->y - player->dy * 0.1f)) + (int)(player->x)] != '1')
-			player->y -= player->dy * 0.1f;
-	}
-	if (keycode == XK_d || keycode == XK_D)
-	{
-		if (ctx->map.raw[(ctx->map.width * (int)player->y) + (int)(player->x + player->dy * 0.1f)] != '1')
-			player->x += player->dy * 0.1f;
-		if (ctx->map.raw[(ctx->map.width * (int)(player->y - player->dx * 0.1f)) + (int)(player->x)] != '1')
-			player->y -= player->dx * 0.1f;
-	}
-	if (keycode == XK_a || keycode == XK_A)
-	{
-		if (ctx->map.raw[(ctx->map.width * (int)player->y) + (int)(player->x - player->dy * 0.1f)] != '1')
-			player->x -= player->dy * 0.1f;
-		if (ctx->map.raw[(ctx->map.width * (int)(player->y + player->dx * 0.1f)) + (int)(player->x)] != '1')
-			player->y += player->dx * 0.1f;
-	}
+	cb_move_updown(keycode, ctx->map, player);
+	cb_move_side(keycode, ctx->map, player);
+	cb_rotate(keycode, player);
 	return (0);
 }
 

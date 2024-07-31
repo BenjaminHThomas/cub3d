@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 16:20:47 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 17:28:06 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,8 @@ int	cb_mini_draw(void *data)
 			tex_pos += step;
 
 			color = arr[(tex_y * tex_line_size + tex_x)];
-			color = cb_darken_color(color, shading);
+			(void)shading;
+			// color = cb_darken_color(color, 3.5);
 			cb_put_pixel(&ctx->img, vec, color, 1.0f);
 			vec.y++;
 		}

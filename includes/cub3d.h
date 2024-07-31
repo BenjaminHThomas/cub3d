@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 21:32:55 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/31 22:08:47 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct s_texture
 
 typedef struct s_raytracer
 {
-	t_vec		vec;
+	t_vecint	vec;
 	double		camera_x;
 	t_vec		ray_dir;
 	t_vecint	map_check;
@@ -116,16 +116,15 @@ typedef struct s_raytracer
 
 typedef struct s_renderer
 {
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
-	double	wall_x;
-	int		tex_width;
-	int		tex_height;
-	int		tex_x;
-	int		tex_y;
-	double	step;
-	double	text_pos;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	double		wall_x;
+	int			tex_width;
+	int			tex_height;
+	t_vecint	tex;
+	double		step;
+	double		tex_pos;
 }	t_renderer;
 
 typedef struct s_fps
@@ -180,5 +179,13 @@ void		cb_free_map(t_ctx *ctx) __attribute__((cold));
 void		cb_free_tex(t_ctx *ctx) __attribute__((cold));
 
 int			cb_exit(void *param) __attribute__((cold));
+
+void		cb_wall_dist(t_ctx *ctx) __attribute__((hot));
+
+void		cb_check_hit(t_ctx *ctx) __attribute__((hot));
+
+void		cb_side_step(t_ctx *ctx) __attribute__((hot));
+
+void		cb_rt_set(t_ctx *ctx);
 
 #endif

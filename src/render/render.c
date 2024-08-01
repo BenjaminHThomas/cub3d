@@ -86,8 +86,8 @@ int	cb_mini_draw(void *data)
 		cb_side_step(ctx);
 		cb_check_hit(ctx);
 		cb_wall_dist(ctx);
-
 		cb_draw_data(ctx);
+
 		texture = ctx->textures[rt->orientation];
 		int tex_width = texture.w;
 		int tex_height = texture.h;
@@ -96,13 +96,12 @@ int	cb_mini_draw(void *data)
 		if ((rt->side == 0 && rt->ray_dir.x > 0) || (rt->side == 1 && rt->ray_dir.y < 0))
 			tex_x = tex_width - tex_x - 1;
 
-		double	step = (double)tex_height / rd->line_height;
-		double	tex_pos = (rd->draw_start - SCREEN_HEIGHT / 2 + rd->line_height / 2) * step;
+		double	tex_step = (double)tex_height / rd->line_height;
+		double	tex_pos = (rd->draw_start - SCREEN_HEIGHT / 2 + rd->line_height / 2) * tex_step;
 
 		int		*arr = (int*)texture.img.buffer;
 		int		tex_line_size = texture.img.line_size / 4;
 		float	shading = 1.0f;
-
 
 		rt->vec.y = 0;
 		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y < rd->draw_start)
@@ -113,7 +112,7 @@ int	cb_mini_draw(void *data)
 		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y >= rd->draw_start && rt->vec.y <= rd->draw_end)
 		{
 			int	tex_y = (int)tex_pos % tex_height;
-			tex_pos += step;
+			tex_pos += tex_step;
 
 			color = arr[(tex_y * tex_line_size + tex_x)];
 			(void)shading;

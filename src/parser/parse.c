@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:05:49 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 14:20:35 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/01 16:18:55 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(int ac, char **av)
 {
 	t_map_data	mapdata;
 	char		*fname;
+	size_t		i;
 
 	(void)ac;
 	fname = av[1];
@@ -27,8 +28,11 @@ int	main(int ac, char **av)
 	get_file_contents(&mapdata);
 	if (!mapdata.input)
 		return (printf("Error\nCould not retrieve file contents\n"));
-	mapdata.tex_paths = get_textures(&mapdata, "maps/test.cub");
+	mapdata.tex_paths = get_textures(&mapdata);
 	if (!mapdata.tex_paths)
 		return (printf("Error\nCould not retrieve "
 				"texture paths from file.\n"));
+	i = -1;
+	while (++i < 4)
+		printf("%s", mapdata.tex_paths[i]->path);
 }

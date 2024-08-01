@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:08:25 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 14:38:39 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/01 16:16:36 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_map_data
 	char		*c_colour;
 }	t_map_data;
 
-t_tex_path	**get_textures(t_map_data *map_data, char *f_name);
+t_tex_path	**get_textures(t_map_data *map_data);
 void		get_file_contents(t_map_data *mapdata);
 int			init_input(t_map_data *mapdata, char *fname);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 15:02:36 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 15:56:53 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # include "mlx.h"
 # include "libft.h"
 # include "render.h"
-# include "parser.h"
 
 # define SCREEN_WIDTH 1680
 # define SCREEN_HEIGHT 720
@@ -58,7 +57,6 @@ typedef struct s_ctx
 	t_renderer	renderer;
 	t_raytracer	raytracer;
 	t_fps		fps;
-	t_map_data	map_data;
 }	t_ctx;
 
 t_map		init_map(void);

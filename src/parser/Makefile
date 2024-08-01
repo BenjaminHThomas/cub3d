@@ -6,7 +6,7 @@
 #    By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 19:32:31 by okoca             #+#    #+#              #
-#    Updated: 2024/08/01 14:30:04 by bthomas          ###   ########.fr        #
+#    Updated: 2024/08/01 16:08:55 by bthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,9 +45,9 @@ MLX= ../../mlx
 
 LIBFT = ../../libft
 
-CFLAGS = -O3 -funroll-loops -std=c99 -Wall -Werror -Wextra -MMD -I${INCLUDES_DIR} -I${MLX} -I${LIBFT}
+CFLAGS = -g3 -O3 -funroll-loops -std=c99 -Wall -Werror -Wextra -MMD -I${INCLUDES_DIR} -I${MLX} -I${LIBFT}
 
-LDFLAGS = -L${MLX} -L${LIBFT} -lmlx_Linux -lXext -lX11 -lm -lbsd -lft # -g
+LDFLAGS = -L${MLX} -L${LIBFT} -lmlx_Linux -lXext -lX11 -lm -lft # -g
 
 LIBFT_TARGET = ${LIBFT}/libft.a
 

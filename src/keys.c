@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 20:44:04 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 21:17:35 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,27 @@ inline void	cb_move_side(t_ctx *ctx, t_map map, t_player *p, float force)
 	}
 }
 
-inline void	cb_rotate(t_ctx *ctx, t_player *p)
+inline void	cb_rotate(t_ctx *ctx, t_player *p, float force)
 {
 	float	old_dir_x;
 	float	old_plane_x;
 
+	force *= 0.7f;
 	old_dir_x = p->dir.x;
 	old_plane_x = p->plane.x;
 	if (ctx->keys.r_right)
 	{
-		p->dir.x = p->dir.x * cos(-FORCE) - p->dir.y * sin(-FORCE);
-		p->dir.y = old_dir_x * sin(-FORCE) + p->dir.y * cos(-FORCE);
-		p->plane.x = p->plane.x * cos(-FORCE) - p->plane.y * sin(-FORCE);
-		p->plane.y = old_plane_x * sin(-FORCE) + p->plane.y * cos(-FORCE);
+		p->dir.x = p->dir.x * cos(-force) - p->dir.y * sin(-force);
+		p->dir.y = old_dir_x * sin(-force) + p->dir.y * cos(-force);
+		p->plane.x = p->plane.x * cos(-force) - p->plane.y * sin(-force);
+		p->plane.y = old_plane_x * sin(-force) + p->plane.y * cos(-force);
 	}
 	else if (ctx->keys.r_left)
 	{
-		p->dir.x = p->dir.x * cos(FORCE) - p->dir.y * sin(FORCE);
-		p->dir.y = old_dir_x * sin(FORCE) + p->dir.y * cos(FORCE);
-		p->plane.x = p->plane.x * cos(FORCE) - p->plane.y * sin(FORCE);
-		p->plane.y = old_plane_x * sin(FORCE) + p->plane.y * cos(FORCE);
+		p->dir.x = p->dir.x * cos(force) - p->dir.y * sin(force);
+		p->dir.y = old_dir_x * sin(force) + p->dir.y * cos(force);
+		p->plane.x = p->plane.x * cos(force) - p->plane.y * sin(force);
+		p->plane.y = old_plane_x * sin(force) + p->plane.y * cos(force);
 	}
 }
 
@@ -140,8 +141,9 @@ int	cb_handle_key(t_ctx *ctx)
 		force /= 2.0f;
 	else if ((keys.down && keys.right) || (keys.down && keys.left))
 		force /= 2.0f;
+	force *= ctx->fps.delta_time;
 	cb_move_updown(ctx, ctx->map, player, force);
 	cb_move_side(ctx, ctx->map, player, force);
-	cb_rotate(ctx, &ctx->map.player);
+	cb_rotate(ctx, &ctx->map.player, force);
 	return (0);
 }

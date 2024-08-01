@@ -6,12 +6,14 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:54:17 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 19:59:23 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 21:10:22 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
+
+# include "cub3d.h"
 
 typedef struct s_vec
 {
@@ -93,14 +95,17 @@ typedef struct s_renderer
 	t_tex		tex;
 }	t_renderer;
 
+typedef struct timeval	time;
+
 typedef struct s_fps
 {
-	unsigned long		old_time;
-	unsigned long		new_time;
-	unsigned long		frame_count;
-	unsigned long		delta_time;
-	unsigned long		fps;
-	char				time_str[21];
+	time	old_time;
+	time	new_time;
+	int		frame_count;
+	float	delta_time;
+	float	fps;
+	float	interval;
+	char	time_str[21];
 }	t_fps;
 
 #endif

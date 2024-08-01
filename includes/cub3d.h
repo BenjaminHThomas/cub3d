@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 20:44:45 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 21:22:03 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define SCREEN_WIDTH 1680
 # define SCREEN_HEIGHT 720
 
-# define FORCE 0.07f
+# define FORCE 5.00f
 
 # define PROG_NAME "cub3d"
 

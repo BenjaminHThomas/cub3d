@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:05:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 20:09:46 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 21:21:08 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,22 @@
 
 inline void	cb_draw_fps(t_ctx *ctx)
 {
-	ctx->fps.new_time = get_time();
-	ctx->fps.delta_time = ctx->fps.new_time - ctx->fps.old_time;
-	ctx->fps.frame_count++;
-	if (ctx->fps.delta_time >= 1000)
+	t_fps			*fps;
+	static float	elapsed;
+
+	fps = &ctx->fps;
+	gettimeofday(&fps->new_time, NULL);
+	fps->delta_time = (fps->new_time.tv_sec - fps->old_time.tv_sec)
+		+ (fps->new_time.tv_usec - fps->old_time.tv_usec) / 1000000.0f;
+	fps->old_time = fps->new_time;
+	fps->frame_count++;
+	elapsed += fps->delta_time;
+	if (elapsed >= fps->interval)
 	{
-		ctx->fps.fps = ctx->fps.frame_count * 1000 / ctx->fps.delta_time;
-		ctx->fps.frame_count = 0;
-		ctx->fps.old_time = get_time();
+		fps->fps = fps->frame_count / elapsed;
 		ft_itoa_s(ctx->fps.time_str, (int)ctx->fps.fps);
+		fps->frame_count = 0;
+		elapsed = 0.0f;
 	}
 	mlx_string_put(ctx->mlx, ctx->window, 20, 30, 0xfff, ctx->fps.time_str);
 }

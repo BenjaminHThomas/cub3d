@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 16:16:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 14:46:17 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 19:34:33 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	init_textures(t_ctx *ctx)
 	// t_map_data	map_data;
 	// t_tex_path	current;
 	int			err;
-	int			i;
+	// int			i;
 
-	i = 0;
+	// i = 0;
 	err = 0;
 	texture = malloc(sizeof(t_texture) * 4);
 	// map_data = ctx->map_data;

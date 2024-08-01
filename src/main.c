@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 15:02:01 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 19:11:59 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 inline unsigned long	get_time(void)
 {
 	struct timeval	time;
-	unsigned long ms;
+	unsigned long	ms;
 
 	gettimeofday(&time, NULL);
 	ms = (time.tv_sec * (unsigned long)1000) + (time.tv_usec / 1000);

@@ -6,55 +6,55 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 20:29:04 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 20:37:45 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-inline void	cb_move_updown(t_ctx *ctx, t_map map, t_player *p)
+inline void	cb_move_updown(t_ctx *ctx, t_map map, t_player *p, float force)
 {
 	if (ctx->keys.up)
 	{
 		if (map.raw[(map.width * (int)p->pos.y)
-				+ (int)(p->pos.x + p->dir.x * FORCE)] != '1')
-			p->pos.x += p->dir.x * FORCE;
-		if (map.raw[(map.width * (int)(p->pos.y + p->dir.y * FORCE))
+				+ (int)(p->pos.x + p->dir.x * force)] != '1')
+			p->pos.x += p->dir.x * force;
+		if (map.raw[(map.width * (int)(p->pos.y + p->dir.y * force))
 			+ (int)(p->pos.x)] != '1')
-			p->pos.y += p->dir.y * FORCE;
+			p->pos.y += p->dir.y * force;
 	}
 	if (ctx->keys.down)
 	{
 		if (map.raw[(map.width * (int)p->pos.y)
-				+ (int)(p->pos.x - p->dir.x * 0.1f)] != '1')
-			p->pos.x -= p->dir.x * 0.1f;
+				+ (int)(p->pos.x - p->dir.x * force)] != '1')
+			p->pos.x -= p->dir.x * force;
 		if (map.raw[(map.width
-					* (int)(p->pos.y - p->dir.y * 0.1f)) + (int)(p->pos.x)] != '1')
-			p->pos.y -= p->dir.y * 0.1f;
+					* (int)(p->pos.y - p->dir.y * force)) + (int)(p->pos.x)] != '1')
+			p->pos.y -= p->dir.y * force;
 	}
 }
 
-inline void	cb_move_side(t_ctx *ctx, t_map map, t_player *p)
+inline void	cb_move_side(t_ctx *ctx, t_map map, t_player *p, float force)
 {
 	if (ctx->keys.right)
 	{
 		if (map.raw[(map.width * (int)p->pos.y)
-				+ (int)(p->pos.x + p->dir.y * 0.1f)] != '1')
-			p->pos.x += p->dir.y * 0.1f;
+				+ (int)(p->pos.x + p->dir.y * force)] != '1')
+			p->pos.x += p->dir.y * force;
 		if (map.raw[(map.width
-					* (int)(p->pos.y - p->dir.x * 0.1f))
+					* (int)(p->pos.y - p->dir.x * force))
 					+ (int)(p->pos.x)] != '1')
-			p->pos.y -= p->dir.x * 0.1f;
+			p->pos.y -= p->dir.x * force;
 	}
 	if (ctx->keys.left)
 	{
 		if (map.raw[(map.width * (int)p->pos.y)
-				+ (int)(p->pos.x - p->dir.y * 0.1f)] != '1')
-			p->pos.x -= p->dir.y * 0.1f;
+				+ (int)(p->pos.x - p->dir.y * force)] != '1')
+			p->pos.x -= p->dir.y * force;
 		if (map.raw[(map.width
-					* (int)(p->pos.y + p->dir.x * 0.1f))
+					* (int)(p->pos.y + p->dir.x * force))
 					+ (int)(p->pos.x)] != '1')
-			p->pos.y += p->dir.x * 0.1f;
+			p->pos.y += p->dir.x * force;
 	}
 }
 
@@ -123,11 +123,17 @@ int	cb_key_down(int keycode, void *data)
 int	cb_handle_key(t_ctx *ctx)
 {
 	t_player	*player;
+	t_keys		keys;
+	float		force;
 
 	player = &ctx->map.player;
-	cb_move_updown(ctx, ctx->map, player);
-	cb_move_side(ctx, ctx->map, player);
+	force = FORCE;
+	keys = ctx->keys;
+	if ((keys.up && keys.right) || (keys.up && keys.left))
+		force /= 2.0f;
+	else if ((keys.down && keys.right) || (keys.down && keys.left))
+		force /= 2.0f;
+	cb_move_updown(ctx, ctx->map, player, force);
+	cb_move_side(ctx, ctx->map, player, force);
 	return (0);
 }
-
-// more fluid keybinds

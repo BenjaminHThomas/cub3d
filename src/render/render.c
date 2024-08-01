@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 11:52:13 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 12:13:14 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,42 @@ inline void	cb_draw_data(t_ctx *ctx)
 	rd->wall_x -= floor(rd->wall_x);
 }
 
+inline void	cb_tex_data(t_ctx *ctx)
+{
+	t_tex		*tex;
+	t_renderer	rd;
+	t_raytracer	rt;
+	t_texture	tex_data;
+
+	tex = &ctx->renderer.tex;
+	rd = ctx->renderer;
+	rt = ctx->raytracer;
+	tex_data = ctx->textures[rt.orientation];
+	tex->width = tex_data.w;
+	tex->height = tex_data.h;
+	tex->pos.x = (int)(rd.wall_x * (double)tex->width);
+	if ((rt.side == 0 && rt.ray_dir.x > 0)
+		|| (rt.side == 1 && rt.ray_dir.y < 0))
+		tex->pos.x = tex->width - tex->pos.x - 1;
+	tex->step = (double)tex->height / rd.line_height;
+	tex->tex_pos = (rd.draw_start - SCREEN_HEIGHT
+			/ 2 + rd.line_height / 2) * tex->step;
+	tex->data = (int *)tex_data.img.buffer;
+	tex->line_size = tex_data.img.line_size / 4;
+}
+
 int	cb_mini_draw(void *data)
 {
 	int			color;
 	t_ctx		*ctx;
 	t_raytracer	*rt;
 	t_renderer	*rd;
-	t_texture	texture;
+	t_tex		*tex;
 
 	ctx = (t_ctx *)data;
 	rt = &ctx->raytracer;
 	rd = &ctx->renderer;
+	tex = &ctx->renderer.tex;
 	rt->vec.x = 0;
 	rt->vec.y = 0;
 	while (rt->vec.x < SCREEN_WIDTH)
@@ -53,38 +78,28 @@ int	cb_mini_draw(void *data)
 		cb_check_hit(ctx);
 		cb_wall_dist(ctx);
 		cb_draw_data(ctx);
-		texture = ctx->textures[rt->orientation];
-		int tex_width = texture.w;
-		int tex_height = texture.h;
-		int	tex_x = (int)(rd->wall_x * (double)tex_width);
-		if ((rt->side == 0 && rt->ray_dir.x > 0) || (rt->side == 1 && rt->ray_dir.y < 0))
-			tex_x = tex_width - tex_x - 1;
-		double	tex_step = (double)tex_height / rd->line_height;
-		double	tex_pos = (rd->draw_start - SCREEN_HEIGHT / 2 + rd->line_height / 2) * tex_step;
-		int		*arr = (int*)texture.img.buffer;
-		int		tex_line_size = texture.img.line_size / 4;
-		float	shading = 1.0f;
+		cb_tex_data(ctx);
 		rt->vec.y = 0;
 		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y < rd->draw_start)
 		{
-				cb_put_pixel(&ctx->img, rt->vec, CEILLING_COLOR, 1.0f);
-				rt->vec.y++;
+			cb_put_pixel(&ctx->img, rt->vec, CEILLING_COLOR, 1.0f);
+			rt->vec.y++;
 		}
-		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y >= rd->draw_start && rt->vec.y <= rd->draw_end)
+		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y
+			>= rd->draw_start && rt->vec.y <= rd->draw_end)
 		{
-			int	tex_y = (int)tex_pos % tex_height;
-			tex_pos += tex_step;
+			tex->pos.y = (int)tex->tex_pos % tex->height;
+			tex->tex_pos += tex->step;
 
-			color = arr[(tex_y * tex_line_size + tex_x)];
-			(void)shading;
-			// color = cb_darken_color(color, 3.5);
+			color = tex->data[(tex->pos.y * tex->line_size + tex->pos.x)];
+			color = cb_darken_color(color, 3.5);
 			cb_put_pixel(&ctx->img, rt->vec, color, 1.0f);
 			rt->vec.y++;
 		}
 		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y > rd->draw_end)
 		{
-				cb_put_pixel(&ctx->img, rt->vec, FLOOR_COLOR, 1.0f);
-				rt->vec.y++;
+			cb_put_pixel(&ctx->img, rt->vec, FLOOR_COLOR, 1.0f);
+			rt->vec.y++;
 		}
 		rt->vec.x++;
 	}

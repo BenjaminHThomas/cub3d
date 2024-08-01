@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:54:17 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 11:56:00 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 12:09:47 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,24 @@ typedef struct s_raytracer
 	double		distance_to_wall;
 }	t_raytracer;
 
+typedef struct s_tex
+{
+	int			width;
+	int			height;
+	t_vecint	pos;
+	double		tex_pos;
+	double		step;
+	int			*data;
+	int			line_size;
+}	t_tex;
+
 typedef struct s_renderer
 {
 	int			line_height;
 	int			draw_start;
 	int			draw_end;
 	double		wall_x;
-	int			tex_width;
-	int			tex_height;
-	t_vecint	tex;
-	double		step;
-	double		tex_pos;
+	t_tex		tex;
 }	t_renderer;
 
 typedef struct s_fps

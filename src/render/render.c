@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 13:11:38 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 13:15:22 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,18 +80,36 @@ inline void	cb_draw_ceilling_floor(t_ctx *ctx, int flag)
 	}
 }
 
-int	cb_mini_draw(void *data)
+inline void	cb_draw_wall(t_ctx *ctx)
 {
-	int			color;
-	t_ctx		*ctx;
 	t_raytracer	*rt;
 	t_renderer	*rd;
 	t_tex		*tex;
+	t_color		color;
+
+	tex = &ctx->renderer.tex;
+	rt = &ctx->raytracer;
+	rd = &ctx->renderer;
+	while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y
+		>= rd->draw_start && rt->vec.y <= rd->draw_end)
+	{
+		tex->pos.y = (int)tex->tex_pos % tex->height;
+		tex->tex_pos += tex->step;
+
+		color = tex->data[(tex->pos.y * tex->line_size + tex->pos.x)];
+		color = cb_darken_color(color, 3.5);
+		cb_put_pixel(&ctx->img, rt->vec, color, 1.0f);
+		rt->vec.y++;
+	}
+}
+
+int	cb_mini_draw(void *data)
+{
+	t_ctx		*ctx;
+	t_raytracer	*rt;
 
 	ctx = (t_ctx *)data;
 	rt = &ctx->raytracer;
-	rd = &ctx->renderer;
-	tex = &ctx->renderer.tex;
 	rt->vec.x = 0;
 	rt->vec.y = 0;
 	while (rt->vec.x < SCREEN_WIDTH)
@@ -103,19 +121,8 @@ int	cb_mini_draw(void *data)
 		cb_draw_data(ctx);
 		cb_tex_data(ctx);
 		rt->vec.y = 0;
-
 		cb_draw_ceilling_floor(ctx, 0);
-		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y
-			>= rd->draw_start && rt->vec.y <= rd->draw_end)
-		{
-			tex->pos.y = (int)tex->tex_pos % tex->height;
-			tex->tex_pos += tex->step;
-
-			color = tex->data[(tex->pos.y * tex->line_size + tex->pos.x)];
-			color = cb_darken_color(color, 3.5);
-			cb_put_pixel(&ctx->img, rt->vec, color, 1.0f);
-			rt->vec.y++;
-		}
+		cb_draw_wall(ctx);
 		cb_draw_ceilling_floor(ctx, 1);
 		rt->vec.x++;
 	}

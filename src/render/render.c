@@ -6,44 +6,11 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 22:12:37 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 13:24:27 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-inline int	cb_clamp(int color)
-{
-	if (color > 255)
-		return (255);
-	return (color);
-}
-
-inline int	cb_darken_color(int color, float shade)
-{
-	int	new;
-	int	red;
-	int	green;
-	int	blue;
-
-	red = cb_clamp(((color >> 16) & 0xFF) * shade);
-	green = cb_clamp(((color >> 8) & 0xFF) * shade);
-	blue = cb_clamp((color & 0xFF) * shade);
-	new = (red << 16) | (green << 8) | blue;
-	return (new);
-}
-
-inline void	cb_put_pixel(t_img *img, t_vecint vec, t_color color, float shading)
-{
-	int	pixel;
-	int	*buffer;
-
-	pixel = (vec.y * (img->line_size / 4)) + (vec.x);
-	buffer = (int *)img->buffer;
-	color *= shading;
-	if (buffer[pixel] != color)
-		buffer[pixel] = color;
-}
 
 inline void	cb_draw_data(t_ctx *ctx)
 {
@@ -59,7 +26,6 @@ inline void	cb_draw_data(t_ctx *ctx)
 	rd->draw_end = rd->line_height / 2 + SCREEN_HEIGHT / 2;
 	if (rd->draw_end >= SCREEN_HEIGHT)
 		rd->draw_end = SCREEN_HEIGHT - 1;
-
 	if (rt.side == 0)
 		rd->wall_x = ctx->map.player.y + rt.distance_to_wall * rt.ray_dir.y;
 	else
@@ -67,17 +33,82 @@ inline void	cb_draw_data(t_ctx *ctx)
 	rd->wall_x -= floor(rd->wall_x);
 }
 
-int	cb_mini_draw(void *data)
+inline void	cb_tex_data(t_ctx *ctx)
 {
-	int			color;
-	t_ctx		*ctx;
+	t_tex		*tex;
+	t_renderer	rd;
+	t_raytracer	rt;
+	t_texture	tex_data;
+
+	tex = &ctx->renderer.tex;
+	rd = ctx->renderer;
+	rt = ctx->raytracer;
+	tex_data = ctx->textures[rt.orientation];
+	tex->width = tex_data.w;
+	tex->height = tex_data.h;
+	tex->pos.x = (int)(rd.wall_x * (double)tex->width);
+	if ((rt.side == 0 && rt.ray_dir.x > 0)
+		|| (rt.side == 1 && rt.ray_dir.y < 0))
+		tex->pos.x = tex->width - tex->pos.x - 1;
+	tex->step = (double)tex->height / rd.line_height;
+	tex->tex_pos = (rd.draw_start - SCREEN_HEIGHT
+			/ 2 + rd.line_height / 2) * tex->step;
+	tex->data = (int *)tex_data.img.buffer;
+	tex->line_size = tex_data.img.line_size / 4;
+}
+
+inline void	cb_draw_ceilling_floor(t_ctx *ctx, int flag)
+{
 	t_raytracer	*rt;
 	t_renderer	*rd;
-	t_texture	texture;
+
+	rt = &ctx->raytracer;
+	rd = &ctx->renderer;
+	if (flag == 0)
+	{
+		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y < rd->draw_start)
+		{
+			cb_put_pixel(&ctx->img, rt->vec, CEILLING_COLOR, 1.0f);
+			rt->vec.y++;
+		}
+		return ;
+	}
+	while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y > rd->draw_end)
+	{
+		cb_put_pixel(&ctx->img, rt->vec, FLOOR_COLOR, 1.0f);
+		rt->vec.y++;
+	}
+}
+
+inline void	cb_draw_wall(t_ctx *ctx)
+{
+	t_raytracer	*rt;
+	t_renderer	*rd;
+	t_tex		*tex;
+	t_color		color;
+
+	tex = &ctx->renderer.tex;
+	rt = &ctx->raytracer;
+	rd = &ctx->renderer;
+	while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y
+		>= rd->draw_start && rt->vec.y <= rd->draw_end)
+	{
+		tex->pos.y = (int)tex->tex_pos % tex->height;
+		tex->tex_pos += tex->step;
+		color = tex->data[(tex->pos.y * tex->line_size + tex->pos.x)];
+		color = cb_darken_color(color, 1.0f);
+		cb_put_pixel(&ctx->img, rt->vec, color, 1.0f);
+		rt->vec.y++;
+	}
+}
+
+int	cb_mini_draw(void *data)
+{
+	t_ctx		*ctx;
+	t_raytracer	*rt;
 
 	ctx = (t_ctx *)data;
 	rt = &ctx->raytracer;
-	rd = &ctx->renderer;
 	rt->vec.x = 0;
 	rt->vec.y = 0;
 	while (rt->vec.x < SCREEN_WIDTH)
@@ -86,60 +117,15 @@ int	cb_mini_draw(void *data)
 		cb_side_step(ctx);
 		cb_check_hit(ctx);
 		cb_wall_dist(ctx);
-
 		cb_draw_data(ctx);
-		texture = ctx->textures[rt->orientation];
-		int tex_width = texture.w;
-		int tex_height = texture.h;
-
-		int	tex_x = (int)(rd->wall_x * (double)tex_width);
-		if ((rt->side == 0 && rt->ray_dir.x > 0) || (rt->side == 1 && rt->ray_dir.y < 0))
-			tex_x = tex_width - tex_x - 1;
-
-		double	step = (double)tex_height / rd->line_height;
-		double	tex_pos = (rd->draw_start - SCREEN_HEIGHT / 2 + rd->line_height / 2) * step;
-
-		int		*arr = (int*)texture.img.buffer;
-		int		tex_line_size = texture.img.line_size / 4;
-		float	shading = 1.0f;
-
-
+		cb_tex_data(ctx);
 		rt->vec.y = 0;
-		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y < rd->draw_start)
-		{
-				cb_put_pixel(&ctx->img, rt->vec, CEILLING_COLOR, 1.0f);
-				rt->vec.y++;
-		}
-		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y >= rd->draw_start && rt->vec.y <= rd->draw_end)
-		{
-			int	tex_y = (int)tex_pos % tex_height;
-			tex_pos += step;
-
-			color = arr[(tex_y * tex_line_size + tex_x)];
-			(void)shading;
-			// color = cb_darken_color(color, 3.5);
-			cb_put_pixel(&ctx->img, rt->vec, color, 1.0f);
-			rt->vec.y++;
-		}
-		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y > rd->draw_end)
-		{
-				cb_put_pixel(&ctx->img, rt->vec, FLOOR_COLOR, 1.0f);
-				rt->vec.y++;
-		}
+		cb_draw_ceilling_floor(ctx, 0);
+		cb_draw_wall(ctx);
+		cb_draw_ceilling_floor(ctx, 1);
 		rt->vec.x++;
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img.img, 0, 0);
-
-	ctx->fps.new_time = get_time();
-	ctx->fps.delta_time = ctx->fps.new_time - ctx->fps.old_time;
-	ctx->fps.frame_count++;
-	if (ctx->fps.delta_time >= 1000)
-	{
-		ctx->fps.fps = ctx->fps.frame_count * 1000 / ctx->fps.delta_time;
-		ctx->fps.frame_count = 0;
-		ctx->fps.old_time = get_time();
-		ft_itoa_s(ctx->fps.time_str, (int)ctx->fps.fps);
-	}
-	mlx_string_put(ctx->mlx, ctx->window, 20, 30, 0xfff, ctx->fps.time_str);
+	cb_draw_fps(ctx);
 	return (0);
 }

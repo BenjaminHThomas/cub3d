@@ -19,7 +19,7 @@ inline void	cb_rt_set(t_ctx *ctx)
 
 	player = ctx->map.player;
 	raytracer = ctx->raytracer;
-	raytracer.camera_x = 2 * raytracer.vec.x / SCREEN_WIDTH - 1;
+	raytracer.camera_x = 2 * (double)raytracer.vec.x / SCREEN_WIDTH - 1;
 	raytracer.ray_dir.x = player.dx + player.plane_x * raytracer.camera_x;
 	raytracer.ray_dir.y = player.dy + player.plane_y * raytracer.camera_x;
 	raytracer.map_check.x = (int)player.x;

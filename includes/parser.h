@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:08:25 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 14:38:28 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/01 14:38:39 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ void		get_file_contents(t_map_data *mapdata);
 int			init_input(t_map_data *mapdata, char *fname);
 
 /* General Utilities */
-int		resize_arr(char ***arr, int *size);
+int			resize_arr(char ***arr, int *size);
 
 /* Boolean helper functions*/
-bool	is_empty_line(char *line);
-bool	is_space(unsigned char c);
-bool	is_valid_fname(char *fname);
+bool		is_empty_line(char *line);
+bool		is_space(unsigned char c);
+bool		is_valid_fname(char *fname);
 
 /* Garbage collection */
-void	free_arr(void **arr);
-void	bin_textures(t_tex_path **texts);
+void		free_arr(void **arr);
+void		bin_textures(t_tex_path **texts);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 13:15:22 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 13:16:01 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ inline void	cb_draw_wall(t_ctx *ctx)
 	{
 		tex->pos.y = (int)tex->tex_pos % tex->height;
 		tex->tex_pos += tex->step;
-
 		color = tex->data[(tex->pos.y * tex->line_size + tex->pos.x)];
 		color = cb_darken_color(color, 3.5);
 		cb_put_pixel(&ctx->img, rt->vec, color, 1.0f);
@@ -127,7 +126,6 @@ int	cb_mini_draw(void *data)
 		rt->vec.x++;
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img.img, 0, 0);
-
 	cb_draw_fps(ctx);
 	return (0);
 }

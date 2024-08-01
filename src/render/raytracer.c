@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 21:51:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 22:14:01 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 20:03:38 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ inline void	cb_rt_set(t_ctx *ctx)
 	player = ctx->map.player;
 	raytracer = ctx->raytracer;
 	raytracer.camera_x = 2 * (double)raytracer.vec.x / SCREEN_WIDTH - 1;
-	raytracer.ray_dir.x = player.dx + player.plane_x * raytracer.camera_x;
-	raytracer.ray_dir.y = player.dy + player.plane_y * raytracer.camera_x;
-	raytracer.map_check.x = (int)player.x;
-	raytracer.map_check.y = (int)player.y;
+	raytracer.ray_dir.x = player.dir.x + player.plane.x * raytracer.camera_x;
+	raytracer.ray_dir.y = player.dir.y + player.plane.y * raytracer.camera_x;
+	raytracer.map_check.x = (int)player.pos.x;
+	raytracer.map_check.y = (int)player.pos.y;
 	if (raytracer.ray_dir.x == 0)
 		raytracer.delta_dist.x = 1e30;
 	else
@@ -48,22 +48,22 @@ inline void	cb_side_step(t_ctx *ctx)
 	if (rt->ray_dir.x < 0)
 	{
 		rt->step.x = -1;
-		rt->side_dist.x = (p.x - rt->map_check.x) * rt->delta_dist.x;
+		rt->side_dist.x = (p.pos.x - rt->map_check.x) * rt->delta_dist.x;
 	}
 	else
 	{
 		rt->step.x = 1;
-		rt->side_dist.x = (rt->map_check.x + 1.0 - p.x) * rt->delta_dist.x;
+		rt->side_dist.x = (rt->map_check.x + 1.0 - p.pos.x) * rt->delta_dist.x;
 	}
 	if (rt->ray_dir.y < 0)
 	{
 		rt->step.y = -1;
-		rt->side_dist.y = (p.y - rt->map_check.y) * rt->delta_dist.y;
+		rt->side_dist.y = (p.pos.y - rt->map_check.y) * rt->delta_dist.y;
 	}
 	else
 	{
 		rt->step.y = 1;
-		rt->side_dist.y = (rt->map_check.y + 1.0 - p.y) * rt->delta_dist.y;
+		rt->side_dist.y = (rt->map_check.y + 1.0 - p.pos.y) * rt->delta_dist.y;
 	}
 }
 

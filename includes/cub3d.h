@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 15:56:53 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/01 20:09:45 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "mlx.h"
 # include "libft.h"
 # include "render.h"
+# include "parser.h"
 
 # define SCREEN_WIDTH 1680
 # define SCREEN_HEIGHT 720
@@ -44,6 +45,10 @@ typedef int	t_color;
 
 # define CEILLING_COLOR 0x70129a
 # define FLOOR_COLOR 0x0fa0b9
+
+# define MINIMAP_WALL 0xfb990f
+# define MINIMAP_FLOOR 0x0bf90f
+# define MINIMAP_PLAYER 0xfa8a8a
 
 # define TEXTURE_COUNT 4
 
@@ -105,5 +110,7 @@ void		cb_draw_ceilling_floor(t_ctx *ctx, int flag) __attribute__((hot));
 int			cb_max(int a, int b);
 
 int			cb_min(int a, int b);
+
+void		cb_draw_minimap(t_ctx *ctx);
 
 #endif

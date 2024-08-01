@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:54:17 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 12:09:47 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 19:59:23 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,10 @@ typedef struct s_vecint
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
-	double	dx;
-	double	dy;
 	double	angle;
-	double	plane_x;
-	double	plane_y;
+	t_vec	pos;
+	t_vec	plane;
+	t_vec	dir;
 }	t_player;
 
 typedef struct s_img

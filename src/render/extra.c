@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:05:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 21:21:08 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 21:35:10 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ inline void	cb_draw_minimap(t_ctx *ctx)
 		while (vec.y < map.height)
 		{
 			if (map.raw[vec.y * map.width + vec.x] == '1')
-				cb_draw_square(ctx, vec, MINIMAP_WALL, 20);
+				cb_draw_square(ctx, vec, MINIMAP_WALL, MINIMAP_SIZE);
 			else if (map.raw[vec.y * map.width + vec.x] == '0')
-				cb_draw_square(ctx, vec, MINIMAP_FLOOR, 20);
+				cb_draw_square(ctx, vec, MINIMAP_FLOOR, MINIMAP_SIZE);
 			vec.y++;
 		}
 		vec.x++;
 	}
-	cb_draw_player(ctx, map.player.pos, MINIMAP_PLAYER, 20);
+	cb_draw_player(ctx, map.player.pos, MINIMAP_PLAYER, MINIMAP_SIZE);
 }

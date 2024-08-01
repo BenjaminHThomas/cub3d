@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 21:22:03 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 21:30:41 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,6 @@ int			cb_min(int a, int b);
 
 void		cb_draw_minimap(t_ctx *ctx);
 
-int			cb_key_down(int keycode, void *data);
-
-int			cb_key_up(int keycode, void *data);
+int			cb_key_toggle(int keycode, void *data);
 
 #endif

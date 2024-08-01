@@ -6,11 +6,21 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:45:55 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 14:36:10 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/01 19:19:57 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+size_t	array_len(void	**arr)
+{
+	size_t	len;
+
+	len = 0;
+	while (arr && arr[len])
+		len++;
+	return (len);
+}
 
 bool	is_space(unsigned char c)
 {
@@ -49,4 +59,9 @@ int	resize_arr(char ***arr, int *size)
 	free_arr((void **)*arr);
 	*arr = new_arr;
 	return (0);
+}
+
+unsigned int rgb_to_hex(unsigned char r, unsigned char g, unsigned char b)
+{
+	return (r << 16) | (g << 8) | b;
 }

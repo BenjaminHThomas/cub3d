@@ -6,28 +6,13 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:04:17 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 14:30:40 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/01 19:14:46 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	init_input(t_map_data *mapdata, char *fname)
-{
-	mapdata->fd = open(fname, O_RDONLY);
-	if (mapdata->fd < 0)
-		return (ft_printf("Error\nCould not open file\n"));
-	mapdata->input = (char **)ft_calloc(32, sizeof(char *));
-	if (!mapdata->input)
-	{
-		close(mapdata->fd);
-		return (ft_printf("Error\nMalloc failure.\n"));
-	}
-	return (0);
-}
-
-//check file name
-bool	is_valid_fname(char *fname)
+bool	valid_fname(char *fname)
 {
 	bool	retval;
 	size_t	len;
@@ -48,32 +33,36 @@ bool	is_valid_fname(char *fname)
 	return (retval);
 }
 
-//read whole file
-void	get_file_contents(t_map_data *mapdata)
+bool	valid_textures(t_map_data *mapdata)
 {
-	char	*line;
+	bool	north;
+	bool	south;
+	bool	east;
+	bool	west;
 	int		i;
-	int		size;
 
-	size = 32;
-	i = -1;
-	while (++i < size)
+	north = false;
+	south = false;
+	east = false;
+	west = false;
+	i = 0;
+	while (i < 3)
 	{
-		if (i == size - 1)
-			if (resize_arr(&mapdata->input, &size))
-				return (free_arr((void **)mapdata->input));
-		line = get_next_line(mapdata->fd);
-		if (!line)
-			break ;
-		if (!is_empty_line(line))
-			mapdata->input[i] = line;
-		else
-		{
-			free(line);
-			line = NULL;
-		}
+		if (mapdata->tex_paths[i]->dir == NORTH)
+			north = true;
+		else if (mapdata->tex_paths[i]->dir == SOUTH)
+			south = true;
+		else if (mapdata->tex_paths[i]->dir == EAST)
+			east = true;
+		else if (mapdata->tex_paths[i]->dir == WEST)
+			west = true;
+		i++;
 	}
+	return (north && south && east && west);
 }
 
-//skip empty lines
-//store in struct
+bool	valid_colours(t_map_data *mapdata)
+{
+	(void)mapdata;
+	return (true);
+}

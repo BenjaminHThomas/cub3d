@@ -6,11 +6,37 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:31:30 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 16:16:22 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/01 20:13:12 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+void	get_file_contents(t_map_data *mapdata)
+{
+	char	*line;
+	int		i;
+	int		size;
+
+	size = 32;
+	i = 0;
+	while (i < size)
+	{
+		if (i == size - 1)
+			if (resize_arr(&mapdata->input, &size))
+				return (free_arr((void **)mapdata->input));
+		line = get_next_line(mapdata->fd);
+		if (!line)
+			break ;
+		if (!is_empty_line(line))
+			mapdata->input[i++] = line;
+		else
+		{
+			free(line);
+			line = NULL;
+		}
+	}
+}
 
 static t_tex_path	*get_texture(char *line)
 {
@@ -40,7 +66,7 @@ static t_tex_path	*get_texture(char *line)
 	return (retval);
 }
 
-t_tex_path	**get_textures(t_map_data *map_data)
+t_tex_path	**get_textures(t_map_data *mapdata)
 {
 	int			i;
 	char		*line;
@@ -52,7 +78,7 @@ t_tex_path	**get_textures(t_map_data *map_data)
 	i = 0;
 	while (i < TEXTURE_COUNT)
 	{
-		line = map_data->input[i];
+		line = mapdata->input[i];
 		texts[i] = get_texture(line);
 		if (!texts[i])
 			return (bin_textures(texts), NULL);
@@ -61,4 +87,46 @@ t_tex_path	**get_textures(t_map_data *map_data)
 	if (i < 3)
 		return (bin_textures(texts), NULL);
 	return (texts);
+}
+
+static char	**get_rgb(char **split_line)
+{
+	char	**rgb;
+
+	if (!split_line || !split_line[0] || !split_line[1])
+		return (NULL);
+	rgb = ft_split(split_line[1], ',');
+	if (!rgb)
+		return (NULL);
+	if (array_len((void **)rgb) != 3)
+		return (free_arr((void **)rgb), NULL);
+	return (rgb);
+}
+
+int	get_hex_colour(t_map_data *mapdata, int idx)
+{
+	char			**temp_rgb;
+	char			**split_line;
+	unsigned char	rgb[3];
+	unsigned int	hex_val;
+	bool			is_floor;
+
+	split_line = ft_split(mapdata->input[idx], ' ');
+	if (!split_line)
+		return (1);
+	is_floor = (*split_line[0] == 'F');
+	temp_rgb = get_rgb(split_line);
+	free_arr((void **)split_line);
+	if (!temp_rgb)
+		return (1);
+	rgb[0] = (unsigned char)ft_atoi(temp_rgb[0]);
+	rgb[1] = (unsigned char)ft_atoi(temp_rgb[1]);
+	rgb[2] = (unsigned char)ft_atoi(temp_rgb[2]);
+	free_arr((void **)temp_rgb);
+	hex_val = rgb_to_hex(rgb[0], rgb[1], rgb[2]);
+	if (is_floor)
+		mapdata->f_colour = hex_val;
+	else
+		mapdata->c_colour = hex_val;
+	return (0);
 }

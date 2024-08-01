@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 12:13:14 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 13:11:38 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,29 @@ inline void	cb_tex_data(t_ctx *ctx)
 	tex->line_size = tex_data.img.line_size / 4;
 }
 
+inline void	cb_draw_ceilling_floor(t_ctx *ctx, int flag)
+{
+	t_raytracer	*rt;
+	t_renderer	*rd;
+
+	rt = &ctx->raytracer;
+	rd = &ctx->renderer;
+	if (flag == 0)
+	{
+		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y < rd->draw_start)
+		{
+			cb_put_pixel(&ctx->img, rt->vec, CEILLING_COLOR, 1.0f);
+			rt->vec.y++;
+		}
+		return ;
+	}
+	while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y > rd->draw_end)
+	{
+		cb_put_pixel(&ctx->img, rt->vec, FLOOR_COLOR, 1.0f);
+		rt->vec.y++;
+	}
+}
+
 int	cb_mini_draw(void *data)
 {
 	int			color;
@@ -80,11 +103,8 @@ int	cb_mini_draw(void *data)
 		cb_draw_data(ctx);
 		cb_tex_data(ctx);
 		rt->vec.y = 0;
-		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y < rd->draw_start)
-		{
-			cb_put_pixel(&ctx->img, rt->vec, CEILLING_COLOR, 1.0f);
-			rt->vec.y++;
-		}
+
+		cb_draw_ceilling_floor(ctx, 0);
 		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y
 			>= rd->draw_start && rt->vec.y <= rd->draw_end)
 		{
@@ -96,25 +116,11 @@ int	cb_mini_draw(void *data)
 			cb_put_pixel(&ctx->img, rt->vec, color, 1.0f);
 			rt->vec.y++;
 		}
-		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y > rd->draw_end)
-		{
-			cb_put_pixel(&ctx->img, rt->vec, FLOOR_COLOR, 1.0f);
-			rt->vec.y++;
-		}
+		cb_draw_ceilling_floor(ctx, 1);
 		rt->vec.x++;
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img.img, 0, 0);
 
-	ctx->fps.new_time = get_time();
-	ctx->fps.delta_time = ctx->fps.new_time - ctx->fps.old_time;
-	ctx->fps.frame_count++;
-	if (ctx->fps.delta_time >= 1000)
-	{
-		ctx->fps.fps = ctx->fps.frame_count * 1000 / ctx->fps.delta_time;
-		ctx->fps.frame_count = 0;
-		ctx->fps.old_time = get_time();
-		ft_itoa_s(ctx->fps.time_str, (int)ctx->fps.fps);
-	}
-	mlx_string_put(ctx->mlx, ctx->window, 20, 30, 0xfff, ctx->fps.time_str);
+	cb_draw_fps(ctx);
 	return (0);
 }

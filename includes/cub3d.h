@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 11:56:24 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 13:12:01 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,9 @@ void		cb_check_hit(t_ctx *ctx) __attribute__((hot));
 void		cb_side_step(t_ctx *ctx) __attribute__((hot));
 
 void		cb_rt_set(t_ctx *ctx);
+
+void		cb_draw_fps(t_ctx *ctx) __attribute__((hot));
+
+void		cb_draw_ceilling_floor(t_ctx *ctx, int flag) __attribute__((hot));
 
 #endif

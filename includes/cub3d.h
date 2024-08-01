@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 13:56:42 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/01 14:03:52 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef int	t_color;
 
 # define CEILLING_COLOR 0x70129a
 # define FLOOR_COLOR 0x0fa0b9
+
+# define TEXTURE_COUNT 4
 
 typedef struct s_ctx
 {

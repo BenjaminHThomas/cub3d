@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 13:24:27 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 13:58:41 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ inline void	cb_draw_ceilling_floor(t_ctx *ctx, int flag)
 	}
 }
 
+// color = cb_darken_color(color, 1.0f);
 inline void	cb_draw_wall(t_ctx *ctx)
 {
 	t_raytracer	*rt;
@@ -96,7 +97,6 @@ inline void	cb_draw_wall(t_ctx *ctx)
 		tex->pos.y = (int)tex->tex_pos % tex->height;
 		tex->tex_pos += tex->step;
 		color = tex->data[(tex->pos.y * tex->line_size + tex->pos.x)];
-		color = cb_darken_color(color, 1.0f);
 		cb_put_pixel(&ctx->img, rt->vec, color, 1.0f);
 		rt->vec.y++;
 	}

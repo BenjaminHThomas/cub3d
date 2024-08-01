@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:05:13 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 12:10:37 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/01 14:01:11 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	free_arr(void **arr)
 	arr = NULL;
 }
 
-void	bin_textures(t_texture **texts)
+void	bin_textures(t_tex_path **texts)
 {
 	size_t	i;
 

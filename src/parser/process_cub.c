@@ -6,21 +6,21 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:31:30 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 13:25:57 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/01 14:03:48 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static t_texture	*get_texture(char *line)
+static t_tex_path	*get_texture(char *line)
 {
 	char		**split_line;
-	t_texture	*retval;
+	t_tex_path	*retval;
 
 	split_line = ft_split(line, ' ');
 	if (!split_line || !split_line[1])
 		return (free_arr(split_line), NULL);
-	retval = malloc(sizeof(t_texture));
+	retval = malloc(sizeof(t_tex_path));
 	if (!retval)
 		return (free_arr(split_line), NULL);
 	if (ft_strcmp(split_line[0], "NO") == 0)
@@ -40,17 +40,17 @@ static t_texture	*get_texture(char *line)
 	return (retval);
 }
 
-t_texture	**get_textures(t_map_data *map_data, char *f_name)
+t_tex_path	**get_textures(t_map_data *map_data, char *f_name)
 {
 	int			i;
 	char		*line;
-	t_texture	**texts;
+	t_tex_path	**texts;
 	int			fd;
 
 	fd = open(f_name, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
-	texts = malloc(4 * sizeof(t_texture *));
+	texts = malloc(4 * sizeof(t_tex_path *));
 	if (!texts)
 		return (NULL);
 	i = 0;
@@ -71,5 +71,5 @@ int	main(void)
 {
 	t_map_data	map_data;
 
-	map_data.textures = get_textures(&map_data, "maps/test.cub");
+	map_data.tex_paths = get_textures(&map_data, "maps/test.cub");
 }

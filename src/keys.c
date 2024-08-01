@@ -6,15 +6,15 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 20:02:54 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 20:29:04 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-inline void	cb_move_updown(int keycode, t_map map, t_player *p)
+inline void	cb_move_updown(t_ctx *ctx, t_map map, t_player *p)
 {
-	if (keycode == XK_W || keycode == XK_w)
+	if (ctx->keys.up)
 	{
 		if (map.raw[(map.width * (int)p->pos.y)
 				+ (int)(p->pos.x + p->dir.x * FORCE)] != '1')
@@ -23,7 +23,7 @@ inline void	cb_move_updown(int keycode, t_map map, t_player *p)
 			+ (int)(p->pos.x)] != '1')
 			p->pos.y += p->dir.y * FORCE;
 	}
-	if (keycode == XK_s || keycode == XK_S)
+	if (ctx->keys.down)
 	{
 		if (map.raw[(map.width * (int)p->pos.y)
 				+ (int)(p->pos.x - p->dir.x * 0.1f)] != '1')
@@ -34,9 +34,9 @@ inline void	cb_move_updown(int keycode, t_map map, t_player *p)
 	}
 }
 
-inline void	cb_move_side(int keycode, t_map map, t_player *p)
+inline void	cb_move_side(t_ctx *ctx, t_map map, t_player *p)
 {
-	if (keycode == XK_d || keycode == XK_D)
+	if (ctx->keys.right)
 	{
 		if (map.raw[(map.width * (int)p->pos.y)
 				+ (int)(p->pos.x + p->dir.y * 0.1f)] != '1')
@@ -46,7 +46,7 @@ inline void	cb_move_side(int keycode, t_map map, t_player *p)
 					+ (int)(p->pos.x)] != '1')
 			p->pos.y -= p->dir.x * 0.1f;
 	}
-	if (keycode == XK_a || keycode == XK_A)
+	if (ctx->keys.left)
 	{
 		if (map.raw[(map.width * (int)p->pos.y)
 				+ (int)(p->pos.x - p->dir.y * 0.1f)] != '1')
@@ -81,18 +81,52 @@ inline void	cb_rotate(int keycode, t_player *p)
 	}
 }
 
-int	cb_handle_key(int keycode, void *data)
+int	cb_key_up(int keycode, void *data)
 {
-	t_ctx		*ctx;
-	t_player	*player;
+	t_ctx	*ctx;
+	t_keys	*keys;
 
 	ctx = (t_ctx *)data;
-	player = &ctx->map.player;
+	keys = &ctx->keys;
+	if (keycode == XK_w || keycode == XK_W)
+		keys->up = 0;
+	if (keycode == XK_s || keycode == XK_S)
+		keys->down = 0;
+	if (keycode == XK_d || keycode == XK_D)
+		keys->right = 0;
+	if (keycode == XK_a || keycode == XK_A)
+		keys->left = 0;
+	return (0);
+}
+
+int	cb_key_down(int keycode, void *data)
+{
+	t_ctx	*ctx;
+	t_keys	*keys;
+
+	ctx = (t_ctx *)data;
+	keys = &ctx->keys;
 	if (keycode == XK_Escape)
 		cb_exit(ctx);
-	cb_move_updown(keycode, ctx->map, player);
-	cb_move_side(keycode, ctx->map, player);
-	cb_rotate(keycode, player);
+	if (keycode == XK_w || keycode == XK_W)
+		keys->up = 1;
+	if (keycode == XK_s || keycode == XK_S)
+		keys->down = 1;
+	if (keycode == XK_d || keycode == XK_D)
+		keys->right = 1;
+	if (keycode == XK_a || keycode == XK_A)
+		keys->left = 1;
+	cb_rotate(keycode, &ctx->map.player);
+	return (0);
+}
+
+int	cb_handle_key(t_ctx *ctx)
+{
+	t_player	*player;
+
+	player = &ctx->map.player;
+	cb_move_updown(ctx, ctx->map, player);
+	cb_move_side(ctx, ctx->map, player);
 	return (0);
 }
 

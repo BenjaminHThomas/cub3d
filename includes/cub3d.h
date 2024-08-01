@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 20:09:45 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 20:28:26 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ typedef int	t_color;
 
 # define TEXTURE_COUNT 4
 
+typedef struct s_keys
+{
+	int	up;
+	int	down;
+	int	right;
+	int	left;
+}	t_keys;
+
 typedef struct s_ctx
 {
 	void		*mlx;
@@ -62,6 +70,7 @@ typedef struct s_ctx
 	t_renderer	renderer;
 	t_raytracer	raytracer;
 	t_fps		fps;
+	t_keys		keys;
 }	t_ctx;
 
 t_map		init_map(void);
@@ -72,7 +81,7 @@ t_ctx		cb_init_ctx(void) __attribute__((cold));
 
 int			cb_init_mtx(t_ctx *ctx) __attribute__((cold));
 
-int			cb_handle_key(int keycode, void *data);
+int			cb_handle_key(t_ctx *ctx);
 
 int			cb_free_all(t_ctx *ctx) __attribute__((cold));
 
@@ -112,5 +121,9 @@ int			cb_max(int a, int b);
 int			cb_min(int a, int b);
 
 void		cb_draw_minimap(t_ctx *ctx);
+
+int			cb_key_down(int keycode, void *data);
+
+int			cb_key_up(int keycode, void *data);
 
 #endif

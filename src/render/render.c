@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 19:59:35 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 20:28:10 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int	cb_mini_draw(void *data)
 	rt = &ctx->raytracer;
 	rt->vec.x = 0;
 	rt->vec.y = 0;
+	cb_handle_key(ctx);
 	while (rt->vec.x < SCREEN_WIDTH)
 	{
 		cb_rt_set(ctx);

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:32:40 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 20:29:26 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 20:42:59 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_ctx	cb_init_ctx(void)
 	ctx.keys.down = 0;
 	ctx.keys.left = 0;
 	ctx.keys.right = 0;
+	ctx.keys.r_right = 0;
+	ctx.keys.r_left = 0;
 	return (ctx);
 }
 

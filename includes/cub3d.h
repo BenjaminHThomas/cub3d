@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 20:28:26 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 20:44:45 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define SCREEN_WIDTH 1680
 # define SCREEN_HEIGHT 720
 
-# define FORCE 0.1f
+# define FORCE 0.07f
 
 # define PROG_NAME "cub3d"
 
@@ -58,6 +58,8 @@ typedef struct s_keys
 	int	down;
 	int	right;
 	int	left;
+	int	r_left;
+	int	r_right;
 }	t_keys;
 
 typedef struct s_ctx

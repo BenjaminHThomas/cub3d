@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 20:37:45 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 20:44:04 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,21 @@ inline void	cb_move_side(t_ctx *ctx, t_map map, t_player *p, float force)
 	}
 }
 
-inline void	cb_rotate(int keycode, t_player *p)
+inline void	cb_rotate(t_ctx *ctx, t_player *p)
 {
 	float	old_dir_x;
 	float	old_plane_x;
 
 	old_dir_x = p->dir.x;
 	old_plane_x = p->plane.x;
-	if (keycode == XK_Right)
+	if (ctx->keys.r_right)
 	{
 		p->dir.x = p->dir.x * cos(-FORCE) - p->dir.y * sin(-FORCE);
 		p->dir.y = old_dir_x * sin(-FORCE) + p->dir.y * cos(-FORCE);
 		p->plane.x = p->plane.x * cos(-FORCE) - p->plane.y * sin(-FORCE);
 		p->plane.y = old_plane_x * sin(-FORCE) + p->plane.y * cos(-FORCE);
 	}
-	if (keycode == XK_Left)
+	else if (ctx->keys.r_left)
 	{
 		p->dir.x = p->dir.x * cos(FORCE) - p->dir.y * sin(FORCE);
 		p->dir.y = old_dir_x * sin(FORCE) + p->dir.y * cos(FORCE);
@@ -96,6 +96,10 @@ int	cb_key_up(int keycode, void *data)
 		keys->right = 0;
 	if (keycode == XK_a || keycode == XK_A)
 		keys->left = 0;
+	if (keycode == XK_Left)
+		keys->r_left = 0;
+	if (keycode == XK_Right)
+		keys->r_right = 0;
 	return (0);
 }
 
@@ -116,7 +120,10 @@ int	cb_key_down(int keycode, void *data)
 		keys->right = 1;
 	if (keycode == XK_a || keycode == XK_A)
 		keys->left = 1;
-	cb_rotate(keycode, &ctx->map.player);
+	if (keycode == XK_Left)
+		keys->r_left = 1;
+	if (keycode == XK_Right)
+		keys->r_right = 1;
 	return (0);
 }
 
@@ -135,5 +142,6 @@ int	cb_handle_key(t_ctx *ctx)
 		force /= 2.0f;
 	cb_move_updown(ctx, ctx->map, player, force);
 	cb_move_side(ctx, ctx->map, player, force);
+	cb_rotate(ctx, &ctx->map.player);
 	return (0);
 }

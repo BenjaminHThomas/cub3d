@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 19:32:31 by okoca             #+#    #+#              #
-#    Updated: 2024/08/01 13:09:47 by okoca            ###   ########.fr        #
+#    Updated: 2024/08/01 15:02:26 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ LIBFT_TARGET = ${LIBFT}/libft.a
 
 MLX_TARGET = ${MLX}/libmlx.a
 
-SRCS_M = main.c keys.c parsing.c
+SRCS_M = main.c keys.c
 
 SRCS_INIT = ctx.c map.c textures.c
 

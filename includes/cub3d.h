@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 14:27:32 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 15:02:36 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ int			cb_darken_color(int color, float shade) __attribute__((hot));
 int			cb_clamp(int color) __attribute__((hot));
 
 int			init_textures(t_ctx *ctx) __attribute__((cold));
-
-int			parsing(char *path, t_ctx *ctx) __attribute__((cold));
 
 uint64_t	get_time(void);
 

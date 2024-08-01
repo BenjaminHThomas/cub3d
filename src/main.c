@@ -6,13 +6,13 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 15:04:19 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 15:02:01 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-inline unsigned long	get_time()
+inline unsigned long	get_time(void)
 {
 	struct timeval	time;
 	unsigned long ms;
@@ -37,10 +37,6 @@ int	main(int ac, char **av)
 
 	(void)ac;
 	(void)av;
-	// if (check_args(av, av) != 0)
-	// 	return (1);
-	// if (parsing(av[1], &ctx) != 0)
-	// 	return (1);
 	ctx = cb_init_ctx();
 	if (cb_init_mtx(&ctx) != 0)
 		return (1);

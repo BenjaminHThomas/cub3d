@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 13:58:41 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 19:59:35 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ inline void	cb_draw_data(t_ctx *ctx)
 	if (rd->draw_end >= SCREEN_HEIGHT)
 		rd->draw_end = SCREEN_HEIGHT - 1;
 	if (rt.side == 0)
-		rd->wall_x = ctx->map.player.y + rt.distance_to_wall * rt.ray_dir.y;
+		rd->wall_x = ctx->map.player.pos.y + rt.distance_to_wall * rt.ray_dir.y;
 	else
-		rd->wall_x = ctx->map.player.x + rt.distance_to_wall * rt.ray_dir.x;
+		rd->wall_x = ctx->map.player.pos.x + rt.distance_to_wall * rt.ray_dir.x;
 	rd->wall_x -= floor(rd->wall_x);
 }
 
@@ -125,6 +125,7 @@ int	cb_mini_draw(void *data)
 		cb_draw_ceilling_floor(ctx, 1);
 		rt->vec.x++;
 	}
+	cb_draw_minimap(ctx);
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img.img, 0, 0);
 	cb_draw_fps(ctx);
 	return (0);

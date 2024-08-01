@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 19:32:31 by okoca             #+#    #+#              #
-#    Updated: 2024/08/01 15:02:26 by okoca            ###   ########.fr        #
+#    Updated: 2024/08/01 20:06:15 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ SRCS_M = main.c keys.c
 
 SRCS_INIT = ctx.c map.c textures.c
 
-SRCS_HELP = free.c
+SRCS_HELP = free.c utils.c
 
 SRCS_REND = render.c raytracer.c pixel.c extra.c
 

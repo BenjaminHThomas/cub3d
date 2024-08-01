@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:05:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 13:45:28 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 20:05:40 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,67 @@ inline void	cb_draw_fps(t_ctx *ctx)
 	mlx_string_put(ctx->mlx, ctx->window, 20, 30, 0xfff, ctx->fps.time_str);
 }
 
-inline int	cb_max(int a, int b)
+inline void	cb_draw_square(t_ctx *ctx, t_vecint vec, t_color color, int area)
 {
-	if (a > b)
-		return (a);
-	return (b);
+	int			x;
+	int			y;
+	t_vecint	tmp;
+
+	x = 0;
+	while (x < area)
+	{
+		y = 0;
+		while (y < area)
+		{
+			tmp.x = (vec.x * area) + x;
+			tmp.y = (vec.y * area) + y;
+			cb_put_pixel(&ctx->img, tmp, color, 1.0f);
+			y++;
+		}
+		x++;
+	}
 }
 
-inline int	cb_min(int a, int b)
+inline void	cb_draw_player(t_ctx *ctx, t_vec player, t_color color, int area)
 {
-	if (a < b)
-		return (a);
-	return (b);
+	int			x;
+	int			y;
+	t_vecint	tmp;
+
+	x = 0;
+	while (x < area)
+	{
+		y = 0;
+		while (y < area)
+		{
+			tmp.x = (int)(player.x * (double)area) + x;
+			tmp.y = (int)(player.y * (double)area) + y;
+			cb_put_pixel(&ctx->img, tmp, color, 1.0f);
+			y++;
+		}
+		x++;
+	}
+}
+
+inline void	cb_draw_minimap(t_ctx *ctx)
+{
+	t_map		map;
+	t_vecint	vec;
+
+	vec.x = 0;
+	map = ctx->map;
+	while (vec.x < map.width)
+	{
+		vec.y = 0;
+		while (vec.y < map.height)
+		{
+			if (map.raw[vec.y * map.width + vec.x] == '1')
+				cb_draw_square(ctx, vec, 0xfb990f, 20);
+			else if (map.raw[vec.y * map.width + vec.x] == '0')
+				cb_draw_square(ctx, vec, 0x0bf90f, 20);
+			vec.y++;
+		}
+		vec.x++;
+	}
+	cb_draw_player(ctx, map.player.pos, 0xfa8a8a, 20);
 }

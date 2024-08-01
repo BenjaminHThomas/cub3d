@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 21:51:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 20:03:38 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 21:24:21 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ inline void	cb_rt_set(t_ctx *ctx)
 
 	player = ctx->map.player;
 	raytracer = ctx->raytracer;
+	raytracer.vec.y = 0;
 	raytracer.camera_x = 2 * (double)raytracer.vec.x / SCREEN_WIDTH - 1;
 	raytracer.ray_dir.x = player.dir.x + player.plane.x * raytracer.camera_x;
 	raytracer.ray_dir.y = player.dir.y + player.plane.y * raytracer.camera_x;

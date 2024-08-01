@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 20:28:10 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 21:23:44 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ int	cb_mini_draw(void *data)
 		cb_wall_dist(ctx);
 		cb_draw_data(ctx);
 		cb_tex_data(ctx);
-		rt->vec.y = 0;
 		cb_draw_ceilling_floor(ctx, 0);
 		cb_draw_wall(ctx);
 		cb_draw_ceilling_floor(ctx, 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:03:36 by okoca             #+#    #+#             */
-/*   Updated: 2024/05/22 09:21:52 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 12:01:43 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static int	count_words(char *str, char sep)
 
 	i = 0;
 	word_count = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 	{
 		if (!is_separator(str[i], sep) && is_separator(str[i + 1], sep))

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:05:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 13:06:25 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 13:45:28 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,18 @@ inline void	cb_draw_fps(t_ctx *ctx)
 		ft_itoa_s(ctx->fps.time_str, (int)ctx->fps.fps);
 	}
 	mlx_string_put(ctx->mlx, ctx->window, 20, 30, 0xfff, ctx->fps.time_str);
+}
+
+inline int	cb_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+inline int	cb_min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
 }

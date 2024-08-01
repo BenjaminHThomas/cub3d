@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:05:49 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 16:18:55 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/01 20:14:38 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 
 	(void)ac;
 	fname = av[1];
-	if (!is_valid_fname(fname))
+	if (!valid_fname(fname))
 		return (printf("Error\nInvalid filename\n"));
 	if (init_input(&mapdata, fname))
 		return (1);
@@ -34,5 +34,12 @@ int	main(int ac, char **av)
 				"texture paths from file.\n"));
 	i = -1;
 	while (++i < 4)
+	{
+		printf("%d ", mapdata.tex_paths[i]->dir);
 		printf("%s", mapdata.tex_paths[i]->path);
+	}
+	if (get_hex_colour(&mapdata, 4) || get_hex_colour(&mapdata, 5))
+		return (printf("Error\nIncorrect RGB values supplied.\n"));
+	printf("Floor colour: %x\n", mapdata.f_colour);
+	printf("Ceiling colour: %x\n", mapdata.c_colour);
 }

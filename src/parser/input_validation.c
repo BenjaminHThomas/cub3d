@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:04:17 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 13:51:31 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/01 14:30:40 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int	init_input(t_map_data *mapdata, char *fname)
 {
 	mapdata->fd = open(fname, O_RDONLY);
 	if (mapdata->fd < 0)
-		return (1);
+		return (ft_printf("Error\nCould not open file\n"));
 	mapdata->input = (char **)ft_calloc(32, sizeof(char *));
 	if (!mapdata->input)
 	{
 		close(mapdata->fd);
-		return (1);
+		return (ft_printf("Error\nMalloc failure.\n"));
 	}
 	return (0);
 }
@@ -49,10 +49,10 @@ bool	is_valid_fname(char *fname)
 }
 
 //read whole file
-void	get_file_contents(t_map_data *mapdata, char *fname)
+void	get_file_contents(t_map_data *mapdata)
 {
 	char	*line;
-	size_t	i;
+	int		i;
 	int		size;
 
 	size = 32;
@@ -61,7 +61,7 @@ void	get_file_contents(t_map_data *mapdata, char *fname)
 	{
 		if (i == size - 1)
 			if (resize_arr(&mapdata->input, &size))
-				return (free_arr(mapdata->input));
+				return (free_arr((void **)mapdata->input));
 		line = get_next_line(mapdata->fd);
 		if (!line)
 			break ;

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 22:08:47 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 11:51:36 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,8 @@ void		cb_put_pixel(t_img *img, t_vecint vec, t_color color, float shading)
 			__attribute__((hot));
 
 int			cb_darken_color(int color, float shade) __attribute__((hot));
+
+int			cb_clamp(int color) __attribute__((hot));
 
 int			init_textures(t_ctx *ctx) __attribute__((cold));
 

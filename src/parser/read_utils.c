@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:45:55 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 13:42:26 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/01 14:36:10 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	resize_arr(char ***arr, int *size)
 	while ((*arr)[arrlen])
 		arrlen++;
 	new_arr = ft_memmove(new_arr, *arr, arrlen);
-	free_arr(*arr);
+	free_arr((void **)*arr);
 	*arr = new_arr;
 	return (0);
 }

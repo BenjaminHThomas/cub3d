@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:08:25 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 14:27:39 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/01 14:38:39 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,20 @@ typedef struct s_map_data
 	char		*c_colour;
 }	t_map_data;
 
+t_tex_path	**get_textures(t_map_data *map_data, char *f_name);
+void		get_file_contents(t_map_data *mapdata);
+int			init_input(t_map_data *mapdata, char *fname);
+
 /* General Utilities */
-int		resize_arr(char ***arr, int *size);
+int			resize_arr(char ***arr, int *size);
 
 /* Boolean helper functions*/
-bool	is_empty_line(char *line);
-bool	is_space(unsigned char c);
-bool	is_valid_fname(char *fname);
+bool		is_empty_line(char *line);
+bool		is_space(unsigned char c);
+bool		is_valid_fname(char *fname);
 
 /* Garbage collection */
-void	free_arr(void **arr);
-void	bin_textures(t_tex_path **texts);
+void		free_arr(void **arr);
+void		bin_textures(t_tex_path **texts);
 
 #endif

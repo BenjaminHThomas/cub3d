@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 16:55:26 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 17:17:33 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,9 @@ int	main(int ac, char **av)
 	t_ctx		ctx;
 	t_map_data	*mapdata;
 
-	(void)ac;
-	(void)av;
 	mapdata = parse(ac, av);
 	if (!mapdata)
-		exit(1);
-	int i = -1;
-	while (mapdata->map[++i])
-		printf("%s\n", mapdata->map[i]);
-	printf("player_pos: %f, %f\n", mapdata->player_pos.x, mapdata->player_pos.y);
+		return (1);
 	ctx = cb_init_ctx(mapdata);
 	if (cb_init_mtx(&ctx) != 0)
 		return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:04:17 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 16:16:14 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 17:26:49 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,12 @@ bool	valid_map(t_map_data *mapdata)
 	map = mapdata->map;
 	if (!map_border_valid(map))
 	{
-		printf("Error\nMap border invalid.");
+		ft_putendl_fd("Error\nMap border invalid.", 2);
 		return (false);
 	}
 	if (!valid_map_chars(mapdata, map))
 	{
-		printf("Error\nInvalid map characters.\n");
+		ft_putendl_fd("Error\nInvalid map characters.", 2);
 		return (false);
 	}
 	x = (size_t)mapdata->player_pos.x;

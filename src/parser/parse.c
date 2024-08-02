@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:05:49 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 17:23:56 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 17:25:42 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	read_cub(t_map_data *mapdata, char *fname)
 {
 	if (!valid_fname(fname))
 	{
-		printf("Error\nInvalid filename\n");
+		ft_putendl_fd("Error\nInvalid filename", 2);
 		return (1);
 	}
 	if (init_input(mapdata, fname))
@@ -25,14 +25,14 @@ static int	read_cub(t_map_data *mapdata, char *fname)
 	get_file_contents(mapdata);
 	if (!mapdata->input)
 	{
-		printf("Error\nCould not retrieve file contents\n");
+		ft_putendl_fd("Error\nCould not retrieve file contents", 2);
 		bin_parse_data(mapdata);
 		return (1);
 	}
 	mapdata->tex_paths = get_textures(mapdata);
 	if (!mapdata->tex_paths)
 	{
-		printf("Error\nCould not retrieve texture paths from file.\n");
+		ft_putendl_fd("Error\nCould not retrieve texture paths from file.", 2);
 		bin_parse_data(mapdata);
 		return (1);
 	}

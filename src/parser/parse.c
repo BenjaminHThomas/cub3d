@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:05:49 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 14:25:57 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 14:50:55 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ int	main(int ac, char **av)
 	printf("Ceiling colour: %x\n", mapdata.c_colour);
 	if (read_map(&mapdata))
 		return (printf("Error\nCould not read in map.\n"));
+	if (!valid_map(&mapdata))
+		return (1);
+	fill_player_room(mapdata.map);
 	i = -1;
 	while (mapdata.map[++i])
 		printf("%s\n", mapdata.map[i]);
-	if (!valid_map(&mapdata))
-		return (1);
 	return (0);
 }

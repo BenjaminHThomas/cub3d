@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:27:36 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 18:44:22 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 19:06:49 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	get_map(t_map_data *mapdata)
 		if (i == 6 && is_empty_line(line))
 		{
 			free(line);
+			line = NULL;
 			continue ;
 		}
 		else if (is_empty_line(line))
@@ -74,13 +75,12 @@ int	read_map(t_map_data *mapdata)
 	int		size;
 	size_t	max_len;
 
+	if (array_len((void **)mapdata->input) <= 6)
+		return (1);
 	max_len = get_max_map_len(mapdata);
 	size = 32;
 	i = 6;
 	j = 0;
-	mapdata->map = (char **)ft_calloc(size, sizeof(char *));
-	if (!mapdata->map)
-		return (1);
 	while (mapdata->input[i])
 	{
 		mapdata->map[j] = get_map_row(mapdata->input[i], max_len);

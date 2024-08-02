@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:05:13 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 18:42:27 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 19:01:34 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	free_arr(void **arr)
 {
 	size_t	i;
 
-	if (!arr || !*arr)
+	if (!arr)
 		return ;
 	i = 0;
 	while (arr[i])

@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:31:30 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 18:23:51 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 19:05:59 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_tex_path	*get_texture(char *line)
 	else if (ft_strcmp(split_line[0], "EA") == 0)
 		retval->dir = EAST;
 	else
-		return (free_arr((void **)split_line), NULL);
+		return (free_arr((void **)split_line), free(retval), NULL);
 	retval->path = ft_strdup(split_line[1]);
 	free_arr((void **)split_line);
 	if (!retval->path)
@@ -67,6 +67,8 @@ t_tex_path	**get_textures(t_map_data *mapdata)
 	char		*line;
 	t_tex_path	**texts;
 
+	if (array_len((void **)mapdata->input) < 4)
+		return (NULL);
 	texts = ft_calloc((TEXTURE_COUNT + 1), sizeof(t_tex_path *));
 	if (!texts)
 		return (NULL);

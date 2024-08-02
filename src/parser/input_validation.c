@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:04:17 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 17:26:49 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 18:53:47 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ bool	valid_map(t_map_data *mapdata)
 	size_t	y;
 	bool	retval;
 
+	if (!mapdata->map || !(*mapdata->map))
+		return (false);
 	map = mapdata->map;
 	if (!map_border_valid(map))
 	{

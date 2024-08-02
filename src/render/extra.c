@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:05:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 21:35:10 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 10:55:09 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,7 @@ inline void	cb_draw_minimap(t_ctx *ctx)
 		}
 		vec.x++;
 	}
+	map.player.pos.x -= 0.5f;
+	map.player.pos.y -= 0.5f;
 	cb_draw_player(ctx, map.player.pos, MINIMAP_PLAYER, MINIMAP_SIZE);
 }

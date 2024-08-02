@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 21:30:15 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 10:48:23 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ inline void	cb_move_side(t_ctx *ctx, t_map map, t_player *p, float force)
 	}
 }
 
-inline void	cb_rotate(t_ctx *ctx, t_player *p, float force)
+void	cb_rotate(t_ctx *ctx, t_player *p, float force)
 {
 	float	old_dir_x;
 	float	old_plane_x;
@@ -123,6 +123,6 @@ int	cb_handle_key(t_ctx *ctx)
 	force *= ctx->fps.delta_time;
 	cb_move_updown(ctx, ctx->map, player, force);
 	cb_move_side(ctx, ctx->map, player, force);
-	cb_rotate(ctx, &ctx->map.player, force);
+	cb_rotate(ctx, &ctx->map.player, FORCE * ctx->fps.delta_time);
 	return (0);
 }

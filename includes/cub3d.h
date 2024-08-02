@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 14:13:13 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 16:45:45 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "mlx.h"
 # include "libft.h"
 # include "render.h"
+# include "parser.h"
 
 # define SCREEN_WIDTH 1680
 # define SCREEN_HEIGHT 720
@@ -56,14 +57,6 @@ typedef int	t_color;
 
 # define TEXTURE_COUNT 4
 
-typedef enum e_direction
-{
-	NORTH,
-	SOUTH,
-	WEST,
-	EAST
-}	t_direction;
-
 typedef struct s_keys
 {
 	int			up;
@@ -87,13 +80,14 @@ typedef struct s_ctx
 	t_raytracer	raytracer;
 	t_fps		fps;
 	t_keys		keys;
+	t_map_data	*mapdata;
 }	t_ctx;
 
-t_map		init_map(void);
+t_map		init_map(t_ctx *ctx);
 
 int			cb_loop(t_ctx *ctx) __attribute__((cold));
 
-t_ctx		cb_init_ctx(void) __attribute__((cold));
+t_ctx		cb_init_ctx(t_map_data *mapdata) __attribute__((cold));
 
 int			cb_init_mtx(t_ctx *ctx) __attribute__((cold));
 

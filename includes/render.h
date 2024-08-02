@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:54:17 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 14:24:29 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 16:46:56 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_vecint
 
 typedef struct s_player
 {
-	double		angle;
 	t_vec		pos;
 	t_vec		plane;
 	t_vec		dir;
@@ -46,7 +45,7 @@ typedef struct s_img
 
 typedef struct s_map
 {
-	char	*raw;
+	char	**map;
 	t_player	player;
 	int		height;
 	int		width;

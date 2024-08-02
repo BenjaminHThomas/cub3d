@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 19:32:31 by okoca             #+#    #+#              #
-#    Updated: 2024/08/02 13:48:45 by okoca            ###   ########.fr        #
+#    Updated: 2024/08/02 16:22:18 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,16 @@ SRCS_HELP = free.c utils.c
 
 SRCS_REND = render.c raytracer.c pixel.c extra.c
 
+SRCS_PARSER = input_validation.c \
+		 pars_cleanup.c \
+		 parse.c \
+		 process_cub.c \
+		 read_utils.c \
+		 init_parser.c \
+		 map_utils.c \
+		 process_map.c \
+		 flood_map.c
+
 SRC 		= src/
 
 INIT_PATH	= src/init/
@@ -73,10 +83,13 @@ HELP_PATH	= src/helper/
 
 REND_PATH	= src/render/
 
+PARSER_PATH	= src/parser/
+
 SRCS		= $(addprefix $(SRC), $(SRCS_M)) \
 		  $(addprefix $(INIT_PATH), $(SRCS_INIT)) \
 		  $(addprefix $(HELP_PATH), $(SRCS_HELP)) \
 		  $(addprefix $(REND_PATH), $(SRCS_REND)) \
+		  $(addprefix $(PARSER_PATH), $(SRCS_PARSER)) \
 
 OBJS = ${SRCS:.c=.o}
 

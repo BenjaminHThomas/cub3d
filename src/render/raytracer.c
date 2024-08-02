@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 21:51:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 21:24:21 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 16:49:36 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ inline void	cb_check_hit(t_ctx *ctx)
 			rt->map_check.y += rt->step.y;
 			rt->side = 1;
 		}
-		if (map.raw[rt->map_check.y * map.width + rt->map_check.x] == '1')
+		if (map.map[rt->map_check.y][rt->map_check.x] == '1')
 			rt->hit = 1;
 	}
 }

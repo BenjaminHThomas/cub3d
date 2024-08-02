@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   process_cub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:31:30 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 13:34:55 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 16:16:16 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub3d.h"
 
 void	get_file_contents(t_map_data *mapdata)
 {

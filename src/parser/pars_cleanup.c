@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pars_cleanup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:05:13 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 14:01:11 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 16:16:15 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub3d.h"
 
 void	free_arr(void **arr)
 {

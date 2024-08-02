@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:29:11 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 15:01:32 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 16:16:15 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub3d.h"
 
 /* Checks whether all characters in a string are the provided char */
 bool	all_are_c(unsigned char c, char *s)

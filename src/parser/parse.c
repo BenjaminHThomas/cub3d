@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:05:49 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 20:14:38 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 10:51:08 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,13 @@ int	main(int ac, char **av)
 	if (!mapdata.tex_paths)
 		return (printf("Error\nCould not retrieve "
 				"texture paths from file.\n"));
-	i = -1;
-	while (++i < 4)
-	{
-		printf("%d ", mapdata.tex_paths[i]->dir);
-		printf("%s", mapdata.tex_paths[i]->path);
-	}
 	if (get_hex_colour(&mapdata, 4) || get_hex_colour(&mapdata, 5))
 		return (printf("Error\nIncorrect RGB values supplied.\n"));
 	printf("Floor colour: %x\n", mapdata.f_colour);
 	printf("Ceiling colour: %x\n", mapdata.c_colour);
+	if (read_map(&mapdata))
+		return (printf("Error\nCould not read in map.\n"));
+	i = -1;
+	while (mapdata.map[++i])
+		printf("%s", mapdata.map[i]);
 }

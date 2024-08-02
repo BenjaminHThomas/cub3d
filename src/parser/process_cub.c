@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:31:30 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 20:13:12 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 11:00:15 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,10 @@ int	get_hex_colour(t_map_data *mapdata, int idx)
 	char			**split_line;
 	unsigned char	rgb[3];
 	unsigned int	hex_val;
-	bool			is_floor;
 
 	split_line = ft_split(mapdata->input[idx], ' ');
 	if (!split_line)
 		return (1);
-	is_floor = (*split_line[0] == 'F');
 	temp_rgb = get_rgb(split_line);
 	free_arr((void **)split_line);
 	if (!temp_rgb)
@@ -124,9 +122,11 @@ int	get_hex_colour(t_map_data *mapdata, int idx)
 	rgb[2] = (unsigned char)ft_atoi(temp_rgb[2]);
 	free_arr((void **)temp_rgb);
 	hex_val = rgb_to_hex(rgb[0], rgb[1], rgb[2]);
-	if (is_floor)
+	if (ft_strcmp(split_line[0], "F") == 0)
 		mapdata->f_colour = hex_val;
-	else
+	else if (ft_strcmp(split_line[0], "C") == 0)
 		mapdata->c_colour = hex_val;
+	else
+		return (1);
 	return (0);
 }

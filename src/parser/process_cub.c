@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:31:30 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 13:34:55 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 17:06:12 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	get_file_contents(t_map_data *mapdata)
 			line = NULL;
 		}
 	}
+	close(mapdata->fd);
 }
 
 static t_tex_path	*get_texture(char *line)

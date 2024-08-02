@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:29:11 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 15:01:32 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 15:09:06 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,6 @@ bool	in(unsigned char c, char *s)
 		i++;
 	}
 	return (false);
-}
-
-void	print_input(t_map_data *mapdata)
-{
-	size_t	i;
-
-	i = -1;
-	while (mapdata->input[++i])
-		printf("%s", mapdata->input[i]);
 }
 
 size_t	get_max_map_len(t_map_data *mapdata)

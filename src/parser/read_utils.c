@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   read_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:45:55 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 15:01:18 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 16:16:16 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub3d.h"
 
 size_t	array_len(void	**arr)
 {

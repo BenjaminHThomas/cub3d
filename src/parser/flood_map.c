@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   flood_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:38:59 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 15:07:23 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 16:16:13 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub3d.h"
 
 static void	flood_fill(char **map, int y, int x, t_vec lims)
 {

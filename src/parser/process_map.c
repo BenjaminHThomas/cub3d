@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   process_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:27:36 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 14:28:15 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 16:16:16 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub3d.h"
 
 static char	*get_map_row(char *maprow, size_t max)
 {

@@ -6,11 +6,11 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:29:11 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 15:09:06 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 17:07:52 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub3d.h"
 
 /* Checks whether all characters in a string are the provided char */
 bool	all_are_c(unsigned char c, char *s)

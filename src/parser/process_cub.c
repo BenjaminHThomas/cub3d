@@ -6,11 +6,11 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:31:30 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 17:06:12 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 17:08:05 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub3d.h"
 
 void	get_file_contents(t_map_data *mapdata)
 {

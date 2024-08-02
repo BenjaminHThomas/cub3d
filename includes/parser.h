@@ -6,13 +6,21 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:08:25 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 17:01:04 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 17:08:30 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 
 # include "cub3d.h"
+
+typedef enum e_direction
+{
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST
+}	t_direction;
 
 typedef struct s_tex_path
 {
@@ -31,6 +39,8 @@ typedef struct s_map_data
 	unsigned int	f_colour;
 	unsigned int	c_colour;
 }	t_map_data;
+
+t_map_data		*parse(int ac, char **av);
 
 t_tex_path		**get_textures(t_map_data *map_data);
 void			get_file_contents(t_map_data *mapdata);

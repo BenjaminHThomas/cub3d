@@ -6,19 +6,19 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:32:40 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 14:14:14 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 16:45:07 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_ctx	cb_init_ctx(void)
+t_ctx	cb_init_ctx(t_map_data *mapdata)
 {
 	t_ctx	ctx;
 
 	ctx.window = NULL;
 	ctx.mlx = NULL;
-	ctx.map.raw = NULL;
+	ctx.mapdata = mapdata;
 	ctx.textures = NULL;
 	ctx.keys.up = 0;
 	ctx.keys.down = 0;
@@ -67,8 +67,6 @@ int	cb_init_mtx(t_ctx *ctx)
 		cb_free_all(ctx);
 		return (1);
 	}
-	ctx->map = init_map();
-	if (!ctx->map.raw)
-		return (cb_free_all(ctx), 1);
+	ctx->map = init_map(ctx);
 	return (0);
 }

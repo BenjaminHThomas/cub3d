@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:44:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 20:00:39 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 17:04:49 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,24 @@ void	print_map(char *map, int height, int width)
 	}
 }
 
-/*
-* 111111111111
-* 100000000001
-* 100000000001
-* 10P000111001
-* 100000110001
-* 100000001001
-* 100000000001
-* 100000000001
-* 100000000001
-* 111111111111
-*/
-t_map	init_map(void)
+t_map	init_map(t_ctx *ctx)
 {
 	t_map	map;
 
-	map.player.pos.x = 3.0f;
-	map.player.pos.y = 3.0f;
+	map.player.pos.x = ctx->mapdata->player_pos.x - 0.5f;
+	map.player.pos.y = ctx->mapdata->player_pos.y - 0.5f;
 	map.player.dir.x = -1.0f;
 	map.player.dir.y = 0.0f;
-	map.player.angle = 0.0f;
 	map.player.plane.x = 0;
 	map.player.plane.y = 0.60;
-	map.height = 10;
-	map.width = 12;
-	map.raw = ft_calloc(sizeof(char), (map.height * map.width + 1));
-	if (!map.raw)
-		return (map);
-	ft_strcat(map.raw, "111111111111100000000001100000000001100000111001100000110001100000001001100000000001100000000001101000000001111111111111");
-	print_map(map.raw, map.height, map.width);
+	map.ceilling = ctx->mapdata->c_colour;
+	map.floor = ctx->mapdata->f_colour;
+	map.map = ctx->mapdata->map;
+	map.width = 0;
+	map.height = 0;
+	while (map.map[map.height])
+		map.height++;
+	if (map.height)
+		map.width = ft_strlen(map.map[0]);
 	return (map);
 }

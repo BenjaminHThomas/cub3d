@@ -6,11 +6,11 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:05:13 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 17:05:20 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 17:07:33 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub3d.h"
 
 void	free_arr(void **arr)
 {

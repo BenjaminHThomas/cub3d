@@ -6,17 +6,17 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:58:03 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/31 16:19:21 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 16:54:15 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	cb_free_map(t_ctx *ctx)
-{
-	if (ctx->map.raw)
-		free(ctx->map.raw);
-}
+// void	cb_free_map(t_ctx *ctx)
+// {
+// 	if (ctx->map.raw)
+// 		free(ctx->map.raw);
+// }
 
 void	cb_free_tex(t_ctx *ctx)
 {
@@ -38,7 +38,7 @@ void	cb_free_tex(t_ctx *ctx)
 
 int	cb_free_all(t_ctx *ctx)
 {
-	cb_free_map(ctx);
+	// cb_free_map(ctx);
 	if (ctx->mlx)
 	{
 		cb_free_tex(ctx);

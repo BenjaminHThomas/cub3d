@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:05:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 21:35:10 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 13:17:25 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,12 @@ inline void	cb_draw_square(t_ctx *ctx, t_vecint vec, t_color color, int area)
 	int			x;
 	int			y;
 	t_vecint	tmp;
+	int			def;
+	int			minimap_side;
 
 	x = 0;
+	def = color;
+	minimap_side = 2;
 	while (x < area)
 	{
 		y = 0;
@@ -48,6 +52,10 @@ inline void	cb_draw_square(t_ctx *ctx, t_vecint vec, t_color color, int area)
 		{
 			tmp.x = (vec.x * area) + x;
 			tmp.y = (vec.y * area) + y;
+			color = def;
+			if ((x < minimap_side || x > area - minimap_side) ||
+				(y < minimap_side || y > area - minimap_side))
+				color = 0x333333;
 			cb_put_pixel(&ctx->img, tmp, color, 1.0f);
 			y++;
 		}
@@ -96,5 +104,7 @@ inline void	cb_draw_minimap(t_ctx *ctx)
 		}
 		vec.x++;
 	}
+	map.player.pos.x -= 0.5f;
+	map.player.pos.y -= 0.5f;
 	cb_draw_player(ctx, map.player.pos, MINIMAP_PLAYER, MINIMAP_SIZE);
 }

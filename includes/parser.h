@@ -6,21 +6,13 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:08:25 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 11:46:55 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 13:36:37 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 
 # include "cub3d.h"
-
-typedef enum e_direction
-{
-	NORTH,
-	SOUTH,
-	WEST,
-	EAST
-}	t_direction;
 
 typedef struct s_tex_path
 {

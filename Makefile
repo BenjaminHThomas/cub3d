@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 19:32:31 by okoca             #+#    #+#              #
-#    Updated: 2024/08/01 20:06:15 by okoca            ###   ########.fr        #
+#    Updated: 2024/08/02 13:48:45 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,9 @@ MLX= mlx
 
 LIBFT = libft
 
-CFLAGS = -O3 -funroll-loops -std=c99 -Wall -Werror -Wextra -MMD -I${INCLUDES_DIR} -I${MLX} -I${LIBFT}
+CUSTOM_FLAGS = -D USE_CUSTOM_FONT=1
+
+CFLAGS = -O3 -funroll-loops -std=c99 -Wall -Werror -Wextra -MMD -I${INCLUDES_DIR} -I${MLX} -I${LIBFT} ${CUSTOM_FLAGS}
 
 LDFLAGS = -L${MLX} -L${LIBFT} -lmlx_Linux -lXext -lX11 -lm -lbsd -lft # -g
 
@@ -55,7 +57,7 @@ LIBFT_TARGET = ${LIBFT}/libft.a
 
 MLX_TARGET = ${MLX}/libmlx.a
 
-SRCS_M = main.c keys.c
+SRCS_M = main.c keys.c mouse.c
 
 SRCS_INIT = ctx.c map.c textures.c
 

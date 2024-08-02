@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:05:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 13:17:25 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 13:49:17 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ inline void	cb_draw_fps(t_ctx *ctx)
 		fps->frame_count = 0;
 		elapsed = 0.0f;
 	}
-	mlx_string_put(ctx->mlx, ctx->window, 20, 30, 0xfff, ctx->fps.time_str);
+	mlx_string_put(ctx->mlx, ctx->window, MINIMAP_SIZE
+		* ctx->map.width + 20, 30, 0xffffff, ctx->fps.time_str);
 }
 
 inline void	cb_draw_square(t_ctx *ctx, t_vecint vec, t_color color, int area)

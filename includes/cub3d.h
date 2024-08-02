@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 13:17:43 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 13:47:45 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
+# endif
+
+# ifndef USE_CUSTOM_FONT
+#  define USE_CUSTOM_FONT 0
 # endif
 
 typedef int	t_color;
@@ -133,5 +137,7 @@ int			cb_min(int a, int b);
 void		cb_draw_minimap(t_ctx *ctx);
 
 int			cb_key_toggle(int keycode, void *data);
+
+int			cb_mouse_move(int x, int y, void *param);
 
 #endif

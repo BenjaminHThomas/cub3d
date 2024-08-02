@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 14:15:36 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 15:12:48 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,13 @@ void	cb_rotate(t_ctx *ctx, t_player *p, float force)
 	old_dir_x = p->dir.x;
 	old_plane_x = p->plane.x;
 	keys = ctx->keys;
-	if (keys.r_right || (keys.mouse && keys.m_pos.x > SCREEN_WIDTH / 2))
+	if (keys.mouse && keys.m_pos.x > SCREEN_WIDTH / 2)
+		cb_rot_right(p, force * 0.7f);
+	if (keys.mouse && keys.m_pos.x <= (SCREEN_WIDTH / 2))
+		cb_rot_left(p, force * 0.7f);
+	if (keys.r_right)
 		cb_rot_right(p, force);
-	if (keys.r_left || (keys.mouse && keys.m_pos.x <= SCREEN_WIDTH / 2))
+	if (keys.r_left)
 		cb_rot_left(p, force);
 }
 

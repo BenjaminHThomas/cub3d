@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:08:25 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 16:21:02 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 17:08:30 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ bool			valid_map(t_map_data *mapdata);
 int				resize_arr(char ***arr, int *size);
 size_t			array_len(void	**arr);
 unsigned int	rgb_to_hex(unsigned char r, unsigned char g, unsigned char b);
-void			print_input(t_map_data *mapdata);
 size_t			get_max_map_len(t_map_data *mapdata);
 t_direction 	char_to_dir(char c);
 

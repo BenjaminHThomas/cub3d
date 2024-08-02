@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:05:49 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 13:35:01 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 14:25:57 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,7 @@ int	main(int ac, char **av)
 	i = -1;
 	while (mapdata.map[++i])
 		printf("%s\n", mapdata.map[i]);
+	if (!valid_map(&mapdata))
+		return (1);
+	return (0);
 }

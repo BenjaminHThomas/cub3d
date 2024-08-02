@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:04:17 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 13:28:58 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 14:25:38 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,85 @@ bool	valid_textures(t_map_data *mapdata)
 	return (north && south && east && west);
 }
 
-bool	left_right_map_valid(t_map_data *mapdata)
+static bool	valid_map_chars(t_map_data *mapdata, char **map)
 {
-	(void)mapdata;
+	bool	player_found;
+	size_t	x;
+	size_t	y;
+
+	player_found = false;
+	y = -1;
+	while (map[++y])
+	{
+		x = -1;
+		while (map[y][++x])
+		{
+			if (!in(map[y][x], "10NSEW"))
+				return (false);
+			if (!player_found && in(map[y][x], "NSEW"))
+			{
+				player_found = true;
+				mapdata->player_dir = char_to_dir(map[y][x]);
+				mapdata->player_pos.x = (double)x;
+				mapdata->player_pos.y = (double)y;
+			}
+			else if (player_found && in(map[y][x], "NSEW"))
+				return (false);
+		}
+	}
+	return (player_found);
+}
+
+static bool	map_border_valid(char **map)
+{
+	size_t	len;
+	size_t	i;
+
+	if (!all_are_c('1', map[0]))
+		return (false);
+	len = ft_strlen(map[0]);
+	i = 0;
+	while (map[i])
+	{
+		if (map[i][0] != '1' || map[i][len - 1] != '1')
+			return (false);
+		i++;
+	}
+	i--;
+	if (!all_are_c('1', map[i]))
+		return (false);
 	return (true);
 }
+
 /*
 	- No zeroes on the border
 	- Only one direction character
 	- Only 1, 0, (N,S,E,W)
-	- Direction not surrounded by 1's on all sides
+	- player not surrounded by 1's on all sides
 */
 bool	valid_map(t_map_data *mapdata)
 {
-	//int	x;
-	//int	y;
+	char	**map;
+	size_t	x;
+	size_t	y;
+	bool	retval;
 
-	if (in('0', mapdata->map[0]))
+	map = mapdata->map;
+	if (!map_border_valid(map))
+	{
+		printf("Error\nMap border invalid.");
 		return (false);
-	return (true);
+	}
+	if (!valid_map_chars(mapdata, map))
+	{
+		printf("Error\nInvalid map characters.\n");
+		return (false);
+	}
+	x = (size_t)mapdata->player_pos.x;
+	y = (size_t)mapdata->player_pos.y;
+	retval = (!(map[y - 1][x] == 1
+				&& map[y + 1][x] == 1
+				&& map[y][x - 1] == 1
+				&& map[y][x + 1] == 1));
+	return (retval);
 }

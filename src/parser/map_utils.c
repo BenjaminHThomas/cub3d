@@ -6,11 +6,23 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:29:11 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 13:26:38 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 14:07:52 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+/* Checks whether all characters in a string are the provided char */
+bool	all_are_c(unsigned char c, char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s && s[i])
+		if (s[i++] != c)
+			return (false);
+	return (true);
+}
 
 bool	in(unsigned char c, char *s)
 {
@@ -51,4 +63,15 @@ size_t	get_max_map_len(t_map_data *mapdata)
 		i++;
 	}
 	return (max_len);
+}
+
+t_direction char_to_dir(char c)
+{
+	if (c == 'N')
+		return (NORTH);
+	if (c == 'S')
+		return (SOUTH);
+	if (c == 'E')
+		return (EAST);
+	return (WEST);
 }

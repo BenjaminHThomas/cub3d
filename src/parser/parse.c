@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:05:49 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 17:22:35 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 17:23:56 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static int	read_cub(t_map_data *mapdata, char *fname)
 		bin_parse_data(mapdata);
 		return (1);
 	}
+	return (0);
 }
 
 t_map_data	*parse(char **av)

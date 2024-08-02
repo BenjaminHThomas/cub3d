@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 19:32:31 by okoca             #+#    #+#              #
-#    Updated: 2024/08/02 17:34:30 by okoca            ###   ########.fr        #
+#    Updated: 2024/08/02 17:54:57 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,9 +49,9 @@ LIBFT = libft
 
 CUSTOM_FLAGS = -D USE_CUSTOM_FONT=1
 
-CFLAGS = -O3 -funroll-loops -std=c99 -Wall -Werror -Wextra -MMD -I${INCLUDES_DIR} -I${MLX} -I${LIBFT}
+CFLAGS = -O3 -funroll-loops -std=c99 -Wall -Werror -Wextra -MMD -I${INCLUDES_DIR} -I${MLX} -I${LIBFT} -g
 
-LDFLAGS = -L${MLX} -L${LIBFT} -lmlx_Linux -lXext -lX11 -lm -lbsd -lft # -g
+LDFLAGS = -L${MLX} -L${LIBFT} -lmlx_Linux -lXext -lX11 -lm -lbsd -lft
 
 LIBFT_TARGET = ${LIBFT}/libft.a
 

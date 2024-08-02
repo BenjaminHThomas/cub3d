@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:27:36 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 13:26:54 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 14:28:15 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*get_map_row(char *maprow, size_t max)
 			row[i] = maprow[i];
 		i++;
 	}
-	while (i < max)
+	while (i < max - 1)
 		row[i++] = '1';
 	row[i] = 0;
 	return (row);

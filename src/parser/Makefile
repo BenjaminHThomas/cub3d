@@ -6,7 +6,7 @@
 #    By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 19:32:31 by okoca             #+#    #+#              #
-#    Updated: 2024/08/02 10:51:22 by bthomas          ###   ########.fr        #
+#    Updated: 2024/08/02 14:51:20 by bthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,8 @@ SRCS_M = input_validation.c \
 		 read_utils.c \
 		 init_parser.c \
 		 map_utils.c \
-		 process_map.c
+		 process_map.c \
+		 flood_map.c
 
 SRC 		= ./
 

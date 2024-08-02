@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 13:49:54 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 14:13:13 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,14 @@ typedef enum e_direction
 
 typedef struct s_keys
 {
-	int	up;
-	int	down;
-	int	right;
-	int	left;
-	int	r_left;
-	int	r_right;
+	int			up;
+	int			down;
+	int			right;
+	int			left;
+	int			r_left;
+	int			r_right;
+	int			mouse;
+	t_vecint	m_pos;
 }	t_keys;
 
 typedef struct s_ctx
@@ -138,6 +140,10 @@ void		cb_draw_minimap(t_ctx *ctx);
 
 int			cb_key_toggle(int keycode, void *data);
 
-int			cb_mouse_move(int x, int y, void *param);
+int			cb_mouse_move(int keycode, int x, int y, void *param);
+
+void		cb_rot_left(t_player *p, float force);
+
+void		cb_rot_right(t_player *p, float force);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:45:55 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 19:19:57 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 15:01:18 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	resize_arr(char ***arr, int *size)
 	return (0);
 }
 
-unsigned int rgb_to_hex(unsigned char r, unsigned char g, unsigned char b)
+unsigned int	rgb_to_hex(unsigned char r, unsigned char g, unsigned char b)
 {
-	return (r << 16) | (g << 8) | b;
+	return ((r << 16) | (g << 8) | b);
 }

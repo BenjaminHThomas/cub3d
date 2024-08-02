@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:31:30 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 17:08:05 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 17:37:10 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_tex_path	**get_textures(t_map_data *mapdata)
 	char		*line;
 	t_tex_path	**texts;
 
-	texts = malloc(TEXTURE_COUNT * sizeof(t_tex_path *));
+	texts = ft_calloc((TEXTURE_COUNT + 1), sizeof(t_tex_path *));
 	if (!texts)
 		return (NULL);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:05:49 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 17:25:42 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 17:38:57 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ t_map_data	*parse(char **av)
 	t_map_data	*new;
 	t_map_data	mapdata;
 	char		*fname;
-	size_t		i;
 
 	fname = av[1];
 	if (read_cub(&mapdata, fname))

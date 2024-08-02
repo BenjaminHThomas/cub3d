@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:32:40 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 17:32:43 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 18:09:35 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_ctx	cb_init_ctx(t_map_data *mapdata)
 {
 	t_ctx	ctx;
 
+	ft_bzero(&ctx, sizeof(t_ctx));
 	ctx.window = NULL;
 	ctx.mlx = NULL;
 	ctx.mapdata = mapdata;
@@ -49,19 +50,17 @@ int	cb_init_mtx(t_ctx *ctx)
 	if (!ctx->mlx)
 	{
 		printf("Failed to init mlx, exiting...\n");
-		cb_free_all(ctx);
 		return (1);
 	}
 	if (cb_init_image(ctx) != 0)
 	{
 		printf("Failed to init image, exiting...\n");
-		cb_free_all(ctx);
 		return (1);
 	}
 	if (init_textures(ctx) != 0)
 	{
+		ctx->textures = NULL;
 		printf("Failed to init textures, exiting...\n");
-		cb_free_all(ctx);
 		return (1);
 	}
 	ctx->map = init_map(ctx);

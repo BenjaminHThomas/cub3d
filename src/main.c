@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 18:06:52 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 18:11:54 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	main(int ac, char **av)
 	if (cb_init_mtx(&ctx) != 0)
 	{
 		cb_free_all(&ctx);
-		bin_parse_data(mapdata);
 		return (1);
 	}
 	cb_loop(&ctx);

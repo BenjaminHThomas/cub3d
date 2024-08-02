@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:58:03 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 16:54:15 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 17:55:28 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ void	cb_free_tex(t_ctx *ctx)
 
 int	cb_free_all(t_ctx *ctx)
 {
-	// cb_free_map(ctx);
+	if (ctx->mapdata)
+	{
+		bin_parse_data(ctx->mapdata);
+		free(ctx->mapdata);
+	}
 	if (ctx->mlx)
 	{
 		cb_free_tex(ctx);

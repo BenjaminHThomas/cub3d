@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 16:16:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 19:34:33 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 17:48:09 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,35 +32,35 @@ t_texture	create_texture(t_ctx *ctx, char *path, int *err)
 int	init_textures(t_ctx *ctx)
 {
 	t_texture	*texture;
-	// t_map_data	map_data;
-	// t_tex_path	current;
+	t_tex_path	*current;
 	int			err;
-	// int			i;
+	int			i;
+	int			j;
+	char		*tmp;
 
-	// i = 0;
+	i = 0;
+	j = 0;
 	err = 0;
-	texture = malloc(sizeof(t_texture) * 4);
-	// map_data = ctx->map_data;
-	// while (i < TEXTURE_COUNT)
-	// {
-	// 	texture[i].data = NULL;
-	// }
-	texture[NORTH] = create_texture(ctx, "textures/boss.xpm", &err);
-	texture[SOUTH] = create_texture(ctx, "textures/psyop.xpm", &err);
-	texture[WEST] = create_texture(ctx, "textures/aple.xpm", &err);
-	texture[EAST] = create_texture(ctx, "textures/alpha.xpm", &err);
-	// while (i < TEXTURE_COUNT)
-	// {
-	// 	current = map_data.tex_paths[i];
-	// 	texture[current.dir] = create_texture(ctx, current.path, &err);
-	// 	if (err == 1)
-	// 	{
-	// 		while (i--)
-	// 		{
-	// 		}
-	// 	}
-	// 	i++;
-	// }
+	texture = ft_calloc(sizeof(t_texture), TEXTURE_COUNT);
+	while (i < TEXTURE_COUNT)
+	{
+		current = ctx->mapdata->tex_paths[i];
+		tmp = ft_substr(current->path, 0, ft_strlen(current->path) - 1);
+		texture[current->dir] = create_texture(ctx, tmp, &err);
+		free(tmp);
+		if (err == 1)
+		{
+			while (j < TEXTURE_COUNT)
+			{
+				if (texture[j].data != NULL)
+					mlx_destroy_image(ctx->mlx, texture[j].data);
+				j++;
+			}
+			free(texture);
+			return (1);
+		}
+		i++;
+	}
 	ctx->textures = texture;
 	return (0);
 }

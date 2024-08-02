@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:05:13 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 17:07:33 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 17:33:36 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ void	free_arr(void **arr)
 void	bin_textures(t_tex_path **texts)
 {
 	size_t	i;
+	size_t	size;
 
 	if (!texts)
 		return ;
+	size = array_len((void **)texts);
 	i = 0;
-	while (texts[i])
+	while (i < size)
 	{
 		if (texts[i]->path)
 		{

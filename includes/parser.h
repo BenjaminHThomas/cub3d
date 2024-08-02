@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:08:25 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 10:49:29 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 11:46:55 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,20 @@ int				read_map(t_map_data *mapdata);
 /* Input Validation */
 bool			valid_fname(char *fname);
 bool			valid_textures(t_map_data *mapdata);
-bool			valid_colours(t_map_data *mapdata);
+bool			valid_map(t_map_data *mapdata);
 
 /* General Utilities */
 int				resize_arr(char ***arr, int *size);
 size_t			array_len(void	**arr);
 unsigned int	rgb_to_hex(unsigned char r, unsigned char g, unsigned char b);
 void			print_input(t_map_data *mapdata);
+size_t			get_max_map_len(t_map_data *mapdata);
+void			fill_map_void(t_map_data *mapdata);
 
 /* Boolean helper functions*/
 bool			is_empty_line(char *line);
 bool			is_space(unsigned char c);
+bool			in(unsigned char c, char *s);
 
 /* Garbage collection */
 void			free_arr(void **arr);

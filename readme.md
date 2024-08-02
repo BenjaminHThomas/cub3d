@@ -1,5 +1,6 @@
 ### cube3d
 
-#### bbb ####
+## TODO
 
-planning to do it using DDA, so far so good and is definitely faster than brute-forcing it with the small-step technique.
+- [behavior] limit the color r, g and b values to 255
+- [crash/leak] if .cub is a directory

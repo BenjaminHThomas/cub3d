@@ -6,15 +6,13 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:08:25 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 11:37:38 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 11:39:01 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 
 # include "cub3d.h"
-
-typedef enum e_direction	t_direction;
 
 typedef struct s_tex_path
 {

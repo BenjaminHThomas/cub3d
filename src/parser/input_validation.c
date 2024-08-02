@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:04:17 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/01 19:14:46 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 13:28:58 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,10 @@ bool	valid_fname(char *fname)
 	len = ft_strlen(fname);
 	if (len < 5)
 		return (false);
-	exten = ft_substr(fname, len - 4, 4);
-	if (!exten)
-		return (false);
+	exten = ft_strrchr(fname, '.');
 	retval = false;
 	if (ft_strcmp(exten, ".cub") == 0)
 		retval = true;
-	free(exten);
 	return (retval);
 }
 
@@ -61,8 +58,23 @@ bool	valid_textures(t_map_data *mapdata)
 	return (north && south && east && west);
 }
 
-bool	valid_colours(t_map_data *mapdata)
+bool	left_right_map_valid(t_map_data *mapdata)
 {
 	(void)mapdata;
+	return (true);
+}
+/*
+	- No zeroes on the border
+	- Only one direction character
+	- Only 1, 0, (N,S,E,W)
+	- Direction not surrounded by 1's on all sides
+*/
+bool	valid_map(t_map_data *mapdata)
+{
+	//int	x;
+	//int	y;
+
+	if (in('0', mapdata->map[0]))
+		return (false);
 	return (true);
 }

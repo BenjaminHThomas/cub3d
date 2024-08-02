@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 19:32:31 by okoca             #+#    #+#              #
-#    Updated: 2024/08/02 17:06:22 by okoca            ###   ########.fr        #
+#    Updated: 2024/08/02 17:34:30 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,13 +57,15 @@ LIBFT_TARGET = ${LIBFT}/libft.a
 
 MLX_TARGET = ${MLX}/libmlx.a
 
-SRCS_M = main.c keys.c mouse.c
+SRCS_M = main.c
 
 SRCS_INIT = ctx.c map.c textures.c
 
 SRCS_HELP = free.c utils.c
 
 SRCS_REND = render.c raytracer.c pixel.c extra.c
+
+SRCS_INPUT = keys.c mouse.c
 
 SRCS_PARSER = input_validation.c \
 		 pars_cleanup.c \
@@ -85,11 +87,14 @@ REND_PATH	= src/render/
 
 PARSER_PATH	= src/parser/
 
+INPUT_PATH	= src/input/
+
 SRCS		= $(addprefix $(SRC), $(SRCS_M)) \
 		  $(addprefix $(INIT_PATH), $(SRCS_INIT)) \
 		  $(addprefix $(HELP_PATH), $(SRCS_HELP)) \
 		  $(addprefix $(REND_PATH), $(SRCS_REND)) \
 		  $(addprefix $(PARSER_PATH), $(SRCS_PARSER)) \
+		  $(addprefix $(INPUT_PATH), $(SRCS_INPUT)) \
 
 OBJS = ${SRCS:.c=.o}
 

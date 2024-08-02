@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 10:48:23 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 14:15:36 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,16 @@ void	cb_rotate(t_ctx *ctx, t_player *p, float force)
 {
 	float	old_dir_x;
 	float	old_plane_x;
+	t_keys	keys;
 
 	force *= 0.7f;
 	old_dir_x = p->dir.x;
 	old_plane_x = p->plane.x;
-	if (ctx->keys.r_right)
-	{
-		p->dir.x = p->dir.x * cos(-force) - p->dir.y * sin(-force);
-		p->dir.y = old_dir_x * sin(-force) + p->dir.y * cos(-force);
-		p->plane.x = p->plane.x * cos(-force) - p->plane.y * sin(-force);
-		p->plane.y = old_plane_x * sin(-force) + p->plane.y * cos(-force);
-	}
-	else if (ctx->keys.r_left)
-	{
-		p->dir.x = p->dir.x * cos(force) - p->dir.y * sin(force);
-		p->dir.y = old_dir_x * sin(force) + p->dir.y * cos(force);
-		p->plane.x = p->plane.x * cos(force) - p->plane.y * sin(force);
-		p->plane.y = old_plane_x * sin(force) + p->plane.y * cos(force);
-	}
+	keys = ctx->keys;
+	if (keys.r_right || (keys.mouse && keys.m_pos.x > SCREEN_WIDTH / 2))
+		cb_rot_right(p, force);
+	if (keys.r_left || (keys.mouse && keys.m_pos.x <= SCREEN_WIDTH / 2))
+		cb_rot_left(p, force);
 }
 
 int	cb_key_toggle(int keycode, void *data)
@@ -113,6 +105,8 @@ int	cb_handle_key(t_ctx *ctx)
 	t_keys		keys;
 	float		force;
 
+	mlx_mouse_get_pos(ctx->mlx, ctx->window,
+		&ctx->keys.m_pos.x, &ctx->keys.m_pos.y);
 	player = &ctx->map.player;
 	force = FORCE;
 	keys = ctx->keys;

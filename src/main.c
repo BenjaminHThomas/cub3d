@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 21:31:04 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 14:12:08 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,13 @@ int	main(int ac, char **av)
 
 int	cb_loop(t_ctx *ctx)
 {
+	if (USE_CUSTOM_FONT)
+		mlx_set_font(ctx->mlx, ctx->window, "-*-*-*-*-*-*-20-*-*-*-*-*-*-*");
 	mlx_hook(ctx->window, DestroyNotify, StructureNotifyMask, cb_exit, ctx);
 	mlx_hook(ctx->window, KeyPress, KeyPressMask, cb_key_toggle, ctx);
 	mlx_hook(ctx->window, KeyRelease, KeyReleaseMask, cb_key_toggle, ctx);
+	mlx_hook(ctx->window, ButtonPress, ButtonPressMask, cb_mouse_move, ctx);
+	mlx_hook(ctx->window, ButtonRelease, ButtonReleaseMask, cb_mouse_move, ctx);
 	mlx_loop_hook(ctx->mlx, cb_mini_draw, ctx);
 	mlx_loop(ctx->mlx);
 	return (0);

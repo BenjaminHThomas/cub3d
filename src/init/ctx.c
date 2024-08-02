@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:32:40 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 21:20:13 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 14:14:14 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_ctx	cb_init_ctx(void)
 	ctx.keys.right = 0;
 	ctx.keys.r_right = 0;
 	ctx.keys.r_left = 0;
+	ctx.keys.mouse = 0;
 	ft_bzero(ctx.fps.time_str, 2);
 	ctx.fps.frame_count = 0;
 	ctx.fps.interval = 1.0f;

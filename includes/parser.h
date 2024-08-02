@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:08:25 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 17:23:18 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 18:31:52 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_map_data		*parse(char **av);
 
 t_tex_path		**get_textures(t_map_data *map_data);
 void			get_file_contents(t_map_data *mapdata);
+void			get_map(t_map_data *mapdata);
 int				init_input(t_map_data *mapdata, char *fname);
 int				get_hex_colour(t_map_data *mapdata, int idx);
 int				read_map(t_map_data *mapdata);

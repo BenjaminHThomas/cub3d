@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:05:49 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 17:40:59 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 18:45:58 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ t_map_data	*parse(char **av)
 	if (get_hex_colour(&mapdata, 4) || get_hex_colour(&mapdata, 5))
 	{
 		bin_parse_data(&mapdata);
-		return (ft_putendl_fd("Error\nIncorrect RGB values supplied.", 2)
-			, NULL);
+		return (ft_putendl_fd("Error\nInvalid RGB values.", 2), NULL);
 	}
+	get_map(&mapdata);
 	if (read_map(&mapdata))
 	{
 		bin_parse_data(&mapdata);
@@ -66,3 +66,18 @@ t_map_data	*parse(char **av)
 	ft_memmove(new, &mapdata, sizeof(t_map_data));
 	return (new);
 }
+
+/*
+int	main(int ac, char **av)
+{
+	if (ac != 2)
+		return (1);
+	t_map_data *data = parse(av);
+	if (data)
+	{
+		bin_parse_data(data);
+		free(data);
+	}
+	return (0);
+}
+*/

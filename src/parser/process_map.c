@@ -3,14 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   process_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:27:36 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 16:16:16 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 18:44:22 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	get_map(t_map_data *mapdata)
+{
+	char	*line;
+	int		size;
+	int		i;
+
+	size = 32;
+	i = 6;
+	while (i < size)
+	{
+		line = get_next_line(mapdata->fd);
+		if (!line)
+			break ;
+		if (i == 6 && is_empty_line(line))
+		{
+			free(line);
+			continue ;
+		}
+		else if (is_empty_line(line))
+			return (free(line));
+		else
+			mapdata->input[i++] = line;
+		if (i == size - 1)
+			if (resize_arr(&mapdata->input, &size))
+				return ;
+	}
+}
 
 static char	*get_map_row(char *maprow, size_t max)
 {

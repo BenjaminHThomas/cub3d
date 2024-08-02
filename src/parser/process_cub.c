@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:31:30 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 17:37:10 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 18:23:51 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,10 @@ void	get_file_contents(t_map_data *mapdata)
 {
 	char	*line;
 	int		i;
-	int		size;
 
-	size = 32;
 	i = 0;
-	while (i < size)
+	while (i < 6)
 	{
-		if (i == size - 1)
-			if (resize_arr(&mapdata->input, &size))
-				return (free_arr((void **)mapdata->input));
 		line = get_next_line(mapdata->fd);
 		if (!line)
 			break ;
@@ -36,7 +31,6 @@ void	get_file_contents(t_map_data *mapdata)
 			line = NULL;
 		}
 	}
-	close(mapdata->fd);
 }
 
 static t_tex_path	*get_texture(char *line)

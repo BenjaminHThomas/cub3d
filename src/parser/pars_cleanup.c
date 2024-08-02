@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:05:13 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 17:33:36 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 18:42:27 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,7 @@ void	bin_textures(t_tex_path **texts)
 
 void	bin_parse_data(t_map_data *mapdata)
 {
-	if (mapdata->input)
-		free_arr((void **)mapdata->input);
-	if (mapdata->map)
-		free_arr((void **)mapdata->map);
-	if (mapdata->tex_paths)
-		bin_textures(mapdata->tex_paths);
+	free_arr((void **)mapdata->input);
+	free_arr((void **)mapdata->map);
+	bin_textures(mapdata->tex_paths);
 }

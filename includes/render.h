@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:54:17 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 16:46:56 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 17:04:25 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_map
 	t_player	player;
 	int		height;
 	int		width;
+	int		ceilling;
+	int		floor;
 }	t_map;
 
 typedef struct s_texture

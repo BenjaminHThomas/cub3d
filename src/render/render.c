@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:30:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/01 21:23:44 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 17:05:18 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ inline void	cb_draw_ceilling_floor(t_ctx *ctx, int flag)
 	{
 		while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y < rd->draw_start)
 		{
-			cb_put_pixel(&ctx->img, rt->vec, CEILLING_COLOR, 1.0f);
+			cb_put_pixel(&ctx->img, rt->vec, ctx->map.ceilling, 1.0f);
 			rt->vec.y++;
 		}
 		return ;
 	}
 	while (rt->vec.y < SCREEN_HEIGHT && rt->vec.y > rd->draw_end)
 	{
-		cb_put_pixel(&ctx->img, rt->vec, FLOOR_COLOR, 1.0f);
+		cb_put_pixel(&ctx->img, rt->vec, ctx->map.floor, 1.0f);
 		rt->vec.y++;
 	}
 }

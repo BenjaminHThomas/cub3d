@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:44:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 17:00:41 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 17:04:49 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_map	init_map(t_ctx *ctx)
 	map.player.dir.y = 0.0f;
 	map.player.plane.x = 0;
 	map.player.plane.y = 0.60;
+	map.ceilling = ctx->mapdata->c_colour;
+	map.floor = ctx->mapdata->f_colour;
 	map.map = ctx->mapdata->map;
 	map.width = 0;
 	map.height = 0;

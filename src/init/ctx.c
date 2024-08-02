@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:32:40 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 16:45:07 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/02 17:21:59 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,7 @@ t_ctx	cb_init_ctx(t_map_data *mapdata)
 	ctx.mlx = NULL;
 	ctx.mapdata = mapdata;
 	ctx.textures = NULL;
-	ctx.keys.up = 0;
-	ctx.keys.down = 0;
-	ctx.keys.left = 0;
-	ctx.keys.right = 0;
-	ctx.keys.r_right = 0;
-	ctx.keys.r_left = 0;
-	ctx.keys.mouse = 0;
+	ft_bzero(&ctx.keys, sizeof(t_keys));
 	ft_bzero(ctx.fps.time_str, 2);
 	ctx.fps.frame_count = 0;
 	ctx.fps.interval = 1.0f;

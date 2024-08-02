@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:08:25 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 17:08:30 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 17:14:23 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ bool			all_are_c(unsigned char c, char *s);
 /* Garbage collection */
 void			free_arr(void **arr);
 void			bin_textures(t_tex_path **texts);
+void			bin_parse_data(t_map_data *mapdata);
 
 #endif

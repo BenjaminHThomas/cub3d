@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:05:49 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 17:19:05 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/02 17:22:35 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,21 @@ static int	read_cub(t_map_data *mapdata, char *fname)
 	}
 }
 
-t_map_data	*parse(int ac, char **av)
+t_map_data	*parse(char **av)
 {
+	t_map_data	*new;
 	t_map_data	mapdata;
 	char		*fname;
 	size_t		i;
 
-	if (ac != 2)
-		return (ft_putendl_fd("Error\nInvalid input.", 2), NULL);
 	fname = av[1];
 	if (read_cub(&mapdata, fname))
 		return (NULL);
 	if (get_hex_colour(&mapdata, 4) || get_hex_colour(&mapdata, 5))
 	{
 		bin_parse_data(&mapdata);
-		return (ft_putendl_fd("Error\nIncorrect RGB values supplied.\n", 2), NULL);
+		return (ft_putendl_fd("Error\nIncorrect RGB values supplied.\n", 2)
+			, NULL);
 	}
 	if (read_map(&mapdata))
 	{
@@ -62,7 +62,7 @@ t_map_data	*parse(int ac, char **av)
 	if (!valid_map(&mapdata))
 		return (bin_parse_data(&mapdata), NULL);
 	fill_player_room(mapdata.map);
-	t_map_data	*new = ft_calloc(1, sizeof(t_map_data));
+	new = ft_calloc(1, sizeof(t_map_data));
 	ft_memmove(new, &mapdata, sizeof(t_map_data));
 	return (new);
 }

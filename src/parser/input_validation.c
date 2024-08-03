@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:04:17 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 18:53:47 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/03 10:08:21 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,14 @@ static bool	map_border_valid(char **map)
 {
 	size_t	len;
 	size_t	i;
+	size_t	arrlen;
 
 	if (!all_are_c('1', map[0]))
 		return (false);
 	len = ft_strlen(map[0]);
+	arrlen = arr_len((void **)map);
+	if (len * arrlen > 2500)
+		return (false);
 	i = 0;
 	while (map[i])
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:31:17 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/03 08:21:42 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/03 09:43:21 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	init_input(t_map_data *mapdata, char *fname)
 		ft_putendl_fd("Error\nMalloc failure.", 2);
 		return (1);
 	}
-	mapdata->map = (char **)ft_calloc(32, sizeof(char *));
+	mapdata->map = (char **)ft_calloc(33, sizeof(char *));
 	if (!mapdata->map)
 		return (1);
 	return (0);

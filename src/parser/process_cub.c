@@ -6,7 +6,7 @@
 /*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:31:30 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 19:05:59 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/03 09:50:18 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static char	**get_rgb(char **split_line)
 	if (!rgb)
 		return (NULL);
 	if (array_len((void **)rgb) != 3)
-		return (free_arr((void **)rgb), NULL);
+		return (free_arr((void **)rgb), free_arr((void **)split_line), NULL);
 	return (rgb);
 }
 

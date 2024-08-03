@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:45:55 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 16:16:16 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/03 09:56:36 by bthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	resize_arr(char ***arr, int *size)
 {
 	char	**new_arr;
 	size_t	arrlen;
+	size_t	i;
 
 	if (!arr || !*arr)
 		return (1);
@@ -52,11 +53,14 @@ int	resize_arr(char ***arr, int *size)
 	new_arr = (char **)ft_calloc(sizeof(char *), (*size) + 1);
 	if (!new_arr)
 		return (1);
-	arrlen = 0;
-	while ((*arr)[arrlen])
-		arrlen++;
-	new_arr = ft_memmove(new_arr, *arr, arrlen);
-	free_arr((void **)*arr);
+	arrlen = array_len((void **)(*arr));
+	i = 0;
+	while (i < arrlen)
+	{
+		new_arr[i] = (*arr)[i];
+		i++;
+	}
+	free(*arr);
 	*arr = new_arr;
 	return (0);
 }

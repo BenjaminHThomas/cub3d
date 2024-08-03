@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:44:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/03 08:58:05 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/03 09:23:35 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ t_map	init_map(t_ctx *ctx)
 	t_map	map;
 
 	init_direction(ctx, &map);
-	map.player.pos.x = ctx->mapdata->player_pos.x - 0.5f;
-	map.player.pos.y = ctx->mapdata->player_pos.y - 0.5f;
+	map.player.pos.x = ctx->mapdata->player_pos.x + 0.5f;
+	map.player.pos.y = ctx->mapdata->player_pos.y + 0.5f;
 	map.ceilling = ctx->mapdata->c_colour;
 	map.floor = ctx->mapdata->f_colour;
 	map.map = ctx->mapdata->map;

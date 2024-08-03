@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:54:17 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 17:04:25 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/03 09:04:29 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ typedef struct s_img
 
 typedef struct s_map
 {
-	char	**map;
+	char		**map;
 	t_player	player;
-	int		height;
-	int		width;
-	int		ceilling;
-	int		floor;
+	int			height;
+	int			width;
+	int			ceilling;
+	int			floor;
 }	t_map;
 
 typedef struct s_texture
@@ -96,12 +96,12 @@ typedef struct s_renderer
 	t_tex		tex;
 }	t_renderer;
 
-typedef struct timeval	time;
+typedef struct timeval	t_time;
 
 typedef struct s_fps
 {
-	time	old_time;
-	time	new_time;
+	t_time	old_time;
+	t_time	new_time;
 	int		frame_count;
 	float	delta_time;
 	float	fps;

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 16:16:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 17:48:09 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/03 09:08:11 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,30 @@ t_texture	create_texture(t_ctx *ctx, char *path, int *err)
 	return (new);
 }
 
+int	cb_tex_error(t_ctx *ctx, t_texture *tex)
+{
+	int			j;
+
+	j = 0;
+	while (j < TEXTURE_COUNT)
+	{
+		if (tex[j].data != NULL)
+			mlx_destroy_image(ctx->mlx, tex[j].data);
+		j++;
+	}
+	free(tex);
+	return (1);
+}
+
 int	init_textures(t_ctx *ctx)
 {
 	t_texture	*texture;
 	t_tex_path	*current;
 	int			err;
 	int			i;
-	int			j;
 	char		*tmp;
 
 	i = 0;
-	j = 0;
 	err = 0;
 	texture = ft_calloc(sizeof(t_texture), TEXTURE_COUNT);
 	while (i < TEXTURE_COUNT)
@@ -49,16 +62,7 @@ int	init_textures(t_ctx *ctx)
 		texture[current->dir] = create_texture(ctx, tmp, &err);
 		free(tmp);
 		if (err == 1)
-		{
-			while (j < TEXTURE_COUNT)
-			{
-				if (texture[j].data != NULL)
-					mlx_destroy_image(ctx->mlx, texture[j].data);
-				j++;
-			}
-			free(texture);
-			return (1);
-		}
+			return (cb_tex_error(ctx, texture));
 		i++;
 	}
 	ctx->textures = texture;

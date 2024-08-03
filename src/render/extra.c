@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:05:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 16:49:23 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/03 09:05:18 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ inline void	cb_draw_square(t_ctx *ctx, t_vecint vec, t_color color, int area)
 			tmp.x = (vec.x * area) + x;
 			tmp.y = (vec.y * area) + y;
 			color = def;
-			if ((x < minimap_side || x > area - minimap_side) ||
-				(y < minimap_side || y > area - minimap_side))
+			if ((x < minimap_side || x > area - minimap_side)
+				|| (y < minimap_side || y > area - minimap_side))
 				color = 0x333333;
 			cb_put_pixel(&ctx->img, tmp, color, 1.0f);
 			y++;

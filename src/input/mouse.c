@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 13:28:20 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 14:11:52 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/03 08:46:47 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	cb_rot_right(t_player *p, float force)
 
 	old_dir_x = p->dir.x;
 	old_plane_x = p->plane.x;
-	p->dir.x = p->dir.x * cos(-force) - p->dir.y * sin(-force);
-	p->dir.y = old_dir_x * sin(-force) + p->dir.y * cos(-force);
-	p->plane.x = p->plane.x * cos(-force) - p->plane.y * sin(-force);
-	p->plane.y = old_plane_x * sin(-force) + p->plane.y * cos(-force);
+	p->dir.x = p->dir.x * cos(force) - p->dir.y * sin(force);
+	p->dir.y = old_dir_x * sin(force) + p->dir.y * cos(force);
+	p->plane.x = p->plane.x * cos(force) - p->plane.y * sin(force);
+	p->plane.y = old_plane_x * sin(force) + p->plane.y * cos(force);
 }
 
 void	cb_rot_left(t_player *p, float force)
@@ -44,8 +44,8 @@ void	cb_rot_left(t_player *p, float force)
 
 	old_dir_x = p->dir.x;
 	old_plane_x = p->plane.x;
-	p->dir.x = p->dir.x * cos(force) - p->dir.y * sin(force);
-	p->dir.y = old_dir_x * sin(force) + p->dir.y * cos(force);
-	p->plane.x = p->plane.x * cos(force) - p->plane.y * sin(force);
-	p->plane.y = old_plane_x * sin(force) + p->plane.y * cos(force);
+	p->dir.x = p->dir.x * cos(-force) - p->dir.y * sin(-force);
+	p->dir.y = old_dir_x * sin(-force) + p->dir.y * cos(-force);
+	p->plane.x = p->plane.x * cos(-force) - p->plane.y * sin(-force);
+	p->plane.y = old_plane_x * sin(-force) + p->plane.y * cos(-force);
 }

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:33:47 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 16:59:52 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/03 08:44:21 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,20 @@ inline void	cb_move_side(t_ctx *ctx, t_map map, t_player *p, float force)
 	if (ctx->keys.right)
 	{
 		if (map.map[((int)p->pos.y)]
-			[(int)(p->pos.x + p->dir.y * force)] != '1')
-			p->pos.x += p->dir.y * force;
-		if (map.map[((int)(p->pos.y - p->dir.x * force))]
-			[(int)(p->pos.x)] != '1')
-			p->pos.y -= p->dir.x * force;
-	}
-	if (ctx->keys.left)
-	{
-		if (map.map[((int)p->pos.y)]
 			[(int)(p->pos.x - p->dir.y * force)] != '1')
 			p->pos.x -= p->dir.y * force;
 		if (map.map[((int)(p->pos.y + p->dir.x * force))]
 			[(int)(p->pos.x)] != '1')
 			p->pos.y += p->dir.x * force;
+	}
+	if (ctx->keys.left)
+	{
+		if (map.map[((int)p->pos.y)]
+			[(int)(p->pos.x + p->dir.y * force)] != '1')
+			p->pos.x += p->dir.y * force;
+		if (map.map[((int)(p->pos.y - p->dir.x * force))]
+			[(int)(p->pos.x)] != '1')
+			p->pos.y -= p->dir.x * force;
 	}
 }
 

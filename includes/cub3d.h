@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:00:44 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 16:45:45 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/03 10:06:18 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef int	t_color;
 # define MINIMAP_WALL 0xfb990f
 # define MINIMAP_FLOOR 0x0bf90f
 # define MINIMAP_PLAYER 0xfa8a8a
-# define MINIMAP_SIZE 20
+# define MINIMAP_SIZE 5
 
 # define TEXTURE_COUNT 4
 

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:32:40 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 18:09:35 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/03 10:03:43 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	cb_init_mtx(t_ctx *ctx)
 		return (1);
 	ctx->window = mlx_new_window(ctx->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT, PROG_NAME);
-	if (!ctx->mlx)
+	if (!ctx->window)
 	{
 		printf("Failed to init mlx, exiting...\n");
 		return (1);

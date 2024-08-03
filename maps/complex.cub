@@ -1,14 +1,14 @@
 SO ./textures/boss.xpm
 WE ./textures/boss.xpm
 EA ./textures/boss.xpm
-NO ./textures/boss.xpm
+NO ./textures/alpha.xpm
 
 F 255,100,80
 C 0,150,40
 
 111111111
 1000000011111
-11110000W0001
+1111000000001
 1000000000001
 1001111000001
 1000001111101
@@ -19,5 +19,5 @@ C 0,150,40
 1111000000001
 1000010011
 100000001
-1011
+1N11
 11

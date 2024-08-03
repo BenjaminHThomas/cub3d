@@ -1,7 +1,7 @@
-SO ./textures/boss.xpm
-WE ./textures/boss.xpm
-EA ./textures/boss.xpm
-NO ./textures/alpha.xpm
+SO ./textures/wall.xpm
+WE ./textures/ground.xpm
+EA ./textures/exit.xpm
+NO ./textures/aple.xpm
 
 F 255,100,80
 C 0,150,40
@@ -10,9 +10,9 @@ C 0,150,40
 1000000011111
 1111000000001
 1000000000001
-1001111000001
-1000001111101
-1111000000001
+          1001111000001
+               1000001111101
+1111000000000000000000000000000001
 1000000000001
 1111000000001
 1100000000001

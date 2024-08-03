@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:44:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/03 09:23:35 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/03 09:30:54 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	init_direction(t_ctx *ctx, t_map *map)
 	else if (dir == NORTH)
 		angle = 270;
 	radiant = angle * M_PI / 180.0f;
-    map->player.dir.x = cos(radiant);
-    map->player.dir.y = sin(radiant);
-    map->player.plane.x = -0.66f * sin(radiant);
-    map->player.plane.y = 0.66f * cos(radiant);
+	map->player.dir.x = cos(radiant);
+	map->player.dir.y = sin(radiant);
+	map->player.plane.x = -0.66f * sin(radiant);
+	map->player.plane.y = 0.66f * cos(radiant);
 }
 
 t_map	init_map(t_ctx *ctx)

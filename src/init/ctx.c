@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:32:40 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/03 10:03:43 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/03 10:17:45 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,18 @@ int	cb_init_mtx(t_ctx *ctx)
 			SCREEN_HEIGHT, PROG_NAME);
 	if (!ctx->window)
 	{
-		printf("Failed to init mlx, exiting...\n");
+		ft_putendl_fd("Failed to init mlx, exiting...", 2);
 		return (1);
 	}
 	if (cb_init_image(ctx) != 0)
 	{
-		printf("Failed to init image, exiting...\n");
+		ft_putendl_fd("Failed to init image, exiting...", 2);
 		return (1);
 	}
 	if (init_textures(ctx) != 0)
 	{
 		ctx->textures = NULL;
-		printf("Failed to init textures, exiting...\n");
+		ft_putendl_fd("Failed to init textures, exiting...", 2);
 		return (1);
 	}
 	ctx->map = init_map(ctx);

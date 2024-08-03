@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:04:17 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/03 10:08:21 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/03 10:19:47 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static bool	map_border_valid(char **map)
 	if (!all_are_c('1', map[0]))
 		return (false);
 	len = ft_strlen(map[0]);
-	arrlen = arr_len((void **)map);
+	arrlen = array_len((void **)map);
 	if (len * arrlen > 2500)
 		return (false);
 	i = 0;

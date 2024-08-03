@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:57:19 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/02 18:11:54 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/03 10:15:52 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		printf("cob3d: please provide a map with the '.cub' extension.\n");
+		ft_putendl_fd("cob3d: please provide a map with the '.cub' ext.", 2);
 		return (1);
 	}
 	mapdata = parse(av);

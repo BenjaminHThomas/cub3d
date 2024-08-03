@@ -6,23 +6,11 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:44:50 by okoca             #+#    #+#             */
-/*   Updated: 2024/08/03 09:30:54 by okoca            ###   ########.fr       */
+/*   Updated: 2024/08/03 10:17:53 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	print_map(char *map, int height, int width)
-{
-	int	i;
-
-	i = 0;
-	while (i < height)
-	{
-		printf("%.12s\n", &(map[i * width]));
-		i++;
-	}
-}
 
 void	init_direction(t_ctx *ctx, t_map *map)
 {

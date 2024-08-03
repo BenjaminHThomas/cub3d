@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bthomas <bthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:31:17 by bthomas           #+#    #+#             */
-/*   Updated: 2024/08/02 18:59:47 by bthomas          ###   ########.fr       */
+/*   Updated: 2024/08/03 08:21:42 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	init_input(t_map_data *mapdata, char *fname)
 {
 	mapdata->fd = open(fname, O_RDONLY);
-	if (read(mapdata->fd, 0, 0) < 0)
-	{
-		ft_putendl_fd("Error\nPath given is a directory.", 2);
-		return (1);
-	}
 	if (mapdata->fd < 0)
 	{
 		ft_putendl_fd("Error\nCould not open file", 2);
+		return (1);
+	}
+	if (read(mapdata->fd, 0, 0) < 0)
+	{
+		ft_putendl_fd("Error\nPath given is a directory.", 2);
 		return (1);
 	}
 	mapdata->input = (char **)ft_calloc(32, sizeof(char *));

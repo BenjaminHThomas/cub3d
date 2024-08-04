@@ -57,13 +57,9 @@ inline void	cb_move_side(t_ctx *ctx, t_map map, t_player *p, float force)
 
 void	cb_rotate(t_ctx *ctx, t_player *p, float force)
 {
-	float	old_dir_x;
-	float	old_plane_x;
 	t_keys	keys;
 
 	force *= 0.7f;
-	old_dir_x = p->dir.x;
-	old_plane_x = p->plane.x;
 	keys = ctx->keys;
 	if (keys.mouse && keys.m_pos.x > SCREEN_WIDTH / 2)
 		cb_rot_right(p, force * 0.7f);

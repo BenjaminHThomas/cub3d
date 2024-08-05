@@ -17,7 +17,7 @@ We have some examples of this in the maps folder.
 Within the .cub file you also have to provide textures for the walls. These can be found in the textures folder.
 
 ## Controls
-- W/A/S/D control the walking
+- W/A/S/D controls the walking
 - Arrow keys / clicking the left or right of the screen controls the rotation.
 - Escape / 'x' button to close the program.
 
